@@ -25,34 +25,41 @@ const Contact = () => {
     event.preventDefault();
     const { name, phone, email, subject, msg } = userData;
     if (name && phone && email && subject && msg) {
-      const res = await fetch(
-        "https://portfoilo-dd5cf-default-rtdb.firebaseio.com/submittedForm.json",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            phone,
-            email,
-            subject,
-            msg,
-          }),
-        }
-      );
+      try {
+        const res = await fetch(
+          "https://portfoilo-dd5cf-default-rtdb.firebaseio.com/submittedForm.json",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              phone,
+              email,
+              subject,
+              msg,
+            }),
+          }
+        );
 
-      if (res) {
-        setUserData({
-          name: "",
-          phone: "",
-          email: "",
-          subject: "",
-          msg: "",
-        });
-        alert("Data stored");
-      } else {
-        alert("Fill the data");
+        if (res) {
+          setUserData({
+            name: "",
+            phone: "",
+            email: "",
+            subject: "",
+            msg: "",
+          });
+          alert("Data stored");
+        } else {
+          alert("Fill the data");
+        }
+      } catch (error) {
+        console.error(error);
+        alert(
+          "An error occurred while submitting the form. Please try again later."
+        );
       }
     } else {
       alert("Fill all the data field");

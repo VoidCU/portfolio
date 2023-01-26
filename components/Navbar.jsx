@@ -26,9 +26,9 @@ const Navbar = () => {
     window.addEventListener("scroll", handleShadow);
   }, []);
 
-  function sendEmail() {
-    window.location = "mailto:sarojprasadmainali@gmail.com";
-  }
+  // function sendEmail() {
+  //   window.location = "mailto:sarojprasadmainali@gmail.com";
+  // }
 
   return (
     <div
@@ -145,7 +145,7 @@ const Navbar = () => {
                 </Link>
 
                 <div
-                  onClick={sendEmail}
+                  // onClick={sendEmail}
                   className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 "
                 >
                   <AiOutlineMail />

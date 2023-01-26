@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import SkillItems from "./SkillItems";
 
 import arduinologo from "../public/assets/skills/arduino.png";
