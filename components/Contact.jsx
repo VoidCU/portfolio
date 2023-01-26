@@ -41,7 +41,12 @@ const Contact = () => {
               msg,
             }),
           }
-        );
+        ).catch((error) => {
+          console.error(error);
+          alert(
+            "An error occurred while submitting the form. Please try again later."
+          );
+        });
 
         if (res) {
           setUserData({

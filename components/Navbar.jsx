@@ -26,9 +26,9 @@ const Navbar = () => {
     window.addEventListener("scroll", handleShadow);
   }, []);
 
-  // function sendEmail() {
-  //   window.location = "mailto:sarojprasadmainali@gmail.com";
-  // }
+  function sendEmail() {
+    window.location = "mailto:sarojprasadmainali@gmail.com";
+  }
 
   return (
     <div
@@ -41,7 +41,7 @@ const Navbar = () => {
     >
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
         <Link href="/">
-          <Image src={logoimg} alt="/" width="350" height="50" />
+          <Image src={logoimg} alt="/" width={350} height="auto" />
         </Link>
 
         <div>
@@ -87,12 +87,7 @@ const Navbar = () => {
           <div>
             <div className="flex w-full items-center justify-between">
               <Link onClick={() => setNav(false)} href="/">
-                <Image
-                  src="/../public/assets/logo.png"
-                  alt="/"
-                  width="87"
-                  height="35"
-                />
+                <Image src={logoimg} alt="/" width="87" height="35" />
               </Link>
               <div
                 div
@@ -145,7 +140,7 @@ const Navbar = () => {
                 </Link>
 
                 <div
-                  // onClick={sendEmail}
+                  onClick={sendEmail}
                   className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 "
                 >
                   <AiOutlineMail />
