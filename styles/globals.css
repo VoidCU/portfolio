@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"); */
 
 html {
   --scroll-behavior: smooth !important;
   scroll-behavior: smooth !important;
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Dancing Script"; */
+  /* font-family: cursive; */
 }
 
 @layer base {
-  body {
+  /* body {
     @apply bg-[#ecf0f3] text-[#1f2937] tracking-wide font-semibold;
+  } */
+  body {
+    @apply bg-[#1f2937] text-[#ecf0f3] tracking-wide font-semibold;
   }
 
   h1,
@@ -32,11 +36,16 @@ html {
     @apply text-3xl sm:text-4xl;
   }
 
+  p {
+    @apply text-base sm:text-base;
+  }
+
   li {
     @apply cursor-pointer;
   }
 
   button {
-    @apply shadow-xl shadow-gray-400 rounded-xl uppercase bg-gradient-to-r from-[#5651e5] to-[#709dff] text-white;
+    /* @apply shadow-xl shadow-black rounded-xl uppercase bg-gradient-to-r from-[#5651e5] to-[#709dff] text-white; */
+    @apply shadow-xl shadow-black rounded-xl uppercase bg-gradient-to-r from-[#51e5a2] to-[#70ff98] text-gray-900;
   }
 }

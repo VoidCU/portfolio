@@ -56,7 +56,7 @@ const Contact = () => {
             subject: "",
             msg: "",
           });
-          alert("Data stored");
+          alert("Message Sent");
         } else {
           alert("Fill the data");
         }
@@ -76,15 +76,15 @@ const Contact = () => {
   }
 
   return (
-    <div id="contact" className="w-full lg:h-screen py-8">
+    <div id="contact" className="p-2 py-8 w-full lg:h-screen ">
       <div className="max-w-[1240px] m-auto px-2 py-16  w-full">
-        <p className="text-xl tracking-widest uppercase text-[#5651e5]">
+        <p className="text-xl tracking-widest uppercase text-[#57daac]">
           Contact
         </p>
         <h2 className="py-4">Get In Touch</h2>
         <div className="grid lg:grid-cols-5 gap-8">
           {/* left */}
-          <div className="col-span-3 lg:col-span-2 w-full h-full shadow-xl shadow-gray-400 rounded-xl p-4">
+          <div className="col-span-3 lg:col-span-2 w-full h-full shadow-xl shadow-black rounded-xl p-4">
             <div className="lg:p-4 h-full">
               <div>
                 <img
@@ -104,24 +104,24 @@ const Contact = () => {
                 <p className="uppercase pt-8">Connect with Me</p>
                 <div className="flex items-center justify-between py-4">
                   <Link href="https://www.linkedin.com/in/saroj-prasad-mainali/">
-                    <div className="rounded-full shadow-lg shadow-gray-400 p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
+                    <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <FaLinkedinIn />
                     </div>
                   </Link>
 
                   <Link href="https://github.com/VoidCU">
-                    <div className="rounded-full shadow-lg shadow-gray-400 p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
+                    <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <FaGithub />
                     </div>
                   </Link>
                   <div
                     onClick={sendEmail}
-                    className="rounded-full shadow-lg shadow-gray-400 p-6 cursir-pointer hover:scale-110 ease-in duration-300 "
+                    className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 "
                   >
                     <AiOutlineMail />
                   </div>
                   <a href="./../public/assets/output.pdf" download="Resume.pdf">
-                    <div className="rounded-full shadow-lg shadow-gray-400 p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
+                    <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <BsFillPersonLinesFill />
                     </div>
                   </a>
@@ -131,7 +131,7 @@ const Contact = () => {
           </div>
           {/* right */}
 
-          <div className="col-span-3 w-full h-auto shadow-xl shadow-gray-400 rounded-xl lg:p-4">
+          <div className="col-span-3 w-full h-auto shadow-xl shadow-black rounded-xl lg:p-4">
             <div className="p-4">
               <form action="" id="contactForm" method="POST">
                 <div className="grid md:grid-cols-2 gap-4 w-full py-2">
@@ -142,7 +142,7 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
-                      className="border-2 rounded-lg p-3 flex border-gray-300"
+                      className="border-2 rounded-lg p-3 flex border-gray-300 text-black"
                       name="name"
                       value={userData.name}
                       onChange={postUserData}
@@ -155,7 +155,7 @@ const Contact = () => {
                     <input
                       type="text"
                       id="phone"
-                      className="border-2 rounded-lg p-3 flex border-gray-300"
+                      className="border-2 rounded-lg p-3 flex border-gray-300 text-black"
                       name="phone"
                       value={userData.phone}
                       onChange={postUserData}
@@ -169,7 +169,7 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
-                    className="border-2 rounded-lg p-3 flex border-gray-300"
+                    className="border-2 rounded-lg p-3 flex border-gray-300 text-black"
                     name="email"
                     value={userData.email}
                     onChange={postUserData}
@@ -182,7 +182,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="subject"
-                    className="border-2 rounded-lg p-3 flex border-gray-300"
+                    className="border-2 rounded-lg p-3 flex border-gray-300 text-black"
                     name="subject"
                     value={userData.subject}
                     onChange={postUserData}
@@ -194,7 +194,7 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="msg"
-                    className="border-2 rounded-lg p-3 flex border-gray-300"
+                    className="border-2 rounded-lg p-3 flex border-gray-300 text-black"
                     rows="6"
                     name="msg"
                     value={userData.msg}
@@ -203,7 +203,7 @@ const Contact = () => {
                 </div>
                 <button
                   onClick={submitData}
-                  className="p-4 w-full text-gray-100  mt-4 bg-[#5651e5]"
+                  className="p-4 w-full   mt-4 bg-[#5651e5]"
                 >
                   Send Message
                 </button>
@@ -213,10 +213,10 @@ const Contact = () => {
         </div>
         <div className="flex justify-center py-12">
           <Link href="/">
-            <div className="rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-110 ease-in duration-300">
+            <div className="rounded-full shadow-lg shadow-black p-4 cursor-pointer hover:scale-110 ease-in duration-300">
               <HiOutlineChevronDoubleUp
                 size={30}
-                className="m-auto text-[#5651e5]"
+                className="m-auto text-[#57daac]"
               />
             </div>
           </Link>

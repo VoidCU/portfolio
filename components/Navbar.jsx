@@ -32,14 +32,14 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ backgroundColor: "#ecf0f3" }}
+      style={{ backgroundColor: "#1f2937" }}
       className={
         shadow
           ? "fixed w-full h-20 shadow-xl z-[100]"
           : "fixed w-full h-20 z-[100]"
       }
     >
-      <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
+      <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16 ">
         <Link href="/">
           <Image src={logoimg} alt="/" width={350} height="auto" />
         </Link>
@@ -80,19 +80,19 @@ const Navbar = () => {
         <div
           className={
             nav
-              ? " fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500"
+              ? " fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#1f2937] p-10 ease-in duration-500 "
               : "fixed left-[-100%] top-0 p-10 ease-in duration-500"
           }
         >
           <div>
             <div className="flex w-full items-center justify-between">
               <Link onClick={() => setNav(false)} href="/">
-                <Image src={logoimg} alt="/" width="87" height="35" />
+                <Image src={logoimg} alt="/" width="125" height="50" />
               </Link>
               <div
                 div
                 onClick={handleNav}
-                className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer"
+                className="rounded-full shadow-lg shadow-black p-3 cursor-pointer"
               >
                 <AiOutlineClose size={25} />
               </div>
@@ -124,29 +124,29 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="pt-40">
-              <p className="uppercase tracking-widest text-[#5651e5] ">
+              <p className="uppercase tracking-widest text-[#57daac] ">
                 Let&#39;s Connect
               </p>
               <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
                 <Link href="https://www.linkedin.com/in/saroj-prasad-mainali/">
-                  <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
+                  <div className="rounded-full shadow-lg shadow-black p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
                     <FaLinkedinIn />
                   </div>
                 </Link>
                 <Link href="https://github.com/VoidCU">
-                  <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
+                  <div className="rounded-full shadow-lg shadow-black p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
                     <FaGithub />
                   </div>
                 </Link>
 
                 <div
                   onClick={sendEmail}
-                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 "
+                  className="rounded-full shadow-lg shadow-black p-3 cursir-pointer hover:scale-105 ease-in duration-300 "
                 >
                   <AiOutlineMail />
                 </div>
                 <a href="./../public/assets/output.pdf" download="Resume.pdf">
-                  <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
+                  <div className="rounded-full shadow-lg shadow-black p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
                     <BsFillPersonLinesFill />
                   </div>
                 </a>

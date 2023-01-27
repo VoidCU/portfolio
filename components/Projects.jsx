@@ -8,9 +8,9 @@ import snakelogo from "../public/assets/project/snake.jpg";
 
 const Projects = () => {
   return (
-    <div id="projects" className="w-full lg:h-screen p-2 py-8">
+    <div id="projects" className="w-full  p-2 py-8">
       <div className="max-w-[1240px] mx-auto px-2 py-16">
-        <p className="text-xl tracking-widest uppercase text-[#5651e5]">
+        <p className="text-xl tracking-widest uppercase text-[#57daac]">
           Projects
         </p>
         <h2 className="py-4">What I&#39;ve Built</h2>
