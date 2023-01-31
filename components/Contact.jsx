@@ -4,6 +4,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { HiOutlineChevronDoubleUp } from "react-icons/hi";
+
 const Contact = () => {
   const [userData, setUserData] = useState({
     name: "",
@@ -120,7 +121,7 @@ const Contact = () => {
                   >
                     <AiOutlineMail />
                   </div>
-                  <a href="./../public/assets/output.pdf" download="Resume.pdf">
+                  <a href="../public/assets/output.pdf" download>
                     <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <BsFillPersonLinesFill />
                     </div>

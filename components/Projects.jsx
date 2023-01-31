@@ -5,6 +5,8 @@ import fitnesslogo from "../public/assets/project/FitnessFlow.jpg";
 import hdrlogo from "../public/assets/project/handwritten.png";
 import slabburlogo from "../public/assets/project/slabbur.jpg";
 import snakelogo from "../public/assets/project/snake.jpg";
+import ranabhumilogo from "../public/assets/project/ranabhumi.png";
+import bctlogo from "../public/assets/project/bctapp.png";
 
 const Projects = () => {
   return (
@@ -38,6 +40,18 @@ const Projects = () => {
             logo={snakelogo}
             desc="Game, C++, GLut"
             urllink="https://github.com/VoidCU/snake-and-ladder"
+          />
+          <ProjectItem
+            title="Ranabhumi: C++ project"
+            logo={ranabhumilogo}
+            desc="Game, C++, multiplayer"
+            urllink="https://github.com/VoidCU/Ranabhoomi-A-Fireman-Game"
+          />
+          <ProjectItem
+            title="Bct2075: Contact app"
+            logo={bctlogo}
+            desc="Mobile App, Flutter"
+            urllink="https://github.com/VoidCU/bct_075"
           />
         </div>
       </div>

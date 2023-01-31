@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import TypingEffect from "./TypeEffect";
 
 const Main = () => {
   function sendEmail() {
@@ -18,12 +19,14 @@ const Main = () => {
           <h1 className="py-4 text-[#ecf0f3]">
             Hi, I&#39;m <span className="text-[#57daac]">Saroj</span>
           </h1>
-          <h1 className="py-2 text-[#ecf0f3]">AI Learner and Explorer.</h1>
-          <p className="py-4 text-[#aaafb3] max-w-[70%] m-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
-            vitae nihil. Blanditiis quae eligendi dolor quis, quod aliquid animi
-            quisquam tenetur beatae cupiditate corporis ipsam odit esse
-            inventore hic dolore.
+          <div>
+            <h1 className="py-2 text-[#ecf0f3]">
+              <TypingEffect />
+            </h1>
+          </div>
+
+          <p className="py-4 text-[#aaafb3]  m-auto w-[65%]">
+            I&#39;m trying to build my own world in my own universe.
           </p>
           <div className="flex items-center justify-between max-w-[330px] m-auto py-4">
             <Link href="https://www.linkedin.com/in/saroj-prasad-mainali/">
@@ -43,11 +46,11 @@ const Main = () => {
             >
               <AiOutlineMail />
             </div>
-            <a href="./../public/assets/output.pdf" download="Resume.pdf">
-              <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
+            <Link href="../public/assets/output.pdf">
+              <div className="rounded-full shadow-lg shadow-black p-6 cursor-pointer hover:scale-110 ease-in duration-300">
                 <BsFillPersonLinesFill />
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
