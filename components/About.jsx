@@ -9,7 +9,7 @@ const About = () => {
             About
           </p>
           <h2 className="py-4">Who I Am</h2>
-          <p className="py-2 text-gray-300 tracking-widest ">
+          <p className="py-2 text-gray-300 tracking-widest text-lg">
             Hello! I am Saroj, a computer engineering student at Thapathali
             Campus. I am passionate about technology and always strive to create
             innovative solutions through my work. My experience in game
