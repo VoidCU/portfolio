@@ -121,11 +121,11 @@ const Contact = () => {
                   >
                     <AiOutlineMail />
                   </div>
-                  <a href="assets/pdfs/SarojResume.pdf" download>
+                  <Link href="assets/pdfs/SarojResume.pdf">
                     <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <BsFillPersonLinesFill />
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
