@@ -121,7 +121,7 @@ const Contact = () => {
                   >
                     <AiOutlineMail />
                   </div>
-                  <a href="../public/assets/output.pdf" download>
+                  <a href="assets/pdfs/SarojResume.pdf" download>
                     <div className="rounded-full shadow-lg shadow-black p-6 cursir-pointer hover:scale-110 ease-in duration-300 ">
                       <BsFillPersonLinesFill />
                     </div>

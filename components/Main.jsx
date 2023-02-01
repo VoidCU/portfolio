@@ -46,7 +46,7 @@ const Main = () => {
             >
               <AiOutlineMail />
             </div>
-            <Link href="../public/assets/output.pdf">
+            <Link href="assets/pdfs/SarojResume.pdf">
               <div className="rounded-full shadow-lg shadow-black p-6 cursor-pointer hover:scale-110 ease-in duration-300">
                 <BsFillPersonLinesFill />
               </div>

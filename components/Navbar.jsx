@@ -145,11 +145,11 @@ const Navbar = () => {
                 >
                   <AiOutlineMail />
                 </div>
-                <a href="./../public/assets/output.pdf" download="Resume.pdf">
+                <Link href="assets/pdfs/SarojResume.pdf">
                   <div className="rounded-full shadow-lg shadow-black p-3 cursir-pointer hover:scale-105 ease-in duration-300 ">
                     <BsFillPersonLinesFill />
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
