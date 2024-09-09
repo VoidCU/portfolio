@@ -15,7 +15,6 @@ export default function Home() {
         <title>Saroj Prasad Mainali | VoidCU</title>
         <meta name="description" content=" Delve into the world of Saroj" />
         <meta name="keywords" content="Saroj, VoidCU, Saroj Prasad Mainali, Vloe, Saroj Void, Void Saroj, computer engineering" />
-        <meta name="ahrefs-site-verification" content="ad553e59e93237aa87cd015b5920f36f68133f950041b292a0a12ebff19cc939">
       </Head>
       <Navbar />
       <Main />
