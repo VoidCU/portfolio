@@ -9,7 +9,7 @@ export default function Hero() {
     <section
       id="home"
       className="relative flex flex-col items-center justify-center h-screen
-                 bg-gradient-to-br from-[#1f2937] to-[#57daac] text-center px-4 font-handwriting"
+                 bg-gradient-to-br from-[#1f3037] to-[#57c0ac] text-center px-4 font-handwriting"
     >
       {/* Slight animated blob decoration */}
       <div className="absolute -top-20 -left-10 w-72 h-72 bg-[#57daac]/20 rounded-full animate-blob mix-blend-multiply filter blur-xl opacity-70"></div>
