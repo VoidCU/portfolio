@@ -1,77 +1,57 @@
-// src/components/Competencies.tsx
-'use client';
-import { useRef, useEffect, useState } from 'react';
-const categories = [
-  {
-    title: 'Frontend & UI',
-    items: ['React', 'Next.js', 'Flutter', 'Figma', 'CSS', 'HTML'],
-  },
-  {
-    title: 'Backend & APIs',
-    items: ['FastAPI', 'NestJS', 'Django', 'Laravel', 'Node.js', 'GraphQL'],
-  },
-  {
-    title: 'DevOps & Cloud',
-    items: [ 'CI/CD', 'Vercel', 'AWS', 'GitHub Actions', 'Docker'],
-  },
-  {
-    title: 'Data & AI',
-    items: ['PySpark', 'scikit-learn', 'TensorFlow', 'HuggingFace', 'NLP', 'OCR'],
-  },
-  {
-    title: 'Languages & Tools',
-    items: ['Python', 'TypeScript', 'C/C++', 'SQL', 'Bash', 'Git'],
-  },
-];
+import { profile } from '@/data/profile';
 
 export default function Competencies() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  // Trigger reveal when in view
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => setVisible(e.isIntersecting),
-      { threshold: 0.3 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
   return (
-    <section id="skills" className="py-16 bg-[#111827]">
-      <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-extrabold text-teal-400 text-center mb-12">
-          Key Competencies
-        </h2>
-        <div
-          ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8
-                      transition-all duration-700
-                      ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          {categories.map((cat) => (
+    <section id="skills" className="bg-[#080d08] border-t border-[rgba(74,222,128,0.06)]">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+
+        {/* Section header */}
+        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
+          <h2 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+            SKILLS
+          </h2>
+          <span className="label">02 / 07</span>
+        </div>
+
+        {/* Magazine-style skills table */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-[rgba(74,222,128,0.08)]">
+          {profile.skills.map((cat, idx) => (
             <div
-              key={cat.title}
-              className="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+              key={cat.category}
+              className={`p-6 border-[rgba(74,222,128,0.08)] ${
+                idx % 3 !== 2 ? 'lg:border-r' : ''
+              } ${
+                idx % 2 !== 1 ? 'md:border-r lg:border-r-0' : 'md:border-r-0'
+              } ${
+                idx < profile.skills.length - 3 ? 'lg:border-b' : ''
+              } ${
+                idx < profile.skills.length - 2 ? 'md:border-b' : ''
+              } ${
+                idx < profile.skills.length - 1 ? 'border-b md:border-b-0' : ''
+              }`}
             >
-              <h3 className="text-2xl font-semibold text-white mb-4">
-                {cat.title}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {cat.items.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 bg-teal-600/20 text-teal-300 rounded-full
-                               font-medium hover:bg-teal-600/30 hover:scale-105
-                               transition transform"
-                  >
-                    {skill}
-                  </span>
+              <p className="label mb-5">{cat.category}</p>
+              <ul className="space-y-2.5">
+                {cat.items.map(skill => (
+                  <li key={skill} className="group flex items-center gap-3">
+                    <span className="w-1 h-px bg-[rgba(74,222,128,0.2)] group-hover:w-4 transition-all duration-200" />
+                    <span className="text-[#86efac] group-hover:text-[#e8fdf0] text-sm transition-colors duration-200">
+                      {skill}
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
+        </div>
+
+        {/* Bottom note */}
+        <div className="mt-8 flex items-center gap-4">
+          <div className="divider flex-1" />
+          <p className="label whitespace-nowrap">
+            5 years · full-stack to low-level
+          </p>
+          <div className="divider flex-1" />
         </div>
       </div>
     </section>

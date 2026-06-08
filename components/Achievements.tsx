@@ -1,38 +1,59 @@
-// src/components/Achievements.tsx
-'use client';
 import { profile } from '@/data/profile';
-import { FaTrophy, FaCertificate, FaMedal } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-
-const icons = [FaTrophy, FaCertificate, FaMedal];
 
 export default function Achievements() {
-  return (
-    <section id="achievements" className="py-16 bg-[#111827]">
-      <div className="container max-w-5xl mx-auto px-4">
-        <h2 className="text-4xl font-extrabold text-teal-400 text-center mb-12">
-          Achievements & Certifications
-        </h2>
+  const competitive = profile.achievements.filter(a => a.type === 'competitive');
+  const certs = profile.achievements.filter(a => a.type === 'cert');
 
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {profile.achievements.map((text, idx) => {
-            const Icon = icons[idx % icons.length];
-            return (
-              <motion.div
-                key={text}
-                className="flex items-start space-x-4 bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+  return (
+    <section id="achievements" className="bg-[#080d08] border-t border-[rgba(74,222,128,0.06)]">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+
+        {/* Section header */}
+        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
+          <h2 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+            ACHIEVEMENTS
+          </h2>
+          <span className="label">06 / 07</span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-0 border border-[rgba(74,222,128,0.08)]">
+          {/* Competitive highlight */}
+          {competitive.map(ach => (
+            <div
+              key={ach.title}
+              className="p-8 lg:border-r border-b lg:border-b-0 border-[rgba(74,222,128,0.08)] flex flex-col justify-between"
+            >
+              <div>
+                <p className="label mb-6">Competitive Programming</p>
+                <h3 className="font-heading font-black text-[#e8fdf0] text-3xl leading-tight mb-3">
+                  {ach.title}
+                </h3>
+                <p className="font-mono text-[#86efac] text-sm">{ach.detail}</p>
+              </div>
+              <div className="mt-8 pt-6 border-t border-[rgba(74,222,128,0.08)]">
+                <p className="font-heading font-black text-[#4ade80] text-6xl">3%</p>
+                <p className="label mt-2">Global ranking</p>
+              </div>
+            </div>
+          ))}
+
+          {/* Certifications */}
+          <div className="divide-y divide-[rgba(74,222,128,0.08)]">
+            <div className="p-5 pb-4">
+              <p className="label">Certifications</p>
+            </div>
+            {certs.map(({ title, detail }) => (
+              <div
+                key={title}
+                className="group px-5 py-4 flex items-start justify-between gap-6 hover:bg-[rgba(74,222,128,0.04)] transition-colors"
               >
-                <div className="flex-shrink-0">
-                  <Icon className="text-teal-400 text-3xl" />
-                </div>
-                <p className="text-slate-200 leading-relaxed">{text}</p>
-              </motion.div>
-            );
-          })}
+                <h4 className="text-[#86efac] group-hover:text-[#e8fdf0] text-sm font-semibold transition-colors leading-snug">
+                  {title}
+                </h4>
+                <p className="label whitespace-nowrap text-right">{detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,41 +1,101 @@
-// src/components/Projects.tsx
-'use client';
+import Link from 'next/link';
 import { profile } from '@/data/profile';
-import { motion } from 'framer-motion';
+
+const statusStyle: Record<string, string> = {
+  'LIVE':     'text-[#4ade80]',
+  'IN DEV':   'text-[#4d7c5a]',
+  'RESEARCH': 'text-[#4d7c5a]',
+};
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-16 bg-[#111827]">
-      <div className="container max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-extrabold text-teal-400 text-center mb-12">
-          Signature Projects
-        </h2>
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {profile.projects.map(({ name, tech, desc, url }, idx) => (
-            <motion.a
+    <section id="projects" className="bg-[#080d08] border-t border-[rgba(74,222,128,0.06)]">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+
+        {/* Section header */}
+        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
+          <h2 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+            PROJECTS
+          </h2>
+          <span className="label">04 / 07</span>
+        </div>
+
+        {/* Project list */}
+        <div className="space-y-0 border-t border-[rgba(74,222,128,0.08)]">
+          {profile.featuredProjects.map(({ index, name, tagline, desc, tech, url, github, status }) => (
+            <div
               key={name}
-              href={url}
-              target="_blank"
-              className="relative block rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 shadow-xl hover:shadow-2xl transition-shadow group"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              className="group border-b border-[rgba(74,222,128,0.08)] py-8 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-x-10 gap-y-5 hover:bg-[rgba(74,222,128,0.02)] transition-colors"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative p-6 h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-2xl font-semibold text-white mb-2 group-hover:text-teal-300 transition-colors">
+              {/* Index */}
+              <span className="font-mono text-[#4d7c5a] text-sm pt-1 w-8 flex-shrink-0">{index}</span>
+
+              {/* Content */}
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h3 className="font-heading font-black text-[#e8fdf0] text-2xl tracking-tight group-hover:text-[#4ade80] transition-colors">
                     {name}
                   </h3>
-                  <p className="text-sm text-teal-300 mb-4">{tech}</p>
-                  <p className="text-slate-300 leading-relaxed">{desc}</p>
+                  <span className={`font-mono text-xs tracking-widest uppercase ${statusStyle[status] ?? ''}`}>
+                    {status}
+                  </span>
                 </div>
-                {/* <span className="mt-6 inline-block px-4 py-2 bg-teal-400 text-black font-semibold rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                  View Project
-                </span> */}
+
+                <p className="text-[#4d7c5a] text-xs font-mono tracking-wider">{tagline}</p>
+
+                <p className="text-[#86efac] text-sm leading-relaxed max-w-2xl">{desc}</p>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {tech.map(t => (
+                    <span
+                      key={t}
+                      className="border border-[rgba(74,222,128,0.1)] px-2.5 py-1 text-[#4d7c5a] font-mono text-[10px] tracking-wider uppercase group-hover:border-[rgba(74,222,128,0.3)] group-hover:text-[#86efac] transition-colors"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </motion.a>
+
+              {/* Links */}
+              <div className="flex flex-col gap-2 items-start lg:items-end justify-start pt-1">
+                {github && (
+                  <Link
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="label text-[#4d7c5a] hover:text-[#4ade80] transition-colors flex items-center gap-2"
+                  >
+                    GITHUB →
+                  </Link>
+                )}
+                {url && (
+                  <Link
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="label text-[#4ade80] hover:text-[#e8fdf0] transition-colors flex items-center gap-2"
+                  >
+                    LIVE SITE →
+                  </Link>
+                )}
+              </div>
+            </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-10 flex items-center gap-6">
+          <Link
+            href={profile.contacts.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary text-xs"
+          >
+            All 80+ Repos on GitHub →
+          </Link>
+          <span className="label">Public and archived projects</span>
         </div>
       </div>
     </section>

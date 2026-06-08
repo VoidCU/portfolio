@@ -1,130 +1,211 @@
-// src/data/profile.ts
-
 export const profile = {
-    name: 'Saroj Prasad Mainali',
-    alias: 'voidcu',
-    tagline: 'Full-stack Developer · AI Explorer · Technical Leader',
-    about: `Full-stack developer and technical lead with 100+ websites, 25+ web/mobile apps, and extensive automation & research deliveries over five years. Skilled in FastAPI, NestJS, React/Next.js, Flutter, Docker, WEAP/SWAT hydrology workflows, and modern AI tooling. Known for rapid prototyping, clean architectures, and mentoring junior developers.`,
-    generatedOn: 'May 01, 2025',
-    contacts: {
-      location: 'Kathmandu, Nepal',
-      phone: '+9779860731680',
-      email: 'sarojprasadmainali@gmail.com',
-      github: 'https://github.com/VoidCU',
-      linkedin: 'https://www.linkedin.com/in/saroj-prasad-mainali',
-      leetcode: 'https://leetcode.com/VoidCU',
-      website: 'https://voidcu.com'
+  name: 'Saroj Prasad Mainali',
+  alias: 'VoidCU',
+  tagline: 'Full-Stack Engineer & AI Builder',
+  bio: [
+    'Computer Engineering graduate from Thapathali Campus, Tribhuvan University. Over five years I have architected and shipped full-stack SaaS platforms, mobile apps, AI pipelines, automation bots, and hydrological models: from green-field to production.',
+    'Currently leading engineering at Neuron Nest and Elytra Solutions. I thrive on hard problems: dynamic RBAC systems, transformer models, real-time multi-channel inboxes, and climate simulation workflows.',
+  ],
+  contacts: {
+    location: 'Kathmandu, Nepal',
+    email: 'sarojprasadmainali@gmail.com',
+    github: 'https://github.com/VoidCU',
+    linkedin: 'https://www.linkedin.com/in/saroj-prasad-mainali',
+    leetcode: 'https://leetcode.com/VoidCU',
+    website: 'https://voidcu.com',
+  },
+  education: {
+    degree: 'B.E. Computer Engineering',
+    institution: 'Thapathali Campus, Tribhuvan University',
+    period: '2018 – 2023',
+  },
+  stats: [
+    { value: '5+',   label: 'Years' },
+    { value: '100+', label: 'Products' },
+    { value: '80+',  label: 'Repos' },
+    { value: '580+', label: 'LeetCode' },
+  ],
+  skills: [
+    {
+      category: 'Frontend & UI',
+      items: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Figma', 'Framer Motion'],
     },
-    education: {
-      degree: 'B.E. Computer Engineering',
-      institution: 'Tribhuvan University',
-      period: '2018 – 2023'
+    {
+      category: 'Backend & APIs',
+      items: ['FastAPI', 'NestJS', 'Django', 'Laravel', 'Node.js', 'GraphQL'],
     },
-    skills: {
-      languages: ['Python', 'TypeScript/JavaScript', 'C/C++', 'Dart', 'PHP', 'SQL', 'Bash'],
-      frameworks: ['FastAPI', 'NestJS', 'Django', 'Laravel', 'React Native', 'React/Next.js', 'Flutter'],
-      containers: ['GitHub Actions CI/CD', 'Docker', 'Kubernetes (basic)'],
-      hydrology: ['WEAP', 'QSWAT/SWAT+', 'ArcGIS', 'QGIS', 'bias-correction workflows'],
-      ai: ['PySpark', 'scikit-learn', 'TensorFlow/Keras', 'HuggingFace', 'prompt-engineering'],
-      design: ['Adobe After Effects', 'Photoshop', 'Illustrator', 'Figma', 'Blender'],
-      soft: ['Agile leadership', 'Mentoring', 'Client communication', 'Problem solving']
+    {
+      category: 'AI & Data',
+      items: ['TensorFlow', 'PyTorch', 'PySpark', 'scikit-learn', 'HuggingFace', 'NLP'],
     },
-    achievements: [
-      'LeetCode – 580+ problems solved; Global Ranking 98k (top 3%).',
-      'Flutter & Dart Complete Guide (Udemy) – 2023.',
-      'Game Theory (Coursera) – May 2023',
-      'Understanding Research Methods (Coursera) – Apr 2023',
-      'Machine Learning Specialization (Coursera) – Mar 2023',
-      'Advanced Learning Algorithms (Coursera) – Mar 2023',
-      'Unsupervised Learning, Recommenders & RL (Coursera) – Mar 2023',
-      'Supervised ML: Regression & Classification (Coursera) – Jan 2023',
-      'Python Programming: A Concise Introduction (Coursera) – Sep 2021'
-    ],
-    timeline: [
-      {
-        role: 'Lead Developer',
-        org: 'Neuron Nest',
-        period: 'Nov 2024 – Present',
-        items: [
-          'Architected multi-tenant EdTech SaaS (FastAPI / Next.js / PostgreSQL / Kubernetes) with modular LMS, CRM & Finance.',
-          'Designed dynamic RBAC reducing onboarding time by 40%.',
-          'Mentored 4 engineers; containerized CI/CD enabled daily releases.'
-        ]
-      },
-      {
-        role: 'Full-Stack Developer',
-        org: 'Elytra Solutions',
-        period: 'Dec 2022 – Present',
-        items: [
-          'Shipped 25+ web & mobile apps and automation bots saving ~1,500 hrs/yr.',
-          'Led micro-service migration; Docker & GitHub Actions cut deploy time by 60%.'
-        ]
-      },
-      {
-        role: 'Technical Head',
-        org: 'KS Photography Station',
-        period: 'Feb 2025 – Present',
-        items: [
-          'Maintain studio software and configure high-performance systems & NAS.',
-          'Implemented AI photo-culling and troubleshooting for daily operations.'
-        ]
-      },
-      {
-        role: 'Freelance Consultant / Full-Stack Engineer',
-        org: 'Self-Employed',
-        period: 'Mar 2024 – Present',
-        items: [
-          'Delivered 100+ responsive sites (Jamstack, WordPress, Shopify) and custom ERP modules.',
-          'Performed WEAP scenario modeling & SWAT calibration for NGO water studies.'
-        ]
-      },
-      {
-        role: 'Website Designer',
-        org: 'BloomBytes',
-        period: 'Feb 2022 – Dec 2022',
-        items: [
-          'Crafted responsive UI for EngineersNepal; tripled monthly visitors.'
-        ]
-      }
-    ],
-    projects: [
-      {
-        name: 'Modular Student Management SaaS',
-        tech: 'FastAPI · Next.js · Docker · JWT · RBAC',
-        desc: 'Plug-in LMS/CRM/Finance; dynamic RBAC and authentication.',
-        url: '#'
-      },
-      {
-        name: 'Handwritten Devanagari Character Recognition',
-        tech: 'TensorFlow CNN · Android',
-        desc: '99.98% accuracy; Android draw-and-predict app.',
-        url: 'https://github.com/VoidCU/Handwritten-Devanagari-Character-Recognition'
-      },
-      {
-        name: 'Perceparator',
-        tech: 'Transformer Architecture · PyTorch',
-        desc: 'Real-time dual-speaker separation (LibriMix).',
-        url: 'https://github.com/VoidCU/perceparator'
-      },
-      {
-        name: 'Godawari WEAP Scenario Model',
-        tech: 'WEAP · CMIP6 bias-correction',
-        desc: 'Forecasts water demand/supply to 2050.',
-        url: '#'
-      },
-      {
-        name: 'News-Portal Scraper',
-        tech: 'Scrapy · Python',
-        desc: 'Harvested 300k Nepali articles for NLP research.',
-        url: '#'
-      }
-    ],
-    contactSection: {
-      text: 'Kathmandu, Nepal • +977 9860731680 • sarojprasadmainali@gmail.com',
-      links: [
-        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/saroj-prasad-mainali' },
-        { label: 'GitHub', url: 'https://github.com/VoidCU' },
-        { label: 'Website', url: 'https://voidcu.com' }
-      ]
-    }
-  };
+    {
+      category: 'DevOps & Cloud',
+      items: ['Docker', 'Kubernetes', 'GitHub Actions', 'Vercel', 'AWS', 'CI/CD'],
+    },
+    {
+      category: 'Languages',
+      items: ['Python', 'TypeScript', 'JavaScript', 'C/C++', 'SQL', 'Dart'],
+    },
+    {
+      category: 'Design & Tools',
+      items: ['Figma', 'Blender', 'Photoshop', 'Illustrator', 'Git', 'Linux'],
+    },
+  ],
+  timeline: [
+    {
+      index: '01',
+      role: 'Lead Developer',
+      org: 'Neuron Nest',
+      period: 'Nov 2024 – Present',
+      items: [
+        'Architected multi-tenant EdTech SaaS (FastAPI / Next.js / PostgreSQL / Kubernetes) with modular LMS, CRM & Finance.',
+        'Designed dynamic RBAC reducing onboarding time by 40%.',
+        'Mentored 4 engineers; containerized CI/CD enabled daily releases.',
+      ],
+    },
+    {
+      index: '02',
+      role: 'Full-Stack Developer & CTO',
+      org: 'Elytra Solutions',
+      period: 'Dec 2022 – Present',
+      items: [
+        'Shipped 25+ web & mobile apps and automation bots saving ~1,500 hrs/yr.',
+        'Led micro-service migration; Docker & GitHub Actions cut deploy time by 60%.',
+      ],
+    },
+    {
+      index: '03',
+      role: 'Technical Head',
+      org: 'KS Photography Station',
+      period: 'Feb 2025 – Present',
+      items: [
+        'Maintain studio software and configure high-performance systems & NAS.',
+        'Implemented AI photo-culling pipeline for daily production workflows.',
+      ],
+    },
+    {
+      index: '04',
+      role: 'Freelance Full-Stack Consultant',
+      org: 'Self-Employed',
+      period: 'Mar 2024 – Present',
+      items: [
+        'Delivered 100+ responsive sites (Jamstack, WordPress, Shopify) and custom ERP modules.',
+        'Performed WEAP scenario modeling & SWAT calibration for NGO water studies.',
+      ],
+    },
+    {
+      index: '05',
+      role: 'Website Designer',
+      org: 'BloomBytes',
+      period: 'Feb 2022 – Dec 2022',
+      items: [
+        'Crafted responsive UI for EngineersNepal; tripled monthly visitor count.',
+      ],
+    },
+  ],
+  featuredProjects: [
+    {
+      index: '01',
+      name: 'Amarnepal',
+      tagline: 'Nepal Federal Budget Analysis Platform',
+      desc: 'Civic data platform analyzing Nepal\'s federal budgets (FY 2080–2083/84) with animated trend charts, editorial analysis, and Devanagari typography. All figures cross-checked against government sources.',
+      tech: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      url: 'https://amarnepal.com',
+      github: 'https://github.com/VoidCU/amarnepal',
+      status: 'LIVE' as const,
+    },
+    {
+      index: '02',
+      name: 'Void Social',
+      tagline: 'Multi-Tenant Social Media Inbox',
+      desc: 'Enterprise-grade multi-tenant social media management platform. AES-256-GCM credential encryption, role-based access (Superadmin/Owner/Admin/Agent), and multi-channel integration.',
+      tech: ['Next.js', 'Prisma', 'PostgreSQL', 'TypeScript', 'SCSS'],
+      url: null,
+      github: 'https://github.com/VoidCU/void-social',
+      status: 'IN DEV' as const,
+    },
+    {
+      index: '03',
+      name: 'Project Lakhey',
+      tagline: 'NGO & Donor Management System',
+      desc: 'Complete donor management platform with public donor wall, event calendar, Cloudinary image uploads, JWT admin auth, impact tracking, and dynamic sitemap generation.',
+      tech: ['Next.js', 'Prisma', 'Neon Postgres', 'Cloudinary', 'Framer Motion'],
+      url: null,
+      github: 'https://github.com/VoidCU/project-lakhey',
+      status: 'IN DEV' as const,
+    },
+    {
+      index: '04',
+      name: 'Devanagari OCR',
+      tagline: 'Handwritten Character Recognition, 99.98% Accuracy',
+      desc: 'CNN achieving 99.98% test accuracy on handwritten Devanagari character recognition, paired with an Android draw-and-predict mobile application.',
+      tech: ['TensorFlow', 'CNN', 'Python', 'Android'],
+      url: null,
+      github: 'https://github.com/VoidCU/Handwritten-Devanagari-Character-Recognition',
+      status: 'RESEARCH' as const,
+    },
+    {
+      index: '05',
+      name: 'Perceparator',
+      tagline: 'Transformer-Based Dual-Speaker Audio Separation',
+      desc: 'Transformer-based real-time dual-speaker audio separation model trained on LibriMix dataset. Sequence modelling for audio source isolation.',
+      tech: ['PyTorch', 'Transformer', 'Python', 'LibriMix'],
+      url: null,
+      github: 'https://github.com/VoidCU/perceparator',
+      status: 'RESEARCH' as const,
+    },
+  ],
+  clients: [
+    { index: '01', name: 'Neuron Nest',              category: 'EdTech SaaS',       url: null },
+    { index: '02', name: 'Elytra Solutions',          category: 'Tech Agency',        url: null },
+    { index: '03', name: 'Infra Nepal',               category: 'Infrastructure',     url: null },
+    { index: '04', name: 'Peace Energy Pvt. Ltd.',    category: 'Energy',             url: null },
+    { index: '05', name: 'mypsych.com',               category: 'Mental Health',      url: 'https://mypsych.com' },
+    { index: '06', name: 'Expogenius',                category: 'Event Ticketing',    url: null },
+    { index: '07', name: 'Dana Himalaya',             category: 'Finance',            url: null },
+    { index: '08', name: 'sunshine.com.np',           category: 'Hospitality',        url: 'https://sunshine.com.np' },
+    { index: '09', name: 'Nexsus Education',          category: 'EdTech',             url: null },
+    { index: '10', name: 'SAHE NSW',                  category: 'Government / Edu',   url: 'https://sahe.nsw.edu.au' },
+    { index: '11', name: 'visaxsolutions.com',        category: 'Immigration',        url: 'https://visaxsolutions.com' },
+    { index: '12', name: 'amarnepal.com',             category: 'Civic Tech',         url: 'https://amarnepal.com' },
+    { index: '13', name: 'Agrimvoyage.com',           category: 'AgriTech',           url: 'https://agrimvoyage.com' },
+    { index: '14', name: 'agrimbooking.com',          category: 'AgriTech',           url: 'https://agrimbooking.com' },
+    { index: '15', name: 'KSeventsco.com',            category: 'Events & Ticketing', url: 'https://kseventsco.com' },
+    { index: '16', name: 'KS Photography Station',   category: 'Photography Studio', url: null },
+    { index: '17', name: 'Thumka Trail',              category: 'Tourism',            url: null },
+    { index: '18', name: 'Genzlink',                  category: 'Social Platform',    url: null },
+    { index: '19', name: 'Amba Global',               category: 'Global Business',    url: null },
+  ],
+  achievements: [
+    {
+      title: 'LeetCode: Top 3% Globally',
+      detail: '580+ problems solved · Global Rank 98k',
+      type: 'competitive',
+    },
+    {
+      title: 'Machine Learning Specialization',
+      detail: 'Coursera (Andrew Ng) · Mar 2023',
+      type: 'cert',
+    },
+    {
+      title: 'Flutter & Dart Complete Guide',
+      detail: 'Udemy · 2023',
+      type: 'cert',
+    },
+    {
+      title: 'Advanced Learning Algorithms',
+      detail: 'Coursera · Mar 2023',
+      type: 'cert',
+    },
+    {
+      title: 'Game Theory',
+      detail: 'Coursera · May 2023',
+      type: 'cert',
+    },
+    {
+      title: 'Understanding Research Methods',
+      detail: 'Coursera · Apr 2023',
+      type: 'cert',
+    },
+  ],
+};

@@ -1,37 +1,98 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import Image from 'next/image';
-import logo from '/public/assets/logo.png'; // adjust path if needed
+
+const navLinks = [
+  { href: '/about',       label: 'About' },
+  { href: '/skills',      label: 'Skills' },
+  { href: '/experience',  label: 'Experience' },
+  { href: '/projects',    label: 'Projects' },
+  { href: '/blog',        label: 'Blog' },
+  { href: '/clients',     label: 'Clients' },
+  { href: '/contact',     label: 'Contact' },
+];
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-//   useEffect(() => {
-//     document.documentElement.classList.toggle('dark', dark);
-//   }, [dark]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 w-full px-6 py-4 z-50 bg-gray-900 dark:bg-gray-800 shadow-md transition-all duration-300">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-      {/* Logo on the left */}
-      <Link href="#home" className="flex items-center">
-        <Image src={logo} alt="voidcu logo" width={300} height={48} />
-      </Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-[#080d08] border-b border-[rgba(74,222,128,0.08)]' : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
 
-      {/* Social icons + theme toggle on the right */}
-      <div className="flex items-center space-x-4">
-        <Link href="https://linkedin.com/in/saroj-prasad-mainali" className="text-white hover:text-teal-300">
-          <FaLinkedin size={20} />
+        {/* Logo */}
+        <Link
+          href="/"
+          className="font-mono-custom text-[#e8fdf0] font-bold text-sm tracking-[0.15em] uppercase hover:text-[#4ade80] transition-colors"
+        >
+          VOIDCU
         </Link>
-        <Link href="https://github.com/VoidCU" className="text-white hover:text-teal-300">
-          <FaGithub size={20} />
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-[#4d7c5a] hover:text-[#e8fdf0] text-xs font-mono tracking-[0.12em] uppercase transition-colors"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Desktop CTA */}
+        <Link
+          href="/assets/pdfs/SarojResume.pdf"
+          target="_blank"
+          className="hidden md:block btn-primary text-xs py-2 px-5"
+        >
+          Resume
         </Link>
-        <Link href="mailto:sarojprasadmainali@gmail.com" className="text-white hover:text-teal-300">
-          <FaEnvelope size={20} />
-        </Link>
-        
+
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden text-[#4d7c5a] hover:text-[#e8fdf0] transition-colors font-mono text-xs tracking-widest uppercase"
+          onClick={() => setOpen(o => !o)}
+        >
+          {open ? 'CLOSE' : 'MENU'}
+        </button>
       </div>
-      </div>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="md:hidden bg-[#080d08] border-t border-[rgba(74,222,128,0.08)] px-6 py-6 space-y-4">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="block text-[#86efac] hover:text-[#e8fdf0] font-mono text-xs tracking-[0.12em] uppercase transition-colors py-1"
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+          <div className="pt-4 border-t border-[rgba(74,222,128,0.08)]">
+            <Link
+              href="/assets/pdfs/SarojResume.pdf"
+              target="_blank"
+              className="btn-primary inline-block text-xs"
+            >
+              Resume
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
