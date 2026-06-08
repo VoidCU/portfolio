@@ -3,15 +3,41 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Uses',
-  description: 'The tools, software, and hardware Saroj Prasad Mainali uses every day. Editor, terminal, stack defaults, design tools, and a custom PC built in Kathmandu.',
+  title: 'Uses — Developer Setup, Tools & Stack',
+  description:
+    'The exact tools, software, and hardware Saroj Prasad Mainali (VoidCU) uses every day: VS Code, Windows Terminal + WSL 2, Next.js, FastAPI, PostgreSQL, Docker, Kubernetes, Figma, and a custom-built PC.',
+  keywords: [
+    'developer setup Nepal', 'VS Code setup developer', 'WSL 2 developer Nepal',
+    'Next.js FastAPI stack', 'developer tools 2025', 'Saroj Prasad Mainali uses',
+    'VoidCU setup', 'developer hardware Nepal', 'Figma design setup',
+    'Docker Kubernetes developer', 'JetBrains Mono font', 'Vim VS Code developer',
+  ],
+  authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
   openGraph: {
-    title: 'Uses · Saroj Prasad Mainali',
-    description: 'My daily setup: editor, terminal, stack, design tools, and hardware.',
+    title: 'Uses — Saroj Prasad Mainali (VoidCU)',
+    description: 'My daily driver: VS Code + WSL 2, Next.js + FastAPI, Docker, Figma, and a custom Ryzen 7 PC. Updated when things change.',
     type: 'website',
     url: 'https://voidcu.com/uses',
+    siteName: 'Saroj Prasad Mainali',
+    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Developer Setup' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Uses — Saroj Prasad Mainali (VoidCU)',
+    description: 'VS Code + WSL 2, Next.js + FastAPI, Docker, Figma. My real daily setup as a full-stack engineer in Nepal.',
+    creator: '@VoidCU',
+    images: ['/assets/me.jpeg'],
   },
   alternates: { canonical: 'https://voidcu.com/uses' },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://voidcu.com' },
+    { '@type': 'ListItem', position: 2, name: 'Uses', item: 'https://voidcu.com/uses' },
+  ],
 };
 
 const sections = [
@@ -72,18 +98,19 @@ const sections = [
 export default function UsesPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[#080d08] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
+        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
 
-          <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
-            <h1 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
+            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
               USES
             </h1>
             <span className="label">My Setup</span>
           </div>
 
-          <p className="text-[#86efac] text-sm leading-relaxed max-w-xl mb-14">
+          <p className="text-[var(--c-dim)] text-sm leading-relaxed max-w-xl mb-14">
             A running list of what I use every day. Updated occasionally when something changes.
           </p>
 
@@ -91,11 +118,11 @@ export default function UsesPage() {
             {sections.map(section => (
               <div key={section.label}>
                 <p className="label mb-5">{section.label}</p>
-                <div className="border border-[rgba(74,222,128,0.08)] divide-y divide-[rgba(74,222,128,0.08)]">
+                <div className="border border-[var(--c-b2)] divide-y divide-[var(--c-b2)]">
                   {section.items.map(item => (
-                    <div key={item.name} className="group px-5 py-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 hover:bg-[rgba(74,222,128,0.03)] transition-colors">
-                      <h3 className="text-[#e8fdf0] font-semibold text-sm w-48 flex-shrink-0">{item.name}</h3>
-                      <p className="text-[#86efac] text-sm flex-1">{item.detail}</p>
+                    <div key={item.name} className="group px-5 py-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 hover:bg-[rgba(74,222,128,0.06)] transition-colors">
+                      <h3 className="text-[var(--c-text)] font-semibold text-sm sm:w-48 flex-shrink-0">{item.name}</h3>
+                      <p className="text-[var(--c-dim)] text-sm flex-1">{item.detail}</p>
                     </div>
                   ))}
                 </div>

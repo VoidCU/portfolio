@@ -1,19 +1,21 @@
 'use client';
 import { useState } from 'react';
 
-type Form = { name: string; email: string; msg: string };
+type Form = { name: string; email: string; subject: string; msg: string };
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
 export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
-  const [form, setForm] = useState<Form>({ name: '', email: '', msg: '' });
+  const [form, setForm] = useState<Form>({ name: '', email: '', subject: '', msg: '' });
   const [errors, setErrors] = useState<Partial<Form>>({});
   const [status, setStatus] = useState<Status>('idle');
+  const [errMsg, setErrMsg] = useState('');
 
   const validate = (): boolean => {
     const errs: Partial<Form> = {};
-    if (!form.name.trim()) errs.name = 'Required';
-    if (!form.email.match(/^\S+@\S+\.\S+$/)) errs.email = 'Valid email required';
-    if (!form.msg.trim()) errs.msg = 'Required';
+    if (form.name.trim().length < 2) errs.name = 'At least 2 characters';
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) errs.email = 'Valid email required';
+    if (form.subject.trim().length < 2) errs.subject = 'Required';
+    if (form.msg.trim().length < 10) errs.msg = 'At least 10 characters';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -26,24 +28,38 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
   const send = async () => {
     if (!validate()) return;
     setStatus('sending');
+    setErrMsg('');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error();
+      const json = await res.json();
+      if (!res.ok) {
+        setErrMsg(json.error ?? 'Something went wrong.');
+        setStatus('error');
+        return;
+      }
       setStatus('success');
-      setForm({ name: '', email: '', msg: '' });
+      setForm({ name: '', email: '', subject: '', msg: '' });
     } catch {
+      setErrMsg(`Something went wrong. Email me directly at ${fallbackEmail}`);
       setStatus('error');
     } finally {
-      setTimeout(() => setStatus('idle'), 4000);
+      setTimeout(() => setStatus('idle'), 6000);
     }
   };
 
   const inputBase =
-    'w-full px-4 py-3 bg-transparent border text-[#e8fdf0] placeholder-[#4d7c5a] text-sm font-mono-custom focus:outline-none transition-colors';
+    'w-full px-4 py-3 bg-transparent border text-[var(--c-text)] placeholder-[var(--c-ghost)] text-sm font-mono focus:outline-none transition-colors';
+
+  const fieldClass = (field: keyof Form) =>
+    `${inputBase} ${
+      errors[field]
+        ? 'border-red-500'
+        : 'border-[var(--c-b3)] focus:border-[var(--c-accent)]'
+    }`;
 
   return (
     <div className="p-8 space-y-5">
@@ -56,13 +72,10 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
           value={form.name}
           onChange={update}
           placeholder="Your full name"
-          className={`${inputBase} ${
-            errors.name
-              ? 'border-[#4ade80]'
-              : 'border-[rgba(74,222,128,0.14)] focus:border-[#4ade80]'
-          }`}
+          autoComplete="name"
+          className={fieldClass('name')}
         />
-        {errors.name && <p className="text-[#4ade80] text-xs font-mono-custom mt-1">{errors.name}</p>}
+        {errors.name && <p className="text-red-500 text-xs font-mono mt-1">{errors.name}</p>}
       </div>
 
       {/* Email */}
@@ -75,13 +88,24 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
           value={form.email}
           onChange={update}
           placeholder="your@email.com"
-          className={`${inputBase} ${
-            errors.email
-              ? 'border-[#4ade80]'
-              : 'border-[rgba(74,222,128,0.14)] focus:border-[#4ade80]'
-          }`}
+          autoComplete="email"
+          className={fieldClass('email')}
         />
-        {errors.email && <p className="text-[#4ade80] text-xs font-mono-custom mt-1">{errors.email}</p>}
+        {errors.email && <p className="text-red-500 text-xs font-mono mt-1">{errors.email}</p>}
+      </div>
+
+      {/* Subject */}
+      <div>
+        <label htmlFor="subject" className="label block mb-2">Subject</label>
+        <input
+          id="subject"
+          name="subject"
+          value={form.subject}
+          onChange={update}
+          placeholder="Project inquiry, collaboration, job offer..."
+          className={fieldClass('subject')}
+        />
+        {errors.subject && <p className="text-red-500 text-xs font-mono mt-1">{errors.subject}</p>}
       </div>
 
       {/* Message */}
@@ -93,14 +117,10 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
           rows={6}
           value={form.msg}
           onChange={update}
-          placeholder="Tell me about your project or opportunity..."
-          className={`${inputBase} resize-none ${
-            errors.msg
-              ? 'border-[#4ade80]'
-              : 'border-[rgba(74,222,128,0.14)] focus:border-[#4ade80]'
-          }`}
+          placeholder="Tell me about your project or what you have in mind..."
+          className={`${fieldClass('msg')} resize-none`}
         />
-        {errors.msg && <p className="text-[#4ade80] text-xs font-mono-custom mt-1">{errors.msg}</p>}
+        {errors.msg && <p className="text-red-500 text-xs font-mono mt-1">{errors.msg}</p>}
       </div>
 
       {/* Submit */}
@@ -113,15 +133,15 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
       </button>
 
       {status === 'success' && (
-        <div className="border border-[rgba(74,222,128,0.14)] p-3">
-          <p className="text-[#4ade80] text-sm font-mono-custom">Message sent. I will get back to you soon.</p>
+        <div className="border border-[var(--c-b3)] bg-[var(--c-b1)] p-4">
+          <p className="text-[var(--c-accent)] text-sm font-mono">
+            Message sent. Check your inbox for a confirmation email from me.
+          </p>
         </div>
       )}
       {status === 'error' && (
-        <div className="border border-[rgba(74,222,128,0.08)] p-3">
-          <p className="text-[#86efac] text-sm font-mono-custom">
-            Error. Please email me directly at {fallbackEmail}
-          </p>
+        <div className="border border-red-500/30 bg-red-500/5 p-4">
+          <p className="text-red-400 text-sm font-mono">{errMsg}</p>
         </div>
       )}
     </div>

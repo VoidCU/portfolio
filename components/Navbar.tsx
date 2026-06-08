@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const navLinks = [
   { href: '/about',       label: 'About' },
@@ -25,7 +26,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#080d08] border-b border-[rgba(74,222,128,0.08)]' : 'bg-transparent'
+        scrolled ? 'bg-[var(--c-bg)] border-b border-[var(--c-b2)]' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -33,7 +34,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-mono-custom text-[#e8fdf0] font-bold text-sm tracking-[0.15em] uppercase hover:text-[#4ade80] transition-colors"
+          className="font-mono-custom text-[var(--c-text)] font-bold text-sm tracking-[0.15em] uppercase hover:text-[var(--c-accent)] transition-colors"
         >
           VOIDCU
         </Link>
@@ -44,25 +45,28 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className="text-[#4d7c5a] hover:text-[#e8fdf0] text-xs font-mono tracking-[0.12em] uppercase transition-colors"
+              className="text-[var(--c-muted)] hover:text-[var(--c-text)] text-xs font-mono tracking-[0.12em] uppercase transition-colors"
             >
               {label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <Link
-          href="/assets/pdfs/SarojResume.pdf"
-          target="_blank"
-          className="hidden md:block btn-primary text-xs py-2 px-5"
-        >
-          Resume
-        </Link>
+        {/* Desktop right */}
+        <div className="hidden md:flex items-center gap-5">
+          <ThemeToggle />
+          <Link
+            href="/assets/pdfs/SarojResume.pdf"
+            target="_blank"
+            className="btn-primary text-xs py-2 px-5"
+          >
+            Resume
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-[#4d7c5a] hover:text-[#e8fdf0] transition-colors font-mono text-xs tracking-widest uppercase"
+          className="md:hidden text-[var(--c-muted)] hover:text-[var(--c-text)] transition-colors font-mono text-xs tracking-widest uppercase"
           onClick={() => setOpen(o => !o)}
         >
           {open ? 'CLOSE' : 'MENU'}
@@ -71,18 +75,19 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden bg-[#080d08] border-t border-[rgba(74,222,128,0.08)] px-6 py-6 space-y-4">
+        <div className="md:hidden bg-[var(--c-bg)] border-t border-[var(--c-b2)] px-6 py-6 space-y-4">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className="block text-[#86efac] hover:text-[#e8fdf0] font-mono text-xs tracking-[0.12em] uppercase transition-colors py-1"
+              className="block text-[var(--c-dim)] hover:text-[var(--c-text)] font-mono text-xs tracking-[0.12em] uppercase transition-colors py-1"
               onClick={() => setOpen(false)}
             >
               {label}
             </Link>
           ))}
-          <div className="pt-4 border-t border-[rgba(74,222,128,0.08)]">
+          <div className="pt-4 border-t border-[var(--c-b2)] flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href="/assets/pdfs/SarojResume.pdf"
               target="_blank"

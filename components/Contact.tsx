@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 import Link from 'next/link';
 import { profile } from '@/data/profile';
@@ -53,57 +53,57 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-[#0d140d] border-t border-[rgba(74,222,128,0.06)]">
+    <section id="contact" className="bg-[var(--c-surface)] border-t border-[var(--c-b1)]">
       <div className="max-w-7xl mx-auto px-6 py-20">
 
         {/* Section header */}
-        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
-          <h2 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[var(--c-b2)]">
+          <h2 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
             CONTACT
           </h2>
           <span className="label">07 / 07</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-0 border border-[rgba(74,222,128,0.08)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-0 border border-[var(--c-b2)]">
 
           {/* Left: info */}
-          <div className="p-8 lg:border-r border-b lg:border-b-0 border-[rgba(74,222,128,0.08)] space-y-8">
+          <div className="p-8 lg:border-r border-b lg:border-b-0 border-[var(--c-b2)] space-y-8">
             <div>
-              <h3 className="font-heading font-bold text-[#e8fdf0] text-xl mb-2">
+              <h3 className="font-heading font-bold text-[var(--c-text)] text-xl mb-2">
                 Let&apos;s build something.
               </h3>
-              <p className="text-[#4d7c5a] text-sm leading-relaxed">
+              <p className="text-[var(--c-muted)] text-sm leading-relaxed">
                 Open to freelance work, full-time roles, and interesting collaborations. I respond within 24 hours.
               </p>
             </div>
 
             {/* Availability */}
-            <div className="border border-[rgba(74,222,128,0.08)] p-4">
+            <div className="border border-[var(--c-b2)] p-4">
               <div className="flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 bg-[#4ade80] opacity-80" />
+                <span className="w-1.5 h-1.5 bg-[var(--c-accent)] opacity-80" />
                 <span className="label">Available</span>
               </div>
-              <p className="text-[#4d7c5a] text-xs mt-1">
+              <p className="text-[var(--c-muted)] text-xs mt-1">
                 Taking new projects &amp; exploring full-time opportunities.
               </p>
             </div>
 
             {/* Contact details */}
-            <div className="divide-y divide-[rgba(74,222,128,0.08)] border border-[rgba(74,222,128,0.08)]">
+            <div className="divide-y divide-[var(--c-b2)] border border-[var(--c-b2)]">
               {contactInfo.map(({ label, value, href }) => (
-                <div key={label} className="group px-4 py-3 flex items-center justify-between gap-4 hover:bg-[#4ade80] transition-colors">
-                  <span className="label group-hover:text-[#080d08]">{label}</span>
+                <div key={label} className="group px-4 py-3 flex items-center justify-between gap-4 hover:bg-[var(--c-accent)] transition-colors">
+                  <span className="label group-hover:text-[var(--c-on-accent)]">{label}</span>
                   {href ? (
                     <Link
                       href={href}
                       target={href.startsWith('mailto') ? undefined : '_blank'}
                       rel="noopener noreferrer"
-                      className="text-[#86efac] group-hover:text-[#080d08] text-xs font-mono transition-colors truncate"
+                      className="text-[var(--c-dim)] group-hover:text-[var(--c-on-accent)] text-xs font-mono transition-colors truncate"
                     >
                       {value}
                     </Link>
                   ) : (
-                    <span className="text-[#86efac] group-hover:text-[#080d08] text-xs font-mono transition-colors">
+                    <span className="text-[var(--c-dim)] group-hover:text-[var(--c-on-accent)] text-xs font-mono transition-colors">
                       {value}
                     </span>
                   )}
@@ -123,13 +123,13 @@ export default function Contact() {
                 value={form.name}
                 onChange={update}
                 placeholder="Your full name"
-                className={`w-full px-4 py-3 bg-transparent border text-[#e8fdf0] placeholder-[#1f3a28] text-sm font-mono focus:outline-none transition-colors ${
+                className={`w-full px-4 py-3 bg-transparent border text-[var(--c-text)] placeholder-[var(--c-ghost)] text-sm font-mono focus:outline-none transition-colors ${
                   errors.name
-                    ? 'border-[rgba(74,222,128,0.5)]'
-                    : 'border-[rgba(74,222,128,0.12)] focus:border-[rgba(74,222,128,0.4)]'
+                    ? 'border-[var(--c-b5)]'
+                    : 'border-[var(--c-b3)] focus:border-[var(--c-b5)]'
                 }`}
               />
-              {errors.name && <p className="text-[#86efac] text-xs font-mono mt-1">{errors.name}</p>}
+              {errors.name && <p className="text-[var(--c-dim)] text-xs font-mono mt-1">{errors.name}</p>}
             </div>
 
             {/* Email */}
@@ -142,13 +142,13 @@ export default function Contact() {
                 value={form.email}
                 onChange={update}
                 placeholder="your@email.com"
-                className={`w-full px-4 py-3 bg-transparent border text-[#e8fdf0] placeholder-[#1f3a28] text-sm font-mono focus:outline-none transition-colors ${
+                className={`w-full px-4 py-3 bg-transparent border text-[var(--c-text)] placeholder-[var(--c-ghost)] text-sm font-mono focus:outline-none transition-colors ${
                   errors.email
-                    ? 'border-[rgba(74,222,128,0.5)]'
-                    : 'border-[rgba(74,222,128,0.12)] focus:border-[rgba(74,222,128,0.4)]'
+                    ? 'border-[var(--c-b5)]'
+                    : 'border-[var(--c-b3)] focus:border-[var(--c-b5)]'
                 }`}
               />
-              {errors.email && <p className="text-[#86efac] text-xs font-mono mt-1">{errors.email}</p>}
+              {errors.email && <p className="text-[var(--c-dim)] text-xs font-mono mt-1">{errors.email}</p>}
             </div>
 
             {/* Message */}
@@ -161,13 +161,13 @@ export default function Contact() {
                 value={form.msg}
                 onChange={update}
                 placeholder="Tell me about your project or opportunity..."
-                className={`w-full px-4 py-3 bg-transparent border text-[#e8fdf0] placeholder-[#1f3a28] text-sm font-mono focus:outline-none resize-none transition-colors ${
+                className={`w-full px-4 py-3 bg-transparent border text-[var(--c-text)] placeholder-[var(--c-ghost)] text-sm font-mono focus:outline-none resize-none transition-colors ${
                   errors.msg
-                    ? 'border-[rgba(74,222,128,0.5)]'
-                    : 'border-[rgba(74,222,128,0.12)] focus:border-[rgba(74,222,128,0.4)]'
+                    ? 'border-[var(--c-b5)]'
+                    : 'border-[var(--c-b3)] focus:border-[var(--c-b5)]'
                 }`}
               />
-              {errors.msg && <p className="text-[#86efac] text-xs font-mono mt-1">{errors.msg}</p>}
+              {errors.msg && <p className="text-[var(--c-dim)] text-xs font-mono mt-1">{errors.msg}</p>}
             </div>
 
             {/* Submit */}
@@ -181,12 +181,12 @@ export default function Contact() {
 
             {status === 'success' && (
               <div className="border border-[rgba(74,222,128,0.2)] p-3">
-                <p className="text-[#4ade80] text-sm font-mono">Message sent. I&apos;ll get back to you soon.</p>
+                <p className="text-[var(--c-accent)] text-sm font-mono">Message sent. I&apos;ll get back to you soon.</p>
               </div>
             )}
             {status === 'error' && (
               <div className="border border-[rgba(74,222,128,0.1)] p-3">
-                <p className="text-[#4d7c5a] text-sm font-mono">Error. Please email me directly at {profile.contacts.email}</p>
+                <p className="text-[var(--c-muted)] text-sm font-mono">Error. Please email me directly at {profile.contacts.email}</p>
               </div>
             )}
           </div>

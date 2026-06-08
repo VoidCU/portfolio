@@ -1,0 +1,128 @@
+# Saroj Prasad Mainali (VoidCU)
+
+> Full-stack software engineer and technical lead from Kathmandu, Nepal. 5+ years shipping production software across SaaS, AI/ML, mobile, and automation. Known online as VoidCU.
+
+## Identity
+
+- Full name: Saroj Prasad Mainali
+- Online alias: VoidCU
+- Location: Kathmandu, Nepal
+- Education: B.E. Computer Engineering, Thapathali Campus, Tribhuvan University (2019–2024)
+- Website: https://voidcu.com
+- GitHub: https://github.com/VoidCU
+- LinkedIn: https://www.linkedin.com/in/saroj-prasad-mainali
+- LeetCode: https://leetcode.com/VoidCU
+- Email: sarojprasadmainali@gmail.com
+
+## Summary
+
+Saroj Prasad Mainali is a full-stack engineer who has shipped 100+ products for 19+ companies across Nepal and internationally. He works across the entire stack — from React/Next.js frontends to FastAPI/Django backends, Flutter mobile apps, TensorFlow/PyTorch models, Docker/Kubernetes infrastructure, and climate modeling with WEAP/SWAT.
+
+He co-founded Elytra Solutions (CTO) and is Lead Developer at Neuron Nest, an EdTech company building LMS platforms for schools in Nepal. He is also Technical Head at KS Photography Station, where he built an AI photo-culling pipeline.
+
+## Professional Experience
+
+1. Lead Developer @ Neuron Nest (2023 – Present)
+   - Building a multi-tenant LMS platform for schools
+   - LLM-powered assessment tools and analytics dashboards
+   - Tech: Next.js, FastAPI, PostgreSQL, Docker
+
+2. CTO & Co-founder @ Elytra Solutions (2022 – Present)
+   - Technical leadership across 15+ client projects
+   - Multi-tenant SaaS architecture, DevOps pipelines
+   - Tech: Next.js, NestJS, Python, Flutter, Kubernetes
+
+3. Technical Head @ KS Photography Station (2022 – Present)
+   - AI photo-culling pipeline for wedding photography workflows
+   - NAS infrastructure setup and maintenance
+   - Tech: Python, TensorFlow, OpenCV
+
+4. Freelance Full-Stack Developer (2020 – Present)
+   - 19+ client companies across EdTech, HealthTech, AgriTech, government, finance
+   - Projects include civic data platforms, donor management systems, CRMs
+   - Tech: Next.js, FastAPI, Flutter, PostgreSQL
+
+## Technical Skills
+
+- **Frontend**: Next.js 15, React, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: FastAPI, Django, NestJS, Node.js, REST APIs, GraphQL
+- **Mobile**: Flutter (iOS + Android), React Native
+- **AI/ML**: TensorFlow, PyTorch, scikit-learn, OpenCV, LLM fine-tuning (LoRA/QLoRA), audio separation
+- **Databases**: PostgreSQL, MySQL, MongoDB, Redis, Prisma ORM
+- **DevOps**: Docker, Kubernetes, GitHub Actions, CI/CD, Nginx, Linux
+- **Cloud**: AWS, Google Cloud, DigitalOcean, Vercel, Cloudinary
+- **Research**: WEAP, SWAT, CMIP6 bias correction, hydrology modeling
+- **Design**: Figma, Adobe Photoshop, Adobe Illustrator
+- **Other**: MATLAB, C, C++, C#, Arduino, Unity, Blender
+
+## Notable Projects
+
+- **Devanagari OCR**: CNN achieving 99.98% accuracy on handwritten Nepali character recognition. Android draw-and-predict app. Published research. (TensorFlow, Python, Android)
+- **Perceparator**: Transformer-based real-time dual-speaker audio separation trained on LibriMix dataset. (PyTorch, Python)
+- **Amarnepal**: Civic data platform analyzing Nepal federal budgets with animated trend charts and editorial analysis. (Next.js, TypeScript)
+- **Void Social**: Multi-tenant social media management platform with AES-256-GCM encryption and full RBAC. (Next.js, Prisma, PostgreSQL)
+- **Project Lakhey**: NGO and donor management system with public donor wall, event calendar, and impact tracking. (Next.js, Prisma, Cloudinary)
+
+## Open Source & Competitive Programming
+
+- 80+ public GitHub repositories across web, AI, mobile, games, research
+- LeetCode: Top 3% globally, 580+ problems solved
+- Practices daily algorithmic problem solving
+
+## Achievements & Certifications
+
+- LeetCode: Top 3% globally (580+ problems solved)
+- Machine Learning Specialization — Coursera / DeepLearning.AI
+- Advanced Learning Algorithms — Coursera / DeepLearning.AI
+- Game Theory — Stanford Online / Coursera
+- Research Methods in Social Sciences — Coursera
+
+## Current Work (June 2025)
+
+- Leading engineering at Neuron Nest (LMS module, schools onboarding)
+- Building AI photo-culling pipeline at KS Photography Station
+- Active freelance client (EdTech data migration)
+- Learning: LLM fine-tuning (LoRA/QLoRA), Kubernetes service meshes (Istio)
+- Personal project: Void Social — multi-tenant social media management platform
+
+## Site Pages
+
+- Homepage: https://voidcu.com
+- About: https://voidcu.com/about
+- Skills: https://voidcu.com/skills
+- Experience: https://voidcu.com/experience
+- Projects: https://voidcu.com/projects
+- Blog: https://voidcu.com/blog
+- Clients: https://voidcu.com/clients
+- Achievements: https://voidcu.com/achievements
+- Contact: https://voidcu.com/contact
+- Now: https://voidcu.com/now
+- Uses: https://voidcu.com/uses
+- Open Source: https://voidcu.com/open-source
+- Sitemap: https://voidcu.com/sitemap.xml
+
+## Blog Topics
+
+Saroj writes about software engineering, AI, building products in Nepal, leadership, and the honest side of technical work. Topics include:
+- Wearing many hats as a lead engineer
+- Building Devanagari OCR from scratch
+- FastAPI vs Django for real-world projects
+- Being CTO at 24 in Kathmandu
+- Automating 1,500 hours of manual work
+- Multi-tenant SaaS architecture mistakes
+- Flutter vs React Native (from experience, not benchmarks)
+- LeetCode and why he still grinds it
+- Freelancing as a developer in Nepal
+- AI for photography workflows
+- Growing up with computers in Nepal
+
+## Contact
+
+- Website contact form: https://voidcu.com/contact
+- Email: sarojprasadmainali@gmail.com
+- Available for: freelance projects, full-time roles, collaborations, consulting
+- Response time: within 1-2 business days
+
+## About This Site
+
+Built with Next.js 15 (App Router), TypeScript, Tailwind CSS v4. Fully static-generated, hosted at voidcu.com. All 42 pages are pre-rendered for fast load times.

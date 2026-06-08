@@ -1,24 +1,24 @@
-import { profile } from '@/data/profile';
+﻿import { profile } from '@/data/profile';
 
 export default function Competencies() {
   return (
-    <section id="skills" className="bg-[#080d08] border-t border-[rgba(74,222,128,0.06)]">
+    <section id="skills" className="bg-[var(--c-bg)] border-t border-[var(--c-b1)]">
       <div className="max-w-7xl mx-auto px-6 py-20">
 
         {/* Section header */}
-        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[rgba(74,222,128,0.08)]">
-          <h2 className="font-heading font-black text-[#e8fdf0] text-4xl md:text-5xl tracking-tight">
+        <div className="flex items-baseline justify-between mb-12 pb-5 border-b border-[var(--c-b2)]">
+          <h2 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
             SKILLS
           </h2>
           <span className="label">02 / 07</span>
         </div>
 
         {/* Magazine-style skills table */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-[rgba(74,222,128,0.08)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-[var(--c-b2)]">
           {profile.skills.map((cat, idx) => (
             <div
               key={cat.category}
-              className={`p-6 border-[rgba(74,222,128,0.08)] ${
+              className={`p-6 border-[var(--c-b2)] ${
                 idx % 3 !== 2 ? 'lg:border-r' : ''
               } ${
                 idx % 2 !== 1 ? 'md:border-r lg:border-r-0' : 'md:border-r-0'
@@ -35,7 +35,7 @@ export default function Competencies() {
                 {cat.items.map(skill => (
                   <li key={skill} className="group flex items-center gap-3">
                     <span className="w-1 h-px bg-[rgba(74,222,128,0.2)] group-hover:w-4 transition-all duration-200" />
-                    <span className="text-[#86efac] group-hover:text-[#e8fdf0] text-sm transition-colors duration-200">
+                    <span className="text-[var(--c-dim)] group-hover:text-[var(--c-text)] text-sm transition-colors duration-200">
                       {skill}
                     </span>
                   </li>

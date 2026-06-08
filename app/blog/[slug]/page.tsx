@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
@@ -25,17 +25,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: [post.category, 'Saroj Prasad Mainali', 'VoidCU', 'Nepal developer', 'software engineering blog'],
+    authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
       publishedTime: post.date,
+      authors: ['Saroj Prasad Mainali'],
+      tags: [post.category, 'software engineering', 'Nepal'],
       url: `https://voidcu.com/blog/${post.slug}`,
+      images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
+      creator: '@VoidCU',
+      images: ['/assets/me.jpeg'],
     },
     alternates: { canonical: `https://voidcu.com/blog/${post.slug}` },
   };
@@ -46,6 +53,31 @@ export default async function BlogPostPage({ params }: Props) {
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Saroj Prasad Mainali',
+      url: 'https://voidcu.com',
+      '@id': 'https://voidcu.com/#person',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Saroj Prasad Mainali',
+      url: 'https://voidcu.com',
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://voidcu.com/blog/${post.slug}` },
+    url: `https://voidcu.com/blog/${post.slug}`,
+    articleSection: post.category,
+    inLanguage: 'en-US',
+    image: { '@type': 'ImageObject', url: 'https://voidcu.com/assets/me.jpeg' },
+  };
+
   const index = orderedPosts.findIndex((p) => p.slug === slug);
   // Newer post sits earlier in the array, older sits later.
   const newer = index > 0 ? orderedPosts[index - 1] : null;
@@ -53,47 +85,51 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Navbar />
-      <main className="pt-14 bg-[#080d08] min-h-screen">
+      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
         <article className="max-w-3xl mx-auto px-6 py-20">
 
           {/* Back */}
           <div className="mb-12">
             <Link
               href="/blog"
-              className="label text-[#4d7c5a] hover:text-[#4ade80] transition-colors"
+              className="label text-[var(--c-muted)] hover:text-[var(--c-accent)] transition-colors"
             >
               ← BACK TO BLOG
             </Link>
           </div>
 
           {/* Header */}
-          <header className="mb-12 pb-8 border-b border-[rgba(74,222,128,0.08)]">
+          <header className="mb-12 pb-8 border-b border-[var(--c-b2)]">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-5">
-              <span className="label text-[#4ade80]">{post.category}</span>
+              <span className="label text-[var(--c-accent)]">{post.category}</span>
               <span className="label">{post.date}</span>
-              <span className="label text-[#4d7c5a]">{post.readTime}</span>
+              <span className="label text-[var(--c-muted)]">{post.readTime}</span>
             </div>
-            <h1 className="font-heading font-black text-[#e8fdf0] text-3xl md:text-5xl leading-[1.1] tracking-tight">
+            <h1 className="font-heading font-black text-[var(--c-text)] text-3xl md:text-5xl leading-[1.1] tracking-tight">
               {post.title}
             </h1>
           </header>
 
           {/* Content */}
           <div
-            className="prose-blog text-[#86efac] text-[1.0625rem] leading-[1.85]"
+            className="prose-blog text-[var(--c-dim)] text-[1.0625rem] leading-[1.85]"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Author footer */}
-          <div className="mt-16 pt-8 border-t border-[rgba(74,222,128,0.08)] flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-16 pt-8 border-t border-[var(--c-b2)] flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-[#e8fdf0] font-heading font-bold text-sm">
+              <p className="text-[var(--c-text)] font-heading font-bold text-sm">
                 Saroj Prasad Mainali
               </p>
               <p className="label mt-1">Full-Stack Engineer · Kathmandu</p>
             </div>
-            <Link href="/now" className="label hover:text-[#4ade80] transition-colors">
+            <Link href="/now" className="label hover:text-[var(--c-accent)] transition-colors">
               WHAT I AM DOING NOW →
             </Link>
           </div>
@@ -103,10 +139,10 @@ export default async function BlogPostPage({ params }: Props) {
             {older ? (
               <Link
                 href={`/blog/${older.slug}`}
-                className="group p-5 border border-[rgba(74,222,128,0.08)] hover:border-[#4ade80] hover:bg-[#4ade80] transition-colors"
+                className="group p-5 border border-[var(--c-b2)] hover:border-[var(--c-accent)] hover:bg-[var(--c-accent)] transition-colors"
               >
-                <p className="label group-hover:text-[#080d08] mb-2">← Older</p>
-                <p className="text-[#e8fdf0] group-hover:text-[#080d08] text-sm font-semibold leading-snug transition-colors">
+                <p className="label group-hover:text-[var(--c-on-accent)] mb-2">← Older</p>
+                <p className="text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-sm font-semibold leading-snug transition-colors">
                   {older.title}
                 </p>
               </Link>
@@ -116,10 +152,10 @@ export default async function BlogPostPage({ params }: Props) {
             {newer ? (
               <Link
                 href={`/blog/${newer.slug}`}
-                className="group p-5 border border-[rgba(74,222,128,0.08)] hover:border-[#4ade80] hover:bg-[#4ade80] transition-colors sm:text-right"
+                className="group p-5 border border-[var(--c-b2)] hover:border-[var(--c-accent)] hover:bg-[var(--c-accent)] transition-colors sm:text-right"
               >
-                <p className="label group-hover:text-[#080d08] mb-2">Newer →</p>
-                <p className="text-[#e8fdf0] group-hover:text-[#080d08] text-sm font-semibold leading-snug transition-colors">
+                <p className="label group-hover:text-[var(--c-on-accent)] mb-2">Newer →</p>
+                <p className="text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-sm font-semibold leading-snug transition-colors">
                   {newer.title}
                 </p>
               </Link>
