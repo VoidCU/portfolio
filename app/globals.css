@@ -1,214 +1,554 @@
 @import "tailwindcss";
 
+/* ════════════════════════════════════════════════════════════════════
+   THE ASCENT — ground & tokens
+   Runtime vars (--c-*, --line-*, --acc-*) flip per [data-theme];
+   @theme inline maps them to Tailwind utilities (bg-bg, text-ink, …).
+   ════════════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  /* Color tokens → runtime vars */
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
+  --color-ink: var(--c-text);
+  --color-dim: var(--c-dim);
+  --color-muted: var(--c-muted);
+  --color-ghost: var(--c-ghost);
+  --color-accent: var(--c-accent);
+  --color-accent2: var(--c-accent2);
+  --color-on-accent: var(--c-on-accent);
+  --color-danger: var(--c-danger);
+
+  /* Neutral hairline ramp (default cartography) */
+  --color-line-1: var(--line-1);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+  --color-line-4: var(--line-4);
+  --color-line-5: var(--line-5);
+
+  /* Accent ramp (focus, waypoints, spine, beacons, hover moments ONLY) */
+  --color-acc-1: var(--acc-1);
+  --color-acc-2: var(--acc-2);
+  --color-acc-3: var(--acc-3);
+  --color-acc-4: var(--acc-4);
+  --color-acc-5: var(--acc-5);
+
+  /* Fonts → next/font variables set on <html> */
+  --font-sans: var(--font-general);
+  --font-mono: var(--font-mono);
+
+  /* Fluid type scale (brief §2.4) — no inline clamp() in components */
+  --text-display: clamp(4rem, 12vw, 12rem);
+  --text-display--line-height: 0.92;
+  --text-chapter: clamp(3rem, 9vw, 9rem);
+  --text-chapter--line-height: 0.95;
+  --text-epigraph: clamp(1.25rem, 2vw, 1.75rem);
+  --text-epigraph--line-height: 1.4;
+  --text-mega: 13vw;
+  --text-mega--line-height: 0.9;
+  --text-label: clamp(0.63rem, 0.6rem + 0.15vw, 0.72rem);
+  --text-label--line-height: 1.5;
+}
+
+/* ── DARK "HIGH NIGHT" — default ─────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --c-bg: #050807;
+  --c-surface: #0b1210;
+  --c-raised: #111a17;
+  --c-text: #edf4f0;
+  --c-dim: #c3d2cb;
+  --c-muted: #7e928a;
+  --c-ghost: #1e2a26;
+  --c-accent: #2be4a2;
+  --c-accent2: #18b87f;
+  --c-on-accent: #04110b;
+  --c-danger: #ff6b5e;
+
+  --line-1: rgba(237, 244, 240, 0.06);
+  --line-2: rgba(237, 244, 240, 0.1);
+  --line-3: rgba(237, 244, 240, 0.16);
+  --line-4: rgba(237, 244, 240, 0.26);
+  --line-5: rgba(237, 244, 240, 0.45);
+
+  --acc-1: rgba(43, 228, 162, 0.08);
+  --acc-2: rgba(43, 228, 162, 0.13);
+  --acc-3: rgba(43, 228, 162, 0.2);
+  --acc-4: rgba(43, 228, 162, 0.3);
+  --acc-5: rgba(43, 228, 162, 0.5);
+}
+
+/* ── LIGHT "FIRST LIGHT" ─────────────────────────────────────────── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --c-bg: #fafaf6;
+  --c-surface: #f1f4ee;
+  --c-raised: #e9efe9;
+  --c-text: #101713;
+  --c-dim: #2e3b34;
+  --c-muted: #5f6f66;
+  --c-ghost: #d7e0d8;
+  --c-accent: #0b7b57;
+  --c-accent2: #086344;
+  --c-on-accent: #fafaf6;
+  --c-danger: #c8442c;
+
+  --line-1: rgba(16, 23, 19, 0.08);
+  --line-2: rgba(16, 23, 19, 0.12);
+  --line-3: rgba(16, 23, 19, 0.18);
+  --line-4: rgba(16, 23, 19, 0.28);
+  --line-5: rgba(16, 23, 19, 0.5);
+
+  --acc-1: rgba(11, 123, 87, 0.08);
+  --acc-2: rgba(11, 123, 87, 0.13);
+  --acc-3: rgba(11, 123, 87, 0.22);
+  --acc-4: rgba(11, 123, 87, 0.32);
+  --acc-5: rgba(11, 123, 87, 0.55);
+}
+
+/* ── Motion tokens (brief §2.5) — plain CSS vars ─────────────────── */
+:root {
+  --ease-summit: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-rise: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-micro: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Ground ──────────────────────────────────────────────────────── */
+/* overflow-x: clip (NEVER hidden) — position: sticky must survive.
+   No scroll-behavior: smooth — Lenis owns scrolling. */
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
-/* ── Design tokens: light (default) ── */
-:root {
-  --c-bg:        #ffffff;
-  --c-surface:   #f0fdf4;
-  --c-text:      #030a05;
-  --c-dim:       #0f3d22;
-  --c-muted:     #166534;
-  --c-ghost:     #86efac;
-  --c-accent:    #16a34a;
-  --c-accent2:   #15803d;
-  --c-on-accent: #ffffff;
-  --c-b1: rgba(22, 101, 52, 0.08);
-  --c-b2: rgba(22, 101, 52, 0.13);
-  --c-b3: rgba(22, 101, 52, 0.22);
-  --c-b4: rgba(22, 101, 52, 0.32);
-  --c-b5: rgba(22, 101, 52, 0.55);
-  /* Aliases (used by utility classes below) */
-  --dark:        var(--c-bg);
-  --green:       var(--c-accent);
-  --green-dim:   var(--c-accent2);
-  --white:       var(--c-text);
-  --white-faint: var(--c-muted);
-  --border:      var(--c-b2);
-  --border-md:   var(--c-b3);
-  --border-lg:   var(--c-b4);
+/* Smooth theme transition on structural elements only */
+body,
+header,
+main,
+footer,
+section,
+nav,
+article,
+aside {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
-/* ── Design tokens: dark ── */
-[data-theme="dark"] {
-  --c-bg:        #020403;
-  --c-surface:   #050908;
-  --c-text:      #ffffff;
-  --c-dim:       #dcfce7;
-  --c-muted:     #86efac;
-  --c-ghost:     #2d6a4f;
-  --c-accent:    #4ade80;
-  --c-accent2:   #22c55e;
-  --c-on-accent: #020403;
-  --c-b1: rgba(74, 222, 128, 0.09);
-  --c-b2: rgba(74, 222, 128, 0.13);
-  --c-b3: rgba(74, 222, 128, 0.22);
-  --c-b4: rgba(74, 222, 128, 0.32);
-  --c-b5: rgba(74, 222, 128, 0.55);
-  --dark:        var(--c-bg);
-  --green:       var(--c-accent);
-  --green-dim:   var(--c-accent2);
-  --white:       var(--c-text);
-  --white-faint: var(--c-muted);
-  --border:      var(--c-b2);
-  --border-md:   var(--c-b3);
-  --border-lg:   var(--c-b4);
+/* Visible focus rings — solid accent (≥3:1 non-text contrast, WCAG 1.4.11) */
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
 }
 
-/* ── Smooth theme transition ── */
-body, header, main, footer, section, nav, article, aside {
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--c-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-4);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-accent);
 }
 
-.font-heading {
-  font-family: 'Space Grotesk', var(--font-sans), ui-sans-serif, sans-serif;
-}
-.font-mono-custom {
-  font-family: 'JetBrains Mono', var(--font-mono), ui-monospace, monospace;
+/* Selection in accent */
+::selection {
+  background: var(--c-accent);
+  color: var(--c-on-accent);
 }
 
-/* ── Section label ── */
+/* ── Instrument utilities (contract §2) ──────────────────────────── */
+
+/* Mono instrument label */
 .label {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.63rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--white-faint);
+  color: var(--c-muted);
 }
 
-/* ── Sharp card ── */
-.sharp-card {
-  border: 1px solid var(--border);
-  background: transparent;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.sharp-card:hover {
-  background: var(--green);
-  border-color: var(--green);
+/* Calibration rule — slashed-zero tabular numerals on every readout */
+.numeric {
+  font-feature-settings: "tnum" 1, "zero" 1;
 }
 
-/* ── Buttons ── */
+/* Display — Clash Display */
+.font-display {
+  font-family: var(--font-clash), var(--font-general), ui-sans-serif, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Voice — Fraunces italic, opsz 144, wonky */
+.font-voice {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 520;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+/* Ghost numerals / outline watermark type */
+.ghost-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-ghost);
+}
+
+/* ── THE BRAND GESTURE — highlighter swipe (brief §3.8) ──────────────
+   Accent stroke sweeps left→right BEHIND the ink on hover/focus,
+   retracts right→left on leave. Text color never changes. */
+.swipe {
+  position: relative;
+  z-index: 0;
+}
+.swipe::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.08em -0.16em 0;
+  background: var(--acc-3);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.35s var(--ease-micro);
+  pointer-events: none;
+}
+.swipe:hover::after,
+.swipe:focus-visible::after {
+  clip-path: inset(0 0 0 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .swipe::after {
+    transition-duration: 0.01s;
+  }
+}
+
+/* ── Buttons (API: className only) ───────────────────────────────── */
 .btn-primary {
   display: inline-block;
   padding: 0.7rem 1.75rem;
-  background: var(--green);
+  background: var(--c-accent);
   color: var(--c-on-accent);
-  font-weight: 700;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  border: 1px solid var(--green);
+  border: 1px solid var(--c-accent);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  transition: background-color 0.2s var(--ease-micro),
+    border-color 0.2s var(--ease-micro), color 0.2s var(--ease-micro),
+    transform 0.2s var(--ease-micro);
 }
 .btn-primary:hover {
-  background: transparent;
-  color: var(--green);
+  background: var(--c-accent2);
+  border-color: var(--c-accent2);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
   display: inline-block;
   padding: 0.7rem 1.75rem;
   background: transparent;
-  color: var(--white);
-  font-weight: 700;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
+  color: var(--c-text);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  border: 1px solid var(--border-md);
+  border: 1px solid var(--line-4);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  transition: background-color 0.2s var(--ease-micro),
+    border-color 0.2s var(--ease-micro), color 0.2s var(--ease-micro),
+    transform 0.2s var(--ease-micro);
 }
 .btn-secondary:hover {
-  background: var(--green);
-  color: var(--c-on-accent);
-  border-color: var(--green);
+  background: var(--acc-1);
+  border-color: var(--acc-5);
+  transform: translateY(-2px);
 }
 
-/* ── Divider ── */
+/* ════════════════════════════════════════════════════════════════════
+   LEGACY SHIM — temporary, delete when the last old component migrates
+   ════════════════════════════════════════════════════════════════════ */
+
+/* legacy */
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  --dark: var(--c-bg);
+  --green: var(--c-accent);
+  --green-dim: var(--c-accent2);
+  --white: var(--c-text);
+  --white-faint: var(--c-muted);
+  --border: var(--line-2);
+  --border-md: var(--line-3);
+  --border-lg: var(--line-4);
+  --c-b1: var(--line-1);
+  --c-b2: var(--line-2);
+  --c-b3: var(--line-3);
+  --c-b4: var(--line-4);
+  --c-b5: var(--line-5);
+}
+
+/* legacy */
+.font-heading {
+  font-family: var(--font-clash), var(--font-general), ui-sans-serif, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* legacy */
+.font-mono-custom {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* legacy */
+.sharp-card {
+  border: 1px solid var(--line-2);
+  background: transparent;
+  transition: background-color 0.15s var(--ease-micro),
+    border-color 0.15s var(--ease-micro);
+}
+.sharp-card:hover {
+  background: var(--acc-1);
+  border-color: var(--acc-4);
+}
+
+/* legacy */
 .divider {
   width: 100%;
   height: 1px;
-  background: var(--border);
+  background: var(--line-2);
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: var(--green-dim); }
-::-webkit-scrollbar-thumb:hover { background: var(--green); }
-
-/* ── Selection ── */
-::selection { background: var(--green); color: var(--c-on-accent); }
-
-/* ── Animations ── */
+/* legacy */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s ease both;
+}
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+.delay-100 {
+  animation-delay: 0.08s;
+}
+.delay-200 {
+  animation-delay: 0.16s;
+}
+.delay-300 {
+  animation-delay: 0.24s;
+}
+.delay-400 {
+  animation-delay: 0.32s;
+}
+.delay-500 {
+  animation-delay: 0.4s;
 }
 
-.animate-fade-up { animation: fade-up 0.5s ease both; }
-.animate-fade-in { animation: fade-in 0.4s ease both; }
-.animate-ticker  { animation: ticker 30s linear infinite; }
-.animate-ticker:hover { animation-play-state: paused; }
-
-/* ── Blog prose ── */
+/* ── VOL.08 — field-note prose (owner: blog agent) ─────────────────
+   Long-form article typography for /blog/[slug]. General Sans body,
+   Clash Display section heads with mono § counters and journal rules,
+   Fraunces italic pull-quotes, accent survey-tick list markers. */
+.prose-blog {
+  font-family: var(--font-general), ui-sans-serif, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--c-dim);
+  counter-reset: fieldnote;
+}
 .prose-blog h2 {
-  font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
-  font-weight: 800;
-  font-size: 1.375rem;
+  font-family: var(--font-clash), var(--font-general), ui-sans-serif, sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
   color: var(--c-text);
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+  margin-bottom: 0.875rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-2);
+  counter-increment: fieldnote;
 }
-.prose-blog p { margin-bottom: 1.25rem; }
+.prose-blog h2::before {
+  content: "§ " counter(fieldnote, decimal-leading-zero) / "";
+  display: block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.63rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--c-muted);
+  margin-bottom: 0.625rem;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+.prose-blog p {
+  margin-bottom: 1.25rem;
+}
 .prose-blog blockquote {
-  border-left: 2px solid var(--c-accent);
-  padding-left: 1.25rem;
-  margin: 1.75rem 0;
-  color: var(--c-text);
+  font-family: var(--font-fraunces), Georgia, serif;
   font-style: italic;
+  font-weight: 520;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--c-text);
+  border-left: 1px solid var(--acc-5);
+  padding-left: 1.5rem;
+  margin: 2.25rem 0;
 }
-.prose-blog ul { list-style: none; padding: 0; margin-bottom: 1.25rem; }
+.prose-blog ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
 .prose-blog ul li {
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
   position: relative;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
 }
 .prose-blog ul li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
-  top: 0.6em;
-  width: 0.375rem;
+  top: 0.8em;
+  width: 0.625rem;
   height: 1px;
-  background: var(--c-accent2);
+  background: var(--c-accent);
 }
-.prose-blog a { color: var(--c-accent); text-decoration: none; }
-.prose-blog a:hover { text-decoration: underline; }
-.prose-blog strong { color: var(--c-text); font-weight: 700; }
+.prose-blog a {
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--acc-4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s var(--ease-micro);
+}
+.prose-blog a:hover {
+  text-decoration-color: var(--c-accent);
+}
+.prose-blog strong {
+  color: var(--c-text);
+  font-weight: 600;
+}
 
-.delay-100 { animation-delay: 0.08s; }
-.delay-200 { animation-delay: 0.16s; }
-.delay-300 { animation-delay: 0.24s; }
-.delay-400 { animation-delay: 0.32s; }
-.delay-500 { animation-delay: 0.40s; }
+/* ════════════════════════════════════════════════════════════════════
+   THEME TOGGLE — View Transitions circular reveal (brief §4.12)
+   Owner: Navbar agent (components/ThemeToggle.tsx). ThemeToggle animates
+   ::view-transition-new(root) clip-path via WAAPI; these rules disable the
+   UA default crossfade so the expanding circle renders clean.
+   ════════════════════════════════════════════════════════════════════ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   HERO ATMOSPHERE — aurora (HIGH NIGHT) / dawn mist (FIRST LIGHT)
+   Brief §2.1/§2.2 atmosphere-only hues; globals.css is the sanctioned
+   home for raw color values (contract §0). Consumed by components/Hero.tsx.
+   ════════════════════════════════════════════════════════════════════ */
+.hero-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+}
+.hero-aurora-a {
+  width: 70vmax;
+  height: 70vmax;
+  left: -22vmax;
+  top: -26vmax;
+  background: radial-gradient(
+    closest-side,
+    rgba(139, 124, 255, 0.13),
+    rgba(139, 124, 255, 0.05) 45%,
+    rgba(139, 124, 255, 0) 72%
+  );
+  animation: hero-drift-a 32s ease-in-out infinite alternate;
+}
+.hero-aurora-b {
+  width: 60vmax;
+  height: 60vmax;
+  right: -20vmax;
+  top: -12vmax;
+  background: radial-gradient(
+    closest-side,
+    rgba(79, 195, 247, 0.11),
+    rgba(43, 228, 162, 0.04) 50%,
+    rgba(79, 195, 247, 0) 72%
+  );
+  animation: hero-drift-b 40s ease-in-out infinite alternate;
+}
+[data-theme='light'] .hero-aurora-a {
+  background: radial-gradient(
+    closest-side,
+    rgba(242, 217, 164, 0.12),
+    rgba(242, 217, 164, 0.05) 45%,
+    rgba(242, 217, 164, 0) 72%
+  );
+}
+[data-theme='light'] .hero-aurora-b {
+  background: radial-gradient(
+    closest-side,
+    rgba(244, 198, 184, 0.1),
+    rgba(244, 198, 184, 0.04) 50%,
+    rgba(244, 198, 184, 0) 72%
+  );
+}
+@keyframes hero-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(8vw, 6vh, 0) scale(1.08); }
+}
+@keyframes hero-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-7vw, 8vh, 0) scale(0.96); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora-a,
+  .hero-aurora-b {
+    animation: none;
+  }
+}

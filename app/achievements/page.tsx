@@ -2,7 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
+import { Odometer } from '@/components/fx/Odometer';
+import { Reveal } from '@/components/fx/Reveal';
 import { profile } from '@/data/profile';
+import SummitStats from './SummitStats';
 
 export const metadata: Metadata = {
   title: 'Achievements — LeetCode Top 3% & Certifications',
@@ -43,87 +49,225 @@ const jsonLd = {
   ],
 };
 
-const clean = (s: string) => s.replace(/—/g, ':');
+/** VOL.07 motif — summit panorama at 4% (opacity applied by VolumePlate). */
+function SummitPanoramaMotif() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 1440 480"
+      preserveAspectRatio="xMidYMax slice"
+      fill="none"
+      className="h-full w-full text-ink"
+    >
+      {/* elevation rules */}
+      {[96, 192, 288, 384].map((y) => (
+        <line
+          key={y}
+          x1="0"
+          y1={y}
+          x2="1440"
+          y2={y}
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="2 10"
+        />
+      ))}
+      {/* far range */}
+      <path
+        d="M0 430 L140 330 L240 386 L380 220 L470 300 L600 96 L700 230 L780 180 L920 330 L1040 240 L1170 400 L1300 300 L1440 410"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      {/* near range */}
+      <path
+        d="M0 470 L180 396 L330 446 L520 330 L700 456 L900 366 L1100 470 L1280 410 L1440 460"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      {/* summit flag on the high point */}
+      <path d="M600 96 V52" stroke="currentColor" strokeWidth="2" />
+      <path d="M600 52 L628 62 L600 72 Z" fill="currentColor" />
+      <circle cx="600" cy="96" r="4" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Registration tick marks — 4 tiny L-shaped corners on a summit certificate. */
+function TickCorners() {
+  const tick =
+    'absolute h-2.5 w-2.5 border-line-4 transition-colors duration-200 group-hover:border-acc-5';
+  return (
+    <span aria-hidden="true" className="pointer-events-none absolute inset-0">
+      <span className={`${tick} left-0 top-0 border-l border-t`} />
+      <span className={`${tick} right-0 top-0 border-r border-t`} />
+      <span className={`${tick} bottom-0 left-0 border-b border-l`} />
+      <span className={`${tick} bottom-0 right-0 border-b border-r`} />
+    </span>
+  );
+}
 
 export default function AchievementsPage() {
-  const competitive = profile.achievements.filter((a) => a.type === 'competitive');
+  const competitive = profile.achievements.find((a) => a.type === 'competitive');
   const certs = profile.achievements.filter((a) => a.type === 'cert');
+  const entryCount = String(profile.achievements.length).padStart(2, '0');
+
+  // Hero numerals parsed from profile.achievements — never hardcoded.
+  // 'LeetCode: Top 3% Globally' → TOP 3% · '580+ problems solved · Global Rank 98k' → 580+ / 98K
+  const heroStats = competitive
+    ? [
+        {
+          value: competitive.title.match(/top\s*\d+%/i)?.[0]?.toUpperCase() ?? '',
+          label: 'GLOBAL STANDING',
+        },
+        {
+          value: competitive.detail.match(/\d[\d,]*\+/)?.[0] ?? '',
+          label: 'PROBLEMS SOLVED',
+        },
+        {
+          value:
+            competitive.detail.match(/rank\s*([\d,.]*\d\s*k?)/i)?.[1]?.toUpperCase() ?? '',
+          label: 'GLOBAL RANK',
+        },
+      ].filter((s) => s.value)
+    : [];
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.07"
+          title="SUMMIT LOG"
+          altitude="8,000M"
+          motif={<SummitPanoramaMotif />}
+        >
+          <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
+            Proof of passage — stamped, dated, logged.
+          </LineMask>
+          <LineMask as="p" delay={0.3} className="mt-4 text-sm leading-relaxed text-dim">
+            I am not big on trophies, but a few things took real work. The LeetCode
+            ranking is the one I am quietly proud of, mostly because it is a habit,
+            not a single moment.
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              ACHIEVEMENTS
-            </h1>
-            <span className="label">06 / 07</span>
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
+          {/* Hero numerals — odometer rolls in ghost-stroke → solid flood */}
+          {heroStats.length > 0 && <SummitStats stats={heroStats} />}
+
+          {/* Log entries */}
+          <div className="mt-16 mb-8 flex items-baseline justify-between gap-4 md:mt-20">
+            <span className="label numeric">CERTIFICATIONS &amp; RECORDS</span>
+            <span className="label numeric">{entryCount} ENTRIES</span>
           </div>
 
-          <p className="text-[var(--c-dim)] text-sm max-w-2xl leading-relaxed mb-12">
-            I am not big on trophies, but a few things took real work. The LeetCode ranking is the
-            one I am quietly proud of, mostly because it is a habit, not a single moment.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] border border-[var(--c-b2)]">
-            {competitive.map((ach) => (
-              <div
-                key={ach.title}
-                className="p-8 lg:border-r border-b lg:border-b-0 border-[var(--c-b2)] flex flex-col justify-between"
-              >
-                <div>
-                  <p className="label mb-6 text-[var(--c-accent)]">Competitive Programming</p>
-                  <h2 className="font-heading font-black text-[var(--c-text)] text-2xl md:text-3xl leading-tight mb-3">
-                    {clean(ach.title)}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {/* Competitive record — LOG 01 */}
+            {competitive && (
+              <Reveal className="h-full">
+                <article className="group relative flex h-full flex-col border border-line-2 bg-surface p-6 transition-transform duration-200 hover:-translate-y-1">
+                  <TickCorners />
+                  <p className="label numeric mb-6 flex items-baseline justify-between gap-3">
+                    <span className="flex items-center gap-2">
+                      <span aria-hidden="true" className="h-1.5 w-1.5 bg-accent" />
+                      COMPETITIVE PROGRAMMING
+                    </span>
+                    <span>LOG 01</span>
+                  </p>
+                  <h2 className="font-display mb-2 text-xl font-semibold leading-snug text-ink">
+                    {competitive.title}
                   </h2>
-                  <p className="font-mono text-[var(--c-dim)] text-sm">{clean(ach.detail)}</p>
-                </div>
-                <div className="mt-8 pt-6 border-t border-[var(--c-b2)]">
-                  <p className="font-heading font-black text-[var(--c-accent)] text-5xl md:text-6xl">3%</p>
-                  <p className="label mt-2">Global ranking</p>
-                </div>
-              </div>
-            ))}
+                  <p className="label numeric">{competitive.detail}</p>
+                  <a
+                    href={profile.contacts.leetcode}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="swipe group/link label numeric mt-auto inline-flex w-fit items-center gap-2 pt-8"
+                  >
+                    VIEW LOG
+                    <span
+                      aria-hidden="true"
+                      className="inline-block transition-transform duration-200 group-hover/link:translate-x-1.5"
+                    >
+                      →
+                    </span>
+                  </a>
+                </article>
+              </Reveal>
+            )}
 
-            <div className="divide-y divide-[var(--c-b2)]">
-              <div className="p-5 pb-4">
-                <p className="label">Certifications</p>
-              </div>
-              {certs.map(({ title, detail }) => (
-                <div
-                  key={title}
-                  className="group px-5 py-4 flex items-start justify-between gap-6 hover:bg-[rgba(74,222,128,0.06)] transition-colors"
-                >
-                  <h3 className="text-[var(--c-dim)] group-hover:text-[var(--c-text)] text-sm font-semibold transition-colors leading-snug">
-                    {clean(title)}
+            {/* Summit certificates */}
+            {certs.map((cert, i) => (
+              <Reveal key={cert.title} delay={(i + 1) * 0.07} className="h-full">
+                <article className="group relative flex h-full flex-col border border-line-2 bg-surface p-6 transition-transform duration-200 hover:-translate-y-1">
+                  <TickCorners />
+                  <p className="label numeric mb-6 flex items-baseline justify-between gap-3">
+                    <span>CERTIFICATE</span>
+                    <span>LOG {String(i + 2).padStart(2, '0')}</span>
+                  </p>
+                  <h3 className="font-display text-lg font-semibold leading-snug text-ink">
+                    {cert.title}
                   </h3>
-                  <p className="label whitespace-nowrap text-right">{clean(detail)}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 border border-[var(--c-b2)] mt-10">
-            {profile.stats.map(({ value, label }, i) => (
-              <div
-                key={label}
-                className={`p-4 sm:p-5 text-center ${i < profile.stats.length - 1 ? 'border-r border-[var(--c-b2)]' : ''}`}
-              >
-                <p className="font-heading font-black text-[var(--c-accent)] text-2xl sm:text-3xl">{value}</p>
-                <p className="label mt-2">{label}</p>
-              </div>
+                  <p className="label numeric mt-auto pt-8">{cert.detail}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link href={profile.contacts.leetcode} target="_blank" rel="noopener noreferrer" className="label hover:text-[var(--c-accent)] transition-colors">LEETCODE PROFILE →</Link>
-            <Link href="/open-source" className="label hover:text-[var(--c-accent)] transition-colors">OPEN SOURCE →</Link>
-            <Link href="/blog/leetcode-obsession" className="label hover:text-[var(--c-accent)] transition-colors">WHY I STILL GRIND →</Link>
+          {/* Expedition totals — deterministic hairline grid */}
+          <div className="mt-16 mb-8 flex items-baseline justify-between gap-4 md:mt-20">
+            <span className="label numeric">EXPEDITION TOTALS</span>
+            <span className="label numeric">▲ 8,000M</span>
+          </div>
+
+          <div className="grid grid-cols-2 border-r border-b border-line-2 sm:grid-cols-4">
+            {profile.stats.map(({ value, label }, i) => (
+              <Reveal
+                key={label}
+                delay={i * 0.07}
+                className="border-t border-l border-line-2 p-5 text-center sm:p-6"
+              >
+                <Odometer
+                  value={value}
+                  className="font-display text-2xl font-semibold text-ink sm:text-3xl"
+                />
+                <p className="label numeric mt-2">{label}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Cross-links */}
+          <div className="mt-14 flex flex-wrap gap-x-10 gap-y-4 border-t border-line-2 pt-8">
+            <Link
+              href={profile.contacts.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="swipe group label numeric inline-flex items-center gap-2"
+            >
+              LEETCODE PROFILE
+              <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+            </Link>
+            <Link
+              href="/open-source"
+              className="swipe group label numeric inline-flex items-center gap-2"
+            >
+              OPEN SOURCE
+              <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+            </Link>
+            <Link
+              href="/blog/leetcode-obsession"
+              className="swipe group label numeric inline-flex items-center gap-2"
+            >
+              WHY I STILL GRIND
+              <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+            </Link>
           </div>
         </div>
+
+        <ChapterNav current="/achievements" />
       </main>
       <Footer />
     </>

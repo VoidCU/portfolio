@@ -1,31 +1,17 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
-import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-});
+import { clash, general, fraunces, jetbrains } from './fonts';
+import MotionRoot from '@/components/fx/MotionRoot';
+import SmoothScroll from '@/components/fx/SmoothScroll';
+import Grain from '@/components/fx/Grain';
+import Loupe from '@/components/fx/Loupe';
+import ExpeditionRadio from '@/components/fx/ExpeditionRadio';
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: dark)',  color: '#020403' },
-    { media: '(prefers-color-scheme: light)', color: '#f0fdf4' },
+    { media: '(prefers-color-scheme: dark)',  color: '#050807' },
+    { media: '(prefers-color-scheme: light)', color: '#FAFAF6' },
   ],
   colorScheme: 'dark light',
 };
@@ -156,26 +142,44 @@ const jsonLd = [
   },
 ];
 
+/**
+ * Anti-FOUC theme bootstrap (contract §4) — runs before first paint.
+ * Resolves theme = localStorage 'theme' ?? system preference, sets
+ * data-theme on <html>, and defines window.__voidcuToggleTheme — the
+ * SINGLE source of truth for the theme flip (called by ThemeToggle and
+ * ExpeditionRadio).
+ */
+const themeScript = `(function(){var d=document.documentElement;var t='dark';try{var s=localStorage.getItem('theme');if(s==='light'||s==='dark'){t=s}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){t='light'}}catch(e){}d.setAttribute('data-theme',t);window.__voidcuToggleTheme=function(){var c=d.getAttribute('data-theme')==='light'?'light':'dark';var n=c==='light'?'dark':'light';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}};})();`;
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-theme="light"
+      data-theme="dark"
       suppressHydrationWarning
-      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
+      className={`${clash.variable} ${general.variable} ${fraunces.variable} ${jetbrains.variable}`}
     >
       <head>
-        {/* Anti-flash: apply stored theme before first paint */}
-        <script
-          dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }}
-        />
+        {/* Anti-flash: resolve + apply theme before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* No-JS: entrance animations SSR their hidden initial state — force
+            every [data-anim] element visible so content never depends on
+            hydration (stylesheet !important beats inline styles). */}
+        <noscript>
+          <style>{`[data-anim]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
       </head>
-      <body className="bg-[var(--c-bg)] text-[var(--c-text)] font-sans antialiased">
-        {children}
+      <body className="bg-bg text-ink font-sans antialiased">
+        <MotionRoot>
+          <SmoothScroll>{children}</SmoothScroll>
+          <Grain />
+          <Loupe />
+          <ExpeditionRadio />
+        </MotionRoot>
       </body>
     </html>
   );

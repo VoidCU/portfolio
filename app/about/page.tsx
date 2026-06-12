@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
+import { Odometer } from '@/components/fx/Odometer';
+import { Reveal } from '@/components/fx/Reveal';
 import { profile } from '@/data/profile';
+import Portrait from './Portrait';
 
 export const metadata: Metadata = {
   title: 'About Saroj Prasad Mainali — Full-Stack Engineer from Kathmandu',
@@ -86,124 +91,224 @@ const facts = [
   { label: 'Status', value: 'Open to work & collaborations' },
 ];
 
+/* VOL.01 motif — valley contour: nested cross-section lines dipping to the
+   valley floor (brief §5). Static inline SVG, 4% opacity via the plate slot. */
+function ValleyContourMotif() {
+  const contours = Array.from({ length: 7 }, (_, i) => {
+    const edge = 26 + i * 16;
+    const floor = 392 - i * 30;
+    return `M0 ${edge} C 340 ${edge + 8}, 440 ${floor} 600 ${floor} C 760 ${floor}, 860 ${edge + 8}, 1200 ${edge}`;
+  });
+  return (
+    <svg
+      className="h-full w-full text-ink"
+      viewBox="0 0 1200 400"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      {contours.map((d) => (
+        <path key={d} d={d} />
+      ))}
+      {/* valley-floor river thread */}
+      <path d="M520 400 C 560 380, 640 376, 680 400" />
+    </svg>
+  );
+}
+
 export default function AboutPage() {
+  const dropSource = profile.bio[0];
+  const dropCap = dropSource.charAt(0);
+  const dropRest = dropSource.slice(1);
+
+  const socials = [
+    { label: 'GitHub', href: profile.contacts.github, external: true },
+    { label: 'LinkedIn', href: profile.contacts.linkedin, external: true },
+    { label: 'LeetCode', href: profile.contacts.leetcode, external: true },
+    { label: profile.contacts.email, href: `mailto:${profile.contacts.email}`, external: false },
+  ];
+
+  const related = [
+    { label: 'NOW', href: '/now' },
+    { label: 'USES', href: '/uses' },
+    { label: 'EXPERIENCE', href: '/experience' },
+    { label: 'BLOG', href: '/blog' },
+  ];
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.01"
+          title="ORIGIN"
+          altitude="2,300M"
+          motif={<ValleyContourMotif />}
+        >
+          <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
+            From the valley floor.
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              ABOUT
-            </h1>
-            <span className="label">01 / 07</span>
-          </div>
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-20">
+            {/* ── Portrait + field record + education ─────────────── */}
+            <div className="space-y-8">
+              <Portrait degree={profile.education.degree} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
+              <Reveal delay={0.08}>
+                <div className="border border-line-2">
+                  <p className="label numeric border-b border-line-2 px-5 py-3">
+                    FIELD RECORD
+                  </p>
+                  <dl className="divide-y divide-line-2">
+                    {facts.map(({ label, value }) => (
+                      <div key={label} className="px-5 py-3.5">
+                        <dt className="label mb-1">{label}</dt>
+                        <dd className="text-sm text-ink">{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </Reveal>
 
-            {/* Photo + facts */}
-            <div className="space-y-6">
-              <div className="relative w-full max-w-xs">
-                <div className="absolute inset-0 border border-[var(--c-b3)]" />
-                <div className="absolute -bottom-2 -right-2 border border-[var(--c-b2)] w-full h-full" />
-                <Image
-                  src="/assets/me.jpeg"
-                  alt="Saroj Prasad Mainali — Full-Stack Engineer from Kathmandu, Nepal"
-                  width={0}
-                  height={0}
-                  sizes="(max-width: 320px) 100vw, 320px"
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
-                  unoptimized
-                  priority
-                />
-              </div>
-
-              <div className="border border-[var(--c-b2)] divide-y divide-[var(--c-b2)]">
-                {facts.map(({ label, value }) => (
-                  <div key={label} className="p-4">
-                    <p className="label mb-1">{label}</p>
-                    <p className="text-[var(--c-text)] text-sm">{value}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border border-[var(--c-b2)] p-5 space-y-1">
-                <p className="label mb-3">Education</p>
-                <p className="text-[var(--c-text)] font-semibold text-sm">{profile.education.degree}</p>
-                <p className="text-[var(--c-dim)] text-xs">{profile.education.institution}</p>
-                <p className="text-[var(--c-muted)] text-xs font-mono">{profile.education.period}</p>
-              </div>
+              <Reveal delay={0.16}>
+                <div className="border border-line-2 p-6">
+                  <p className="label mb-4">Education</p>
+                  <p className="text-sm font-medium text-ink">{profile.education.degree}</p>
+                  <p className="mt-1 text-sm text-dim">{profile.education.institution}</p>
+                  <p className="label numeric mt-3">{profile.education.period}</p>
+                </div>
+              </Reveal>
             </div>
 
-            {/* Bio + stats */}
-            <div className="space-y-10">
-              <div className="space-y-5">
-                {profile.bio.map((para, i) => (
-                  <p key={`bio-${i}`} className="text-[var(--c-dim)] leading-relaxed text-base">
-                    {para.replace(/—/g, ',')}
-                  </p>
-                ))}
-                {extraBio.map((para, i) => (
-                  <p key={`extra-${i}`} className="text-[var(--c-dim)] leading-relaxed text-base">
-                    {para}
-                  </p>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 border border-[var(--c-b2)]">
-                {profile.stats.map(({ value, label }, i) => (
-                  <div
-                    key={label}
-                    className={`p-4 sm:p-5 text-center ${i < profile.stats.length - 1 ? 'border-r border-[var(--c-b2)]' : ''}`}
+            {/* ── Bio + stats + skills + links ─────────────────────── */}
+            <div className="space-y-12">
+              {/* Fraunces drop cap on the first paragraph */}
+              <Reveal>
+                <p
+                  aria-label={dropSource}
+                  className="max-w-[62ch] text-lg leading-[1.7] text-ink md:text-xl"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="font-voice float-left mt-[0.06em] pr-[0.14em] text-[4.4em] leading-[0.78]"
                   >
-                    <p className="font-heading font-black text-[var(--c-accent)] text-2xl sm:text-3xl">{value}</p>
-                    <p className="label mt-2">{label}</p>
-                  </div>
+                    {dropCap}
+                  </span>
+                  <span aria-hidden="true">{dropRest}</span>
+                </p>
+              </Reveal>
+
+              <div className="space-y-5">
+                <Reveal delay={0.06}>
+                  <p className="max-w-[62ch] text-base leading-[1.7] text-dim">
+                    {profile.bio[1]}
+                  </p>
+                </Reveal>
+                {extraBio.map((para, i) => (
+                  <Reveal key={para.slice(0, 24)} delay={0.06 + (i + 1) * 0.06}>
+                    <p className="max-w-[62ch] text-base leading-[1.7] text-dim">{para}</p>
+                  </Reveal>
                 ))}
               </div>
 
-              <div>
-                <p className="label mb-5">What I work with</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
-                  {profile.skills.map((cat) => (
-                    <div key={cat.category} className="flex items-baseline gap-3 py-1.5 border-b border-[var(--c-b2)]">
-                      <span className="text-[var(--c-text)] text-sm font-semibold whitespace-nowrap">{cat.category}</span>
-                      <span className="text-[var(--c-muted)] text-xs font-mono truncate">{cat.items.join(', ')}</span>
-                    </div>
+              {/* Stats — odometer row, deterministic grid borders */}
+              <div className="border-b border-r border-line-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4">
+                  {profile.stats.map(({ value, label }, i) => (
+                    <Reveal
+                      key={label}
+                      delay={i * 0.06}
+                      className="border-l border-t border-line-2"
+                    >
+                      <div className="px-4 py-7 text-center">
+                        <Odometer
+                          value={value}
+                          className="font-display text-3xl font-semibold text-accent md:text-4xl"
+                        />
+                        <p className="label mt-3">{label}</p>
+                      </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { label: 'GitHub', href: profile.contacts.github },
-                  { label: 'LinkedIn', href: profile.contacts.linkedin },
-                  { label: 'LeetCode', href: profile.contacts.leetcode },
-                  { label: profile.contacts.email, href: `mailto:${profile.contacts.email}` },
-                ].map(({ label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith('mailto') ? undefined : '_blank'}
-                    rel="noopener noreferrer"
-                    className="label border border-[var(--c-b2)] px-4 py-2.5 text-[var(--c-muted)] hover:text-[var(--c-on-accent)] hover:bg-[var(--c-accent)] hover:border-[var(--c-accent)] transition-colors"
-                  >
-                    {label}
-                  </a>
-                ))}
+              {/* Skills summary rows */}
+              <div>
+                <LineMask as="p" className="label mb-5">
+                  What I work with
+                </LineMask>
+                <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+                  {profile.skills.map((cat, i) => (
+                    <Reveal key={cat.category} delay={i * 0.06}>
+                      <div className="flex items-baseline gap-3 border-b border-line-2 py-2.5 transition-transform duration-200 ease-[var(--ease-micro)] hover:translate-x-2">
+                        <span className="swipe whitespace-nowrap text-sm font-medium text-ink">
+                          {cat.category}
+                        </span>
+                        <span className="numeric truncate font-mono text-xs text-muted">
+                          {cat.items.join(', ')}
+                        </span>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-4 border-t border-[var(--c-b2)]">
-                <Link href="/now" className="label hover:text-[var(--c-accent)] transition-colors">NOW →</Link>
-                <Link href="/uses" className="label hover:text-[var(--c-accent)] transition-colors">USES →</Link>
-                <Link href="/experience" className="label hover:text-[var(--c-accent)] transition-colors">EXPERIENCE →</Link>
-                <Link href="/blog" className="label hover:text-[var(--c-accent)] transition-colors">BLOG →</Link>
-              </div>
+              {/* Social links */}
+              <Reveal delay={0.08}>
+                <ul className="flex flex-wrap gap-x-7 gap-y-3">
+                  {socials.map(({ label, href, external }) => (
+                    <li key={label}>
+                      <a
+                        href={href}
+                        target={external ? '_blank' : undefined}
+                        rel={external ? 'noopener noreferrer' : undefined}
+                        className={`swipe group inline-flex items-center gap-2 font-mono text-[0.68rem] tracking-[0.18em] text-muted ${
+                          external ? 'uppercase' : ''
+                        }`}
+                      >
+                        {label}
+                        <span
+                          aria-hidden="true"
+                          className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5"
+                        >
+                          →
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              {/* Cross-volume links */}
+              <Reveal delay={0.14}>
+                <ul className="flex flex-wrap gap-x-7 gap-y-3 border-t border-line-2 pt-6">
+                  {related.map(({ label, href }) => (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className="swipe group label inline-flex items-center gap-2"
+                      >
+                        {label}
+                        <span
+                          aria-hidden="true"
+                          className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5"
+                        >
+                          →
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
           </div>
         </div>
+
+        <ChapterNav current="/about" />
       </main>
       <Footer />
     </>

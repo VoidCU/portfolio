@@ -1,18 +1,20 @@
-﻿import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import NotFoundView from './NotFoundView';
 
+/**
+ * OFF THE TRAIL — 404 (BRIEF §5). Full site chrome retained; the page
+ * itself (wandering trail, compass, throwable headline) lives in the
+ * co-located client view. Not a Field Volume — no VolumePlate/ChapterNav.
+ */
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[var(--c-bg)] text-center px-6">
-      <span className="label mb-6">404</span>
-      <h1 className="font-heading font-black text-[var(--c-text)] text-6xl md:text-8xl tracking-tight mb-4">
-        NOT FOUND
-      </h1>
-      <p className="text-[var(--c-dim)] text-sm max-w-sm mb-10 leading-relaxed">
-        The page you are looking for does not exist. It may have moved, been deleted, or never existed in the first place.
-      </p>
-      <Link href="/" className="btn-primary">
-        Back to Home
-      </Link>
-    </div>
+    <>
+      <Navbar />
+      <main className="bg-bg text-ink">
+        <NotFoundView />
+      </main>
+      <Footer />
+    </>
   );
 }

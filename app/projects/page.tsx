@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
 import { profile } from '@/data/profile';
+import ProjectsView from './ProjectsView';
 
 export const metadata: Metadata = {
   title: 'Projects — SaaS, AI Research & Civic Tech from Nepal',
@@ -57,12 +60,6 @@ const jsonLd = [
   },
 ];
 
-const statusStyle: Record<string, string> = {
-  'LIVE': 'text-[var(--c-accent)]',
-  'IN DEV': 'text-[var(--c-dim)]',
-  'RESEARCH': 'text-[var(--c-muted)]',
-};
-
 const domains = [
   { title: 'SaaS & Web Platforms', desc: 'Multi-tenant systems, RBAC, dashboards, CRMs, and Jamstack sites that ship and stay up.' },
   { title: 'AI & Machine Learning', desc: 'CNNs, transformers, NLP, and culling pipelines. Research that turns into something a person can use.' },
@@ -72,112 +69,60 @@ const domains = [
   { title: 'DevOps & Infra', desc: 'Docker, Kubernetes, and CI/CD pipelines, run on real infrastructure in a place where the power goes out.' },
 ];
 
+/** Topo-contour motif — VOL.02 plate art (BRIEF §5), rendered at 4% by VolumePlate. */
+function TopoMotif() {
+  return (
+    <svg
+      className="h-full w-full"
+      viewBox="0 0 1440 600"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      {/* wandering contour bands */}
+      <path d="M0 90 C 180 40, 360 130, 560 95 S 940 30, 1140 85 S 1360 130, 1440 100" />
+      <path d="M0 170 C 200 120, 420 210, 640 170 S 1020 110, 1240 165 S 1400 200, 1440 180" />
+      <path d="M0 260 C 160 220, 380 300, 600 255 S 1000 200, 1220 250 S 1390 290, 1440 265" />
+      <path d="M0 350 C 220 310, 440 390, 660 345 S 1040 290, 1260 340 S 1410 380, 1440 355" />
+      <path d="M0 445 C 180 405, 400 480, 620 440 S 1020 385, 1240 435 S 1400 470, 1440 450" />
+      <path d="M0 540 C 240 500, 460 575, 680 535 S 1060 480, 1280 530 S 1420 560, 1440 545" />
+      {/* summit ring cluster */}
+      <ellipse cx="1050" cy="210" rx="170" ry="95" />
+      <ellipse cx="1040" cy="205" rx="130" ry="70" />
+      <ellipse cx="1030" cy="200" rx="92" ry="48" />
+      <ellipse cx="1022" cy="196" rx="58" ry="30" />
+      <ellipse cx="1016" cy="192" rx="28" ry="14" />
+      {/* secondary knoll */}
+      <ellipse cx="300" cy="120" rx="110" ry="55" />
+      <ellipse cx="294" cy="116" rx="72" ry="34" />
+      <ellipse cx="288" cy="112" rx="38" ry="17" />
+    </svg>
+  );
+}
+
 export default function ProjectsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate volume="VOL.02" title="EXPEDITIONS" altitude="3,500M" motif={<TopoMotif />}>
+          <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
+            The public slice, documented.
+          </LineMask>
+          <LineMask as="p" delay={0.28} className="mt-5">
+            <span className="block max-w-2xl text-sm leading-relaxed text-dim">
+              A few things I have built that I am happy to talk about. Most client work is under NDA,
+              so this is the public slice: civic tech, multi-tenant SaaS, and a couple of AI research
+              projects that I did mostly because I could not stop thinking about them.
+            </span>
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              PROJECTS
-            </h1>
-            <span className="label">04 / 07</span>
-          </div>
+        <ProjectsView domains={domains} />
 
-          <p className="text-[var(--c-dim)] text-sm max-w-2xl leading-relaxed mb-12">
-            A few things I have built that I am happy to talk about. Most client work is under NDA,
-            so this is the public slice: civic tech, multi-tenant SaaS, and a couple of AI research
-            projects that I did mostly because I could not stop thinking about them.
-          </p>
-
-          <div className="space-y-0 border-t border-[var(--c-b2)]">
-            {profile.featuredProjects.map(({ index, name, tagline, desc, tech, url, github, status }) => (
-              <div
-                key={name}
-                className="group border-b border-[var(--c-b2)] py-8 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-x-10 gap-y-5 hover:bg-[rgba(74,222,128,0.06)] transition-colors"
-              >
-                <span className="font-mono text-[var(--c-muted)] text-sm pt-1 w-8 flex-shrink-0">{index}</span>
-
-                <div className="space-y-3">
-                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <h2 className="font-heading font-black text-[var(--c-text)] text-xl md:text-2xl tracking-tight group-hover:text-[var(--c-accent)] transition-colors">
-                      {name}
-                    </h2>
-                    <span className={`font-mono text-xs tracking-widest uppercase ${statusStyle[status] ?? ''}`}>
-                      ● {status}
-                    </span>
-                  </div>
-
-                  <p className="text-[var(--c-muted)] text-xs font-mono tracking-wider">{tagline}</p>
-                  <p className="text-[var(--c-dim)] text-sm leading-relaxed max-w-2xl">{desc}</p>
-
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {tech.map((t) => (
-                      <span
-                        key={t}
-                        className="border border-[var(--c-b2)] px-2.5 py-1 text-[var(--c-muted)] font-mono text-[10px] tracking-wider uppercase"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-row lg:flex-col gap-4 lg:gap-2 items-start lg:items-end pt-1">
-                  {github && (
-                    <Link href={github} target="_blank" rel="noopener noreferrer"
-                      className="label text-[var(--c-muted)] hover:text-[var(--c-accent)] transition-colors">
-                      GITHUB →
-                    </Link>
-                  )}
-                  {url && (
-                    <Link href={url} target="_blank" rel="noopener noreferrer"
-                      className="label text-[var(--c-accent)] hover:text-[var(--c-text)] transition-colors">
-                      LIVE →
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-20">
-            <div className="flex items-baseline justify-between mb-10 pb-5 border-b border-[var(--c-b2)]">
-              <h2 className="font-heading font-black text-[var(--c-text)] text-2xl md:text-3xl tracking-tight">
-                WORK DOMAINS
-              </h2>
-              <span className="label">{domains.length} areas</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-[var(--c-b2)]">
-              {domains.map((d) => (
-                <div
-                  key={d.title}
-                  className="group p-6 border-b border-r border-[var(--c-b2)] hover:border-[var(--c-accent)] hover:bg-[var(--c-accent)] transition-colors last:border-b-0"
-                >
-                  <h3 className="font-heading font-bold text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-base mb-3 transition-colors">
-                    {d.title}
-                  </h3>
-                  <p className="text-[var(--c-dim)] group-hover:text-[var(--c-on-accent)] text-sm leading-relaxed transition-colors">
-                    {d.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-wrap items-center gap-6">
-            <Link href={profile.contacts.github} target="_blank" rel="noopener noreferrer" className="btn-secondary text-xs">
-              All 80+ Repos on GitHub →
-            </Link>
-            <Link href="/open-source" className="label hover:text-[var(--c-accent)] transition-colors">
-              OPEN SOURCE →
-            </Link>
-          </div>
-        </div>
+        <ChapterNav current="/projects" />
       </main>
       <Footer />
     </>

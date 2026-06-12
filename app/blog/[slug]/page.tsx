@@ -1,9 +1,15 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ChapterNav from '@/components/fx/ChapterNav';
+import Magnetic from '@/components/fx/Magnetic';
+import { LineMask } from '@/components/fx/LineMask';
+import { Reveal } from '@/components/fx/Reveal';
 import { blogPosts } from '@/data/blog';
+import JournalRules from '../JournalRules';
+import ReadingAltimeter from './ReadingAltimeter';
 
 export const dynamic = 'force-static';
 
@@ -83,6 +89,25 @@ export default async function BlogPostPage({ params }: Props) {
   const newer = index > 0 ? orderedPosts[index - 1] : null;
   const older = index < orderedPosts.length - 1 ? orderedPosts[index + 1] : null;
 
+  const entryNum = String(index + 1).padStart(2, '0');
+  const entryTotal = String(orderedPosts.length).padStart(2, '0');
+
+  // Related field notes — same category first, newest recent posts as fallback.
+  const sameCategory = orderedPosts.filter(
+    (p) => p.category === post.category && p.slug !== post.slug
+  );
+  const related = (
+    sameCategory.length > 0
+      ? sameCategory
+      : orderedPosts.filter((p) => p.slug !== post.slug)
+  ).slice(0, 3);
+  const relatedLabel =
+    sameCategory.length > 0
+      ? `MORE IN ${post.category.toUpperCase()}`
+      : 'MORE FIELD NOTES';
+  const relatedCols =
+    related.length >= 3 ? 'sm:grid-cols-3' : related.length === 2 ? 'sm:grid-cols-2' : '';
+
   return (
     <>
       <script
@@ -90,80 +115,172 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <article className="max-w-3xl mx-auto px-6 py-20">
-
-          {/* Back */}
-          <div className="mb-12">
-            <Link
-              href="/blog"
-              className="label text-[var(--c-muted)] hover:text-[var(--c-accent)] transition-colors"
-            >
-              ← BACK TO BLOG
-            </Link>
+      <ReadingAltimeter />
+      <main className="min-h-screen bg-bg">
+        {/* ── Entry plate — VOL.08 field-note header ─────────────────── */}
+        <header className="relative overflow-hidden border-b border-line-2 pb-10 pt-28 md:pb-14 md:pt-36">
+          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]">
+            <JournalRules id="motif-field-note-entry" />
           </div>
+          <span
+            aria-hidden
+            className="ghost-outline font-display numeric pointer-events-none absolute -top-6 right-0 select-none text-[clamp(8rem,22vw,20rem)] leading-none"
+          >
+            {entryNum}
+          </span>
 
-          {/* Header */}
-          <header className="mb-12 pb-8 border-b border-[var(--c-b2)]">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-5">
-              <span className="label text-[var(--c-accent)]">{post.category}</span>
-              <span className="label">{post.date}</span>
-              <span className="label text-[var(--c-muted)]">{post.readTime}</span>
+          <div className="relative mx-auto w-full max-w-3xl px-6">
+            <div className="mb-8">
+              <Link
+                href="/blog"
+                className="swipe group numeric font-mono text-label uppercase tracking-[0.18em] text-ink"
+              >
+                <span className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:-translate-x-1.5">
+                  ←
+                </span>{' '}
+                BACK TO BLOG
+              </Link>
             </div>
-            <h1 className="font-heading font-black text-[var(--c-text)] text-3xl md:text-5xl leading-[1.1] tracking-tight">
-              {post.title}
-            </h1>
-          </header>
 
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-y-2">
+              <LineMask as="p" className="label numeric">
+                {`VOL.08 — FIELD NOTES · ENTRY ${entryNum}/${entryTotal}`}
+              </LineMask>
+              <LineMask as="p" delay={0.08} className="label numeric">
+                ▲ 8,200M
+              </LineMask>
+            </div>
+
+            <LineMask delay={0.12} className="mb-6">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span className="numeric border border-line-3 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  {post.category}
+                </span>
+                <span className="label numeric">{post.date}</span>
+                <span className="label numeric">{post.readTime}</span>
+              </div>
+            </LineMask>
+
+            <LineMask as="h1" delay={0.18} className="font-display text-3xl font-semibold leading-[1.05] tracking-tight text-ink md:text-5xl">
+              {post.title}
+            </LineMask>
+          </div>
+        </header>
+
+        <article className="mx-auto w-full max-w-3xl px-6 py-14 md:py-16">
           {/* Content */}
           <div
-            className="prose-blog text-[var(--c-dim)] text-[1.0625rem] leading-[1.85]"
+            className="prose-blog"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Author footer */}
-          <div className="mt-16 pt-8 border-t border-[var(--c-b2)] flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-line-2 pt-8">
             <div>
-              <p className="text-[var(--c-text)] font-heading font-bold text-sm">
+              <p className="font-display text-sm font-medium tracking-tight text-ink">
                 Saroj Prasad Mainali
               </p>
-              <p className="label mt-1">Full-Stack Engineer · Kathmandu</p>
+              <p className="label numeric mt-1.5">Full-Stack Engineer · Kathmandu</p>
             </div>
-            <Link href="/now" className="label hover:text-[var(--c-accent)] transition-colors">
-              WHAT I AM DOING NOW →
+            <Link
+              href="/now"
+              className="swipe group numeric font-mono text-label uppercase tracking-[0.18em] text-ink"
+            >
+              WHAT I AM DOING NOW{' '}
+              <span className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5">
+                →
+              </span>
             </Link>
           </div>
 
+          {/* Related field notes — by category */}
+          {related.length > 0 && (
+            <section aria-label="Related posts" className="mt-16">
+              <Reveal>
+                <div className="mb-6 flex items-center gap-4">
+                  <p className="label numeric whitespace-nowrap">{relatedLabel}</p>
+                  <div className="h-px flex-1 bg-line-2" />
+                  <p className="label numeric">{String(related.length).padStart(2, '0')}</p>
+                </div>
+              </Reveal>
+              {/* deterministic grid borders: cells t+l, wrapper r+b */}
+              <div className={`grid grid-cols-1 border-b border-r border-line-2 ${relatedCols}`}>
+                {related.map((p, i) => (
+                  <Reveal
+                    key={p.slug}
+                    delay={i * 0.06}
+                    className="border-l border-t border-line-2"
+                  >
+                    <Link
+                      href={`/blog/${p.slug}`}
+                      data-cursor="read"
+                      className="group flex h-full flex-col gap-3 p-5 transition-transform duration-200 ease-[var(--ease-micro)] hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                    >
+                      <span className="label numeric">{p.date}</span>
+                      <span className="font-display text-base font-medium leading-snug tracking-tight text-ink">
+                        <span className="swipe">{p.title}</span>
+                      </span>
+                      <span className="label numeric mt-auto pt-2">
+                        {p.readTime}{' '}
+                        <span className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5">
+                          →
+                        </span>
+                      </span>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Prev / Next */}
-          <nav className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <nav aria-label="Post navigation" className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {older ? (
-              <Link
-                href={`/blog/${older.slug}`}
-                className="group p-5 border border-[var(--c-b2)] hover:border-[var(--c-accent)] hover:bg-[var(--c-accent)] transition-colors"
-              >
-                <p className="label group-hover:text-[var(--c-on-accent)] mb-2">← Older</p>
-                <p className="text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-sm font-semibold leading-snug transition-colors">
-                  {older.title}
-                </p>
-              </Link>
+              <Magnetic className="block h-full">
+                <Link
+                  href={`/blog/${older.slug}`}
+                  data-cursor="read"
+                  className="group flex h-full flex-col gap-2 border border-line-2 p-5 transition-colors duration-200 hover:border-line-4"
+                >
+                  <p className="label numeric">
+                    <span className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:-translate-x-1.5">
+                      ←
+                    </span>{' '}
+                    OLDER
+                  </p>
+                  <p className="font-display text-base font-medium leading-snug tracking-tight text-ink">
+                    <span className="swipe">{older.title}</span>
+                  </p>
+                </Link>
+              </Magnetic>
             ) : (
               <div className="hidden sm:block" />
             )}
             {newer ? (
-              <Link
-                href={`/blog/${newer.slug}`}
-                className="group p-5 border border-[var(--c-b2)] hover:border-[var(--c-accent)] hover:bg-[var(--c-accent)] transition-colors sm:text-right"
-              >
-                <p className="label group-hover:text-[var(--c-on-accent)] mb-2">Newer →</p>
-                <p className="text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-sm font-semibold leading-snug transition-colors">
-                  {newer.title}
-                </p>
-              </Link>
+              <Magnetic className="block h-full">
+                <Link
+                  href={`/blog/${newer.slug}`}
+                  data-cursor="read"
+                  className="group flex h-full flex-col gap-2 border border-line-2 p-5 transition-colors duration-200 hover:border-line-4 sm:items-end sm:text-right"
+                >
+                  <p className="label numeric">
+                    NEWER{' '}
+                    <span className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5">
+                      →
+                    </span>
+                  </p>
+                  <p className="font-display text-base font-medium leading-snug tracking-tight text-ink">
+                    <span className="swipe">{newer.title}</span>
+                  </p>
+                </Link>
+              </Magnetic>
             ) : (
               <div className="hidden sm:block" />
             )}
           </nav>
         </article>
+
+        <ChapterNav current="/blog" />
       </main>
       <Footer />
     </>

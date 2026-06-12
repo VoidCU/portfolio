@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
+import { Reveal } from '@/components/fx/Reveal';
 
 export const metadata: Metadata = {
   title: 'Uses — Developer Setup, Tools & Stack',
@@ -95,41 +99,122 @@ const sections = [
   },
 ];
 
+/* Running item numbers across the whole manifest — 001, 002, … */
+const manifest = (() => {
+  let n = 0;
+  return sections.map((section) => ({
+    ...section,
+    items: section.items.map((item) => ({ ...item, n: ++n })),
+  }));
+})();
+
+/* VOL.10 motif — gear ticks: survey-rule lines with calibration tick marks,
+   longer tick every fifth interval (brief §5). Deterministic, static SVG. */
+function GearTicksMotif() {
+  const rules = [70, 170, 270];
+  const ticks = rules.flatMap((y, r) =>
+    Array.from({ length: 51 }, (_, i) => {
+      const x = i * 24;
+      const long = i % 5 === 0;
+      return { key: `${r}-${i}`, x, y1: y, y2: y - (long ? 22 : 11) };
+    }),
+  );
+  return (
+    <svg
+      className="h-full w-full text-ink"
+      viewBox="0 0 1200 340"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      {rules.map((y) => (
+        <line key={y} x1="0" y1={y} x2="1200" y2={y} />
+      ))}
+      {ticks.map((t) => (
+        <line key={t.key} x1={t.x} y1={t.y1} x2={t.x} y2={t.y2} />
+      ))}
+    </svg>
+  );
+}
+
+/* Registration tick corners — the manifest plate stamp. */
+function CornerTicks() {
+  const base = 'pointer-events-none absolute h-2.5 w-2.5 border-line-5';
+  return (
+    <>
+      <span aria-hidden="true" className={`${base} -left-px -top-px border-l border-t`} />
+      <span aria-hidden="true" className={`${base} -right-px -top-px border-r border-t`} />
+      <span aria-hidden="true" className={`${base} -bottom-px -left-px border-b border-l`} />
+      <span aria-hidden="true" className={`${base} -bottom-px -right-px border-b border-r`} />
+    </>
+  );
+}
+
 export default function UsesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.10"
+          title="GEAR MANIFEST"
+          altitude="8,500M"
+          motif={<GearTicksMotif />}
+        >
+          <LineMask as="p" delay={0.2} className="label">
+            MY SETUP
+          </LineMask>
+          <LineMask as="p" delay={0.28} className="mt-4 max-w-xl text-sm leading-relaxed text-dim">
+            A running list of what I use every day. Updated occasionally when
+            something changes.
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              USES
-            </h1>
-            <span className="label">My Setup</span>
-          </div>
-
-          <p className="text-[var(--c-dim)] text-sm leading-relaxed max-w-xl mb-14">
-            A running list of what I use every day. Updated occasionally when something changes.
-          </p>
-
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
           <div className="space-y-12">
-            {sections.map(section => (
-              <div key={section.label}>
-                <p className="label mb-5">{section.label}</p>
-                <div className="border border-[var(--c-b2)] divide-y divide-[var(--c-b2)]">
-                  {section.items.map(item => (
-                    <div key={item.name} className="group px-5 py-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 hover:bg-[rgba(74,222,128,0.06)] transition-colors">
-                      <h3 className="text-[var(--c-text)] font-semibold text-sm sm:w-48 flex-shrink-0">{item.name}</h3>
-                      <p className="text-[var(--c-dim)] text-sm flex-1">{item.detail}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {manifest.map((section, si) => (
+              <Reveal key={section.label} delay={si * 0.06}>
+                <section aria-label={section.label} className="relative border border-line-2">
+                  <CornerTicks />
+                  <header className="flex items-baseline justify-between gap-4 border-b border-line-2 px-5 py-3">
+                    <h2 className="label numeric text-ink">
+                      {`SEC.${String(si + 1).padStart(2, '0')} — ${section.label}`}
+                    </h2>
+                    <span className="label numeric">
+                      {`${String(section.items.length).padStart(2, '0')} ITEMS`}
+                    </span>
+                  </header>
+                  <ul>
+                    {section.items.map((item, i) => (
+                      <li
+                        key={item.name}
+                        className={i > 0 ? 'border-t border-line-2' : ''}
+                      >
+                        <Reveal delay={0.08 + i * 0.06}>
+                          <div className="group flex flex-col gap-1.5 px-5 py-4 transition-[transform,background-color] duration-200 ease-[var(--ease-micro)] hover:translate-x-2 hover:bg-acc-1 sm:flex-row sm:items-baseline sm:gap-5">
+                            <span className="label numeric shrink-0 pt-0.5 sm:w-10">
+                              {String(item.n).padStart(3, '0')}
+                            </span>
+                            <h3 className="shrink-0 text-sm font-medium text-ink sm:w-48">
+                              <span className="swipe">{item.name}</span>
+                            </h3>
+                            <p className="flex-1 text-sm leading-relaxed text-dim">
+                              {item.detail}
+                            </p>
+                          </div>
+                        </Reveal>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </Reveal>
             ))}
           </div>
         </div>
+
+        <ChapterNav current="/uses" />
       </main>
       <Footer />
     </>

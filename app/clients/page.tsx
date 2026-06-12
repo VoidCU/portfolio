@@ -2,7 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
+import { Odometer } from '@/components/fx/Odometer';
+import { Reveal } from '@/components/fx/Reveal';
 import { profile } from '@/data/profile';
+import SignalGrid from './SignalGrid';
 
 export const metadata: Metadata = {
   title: 'Clients — 19+ Companies Across EdTech, HealthTech & More',
@@ -42,79 +48,116 @@ const jsonLd = {
   ],
 };
 
+/** VOL.06 motif — constellation at 4% (opacity applied by VolumePlate). */
+function ConstellationMotif() {
+  const stars: Array<[number, number, number]> = [
+    [60, 90, 2.5], [180, 200, 2], [300, 60, 3], [430, 260, 2], [540, 130, 2.5],
+    [660, 320, 2], [760, 80, 3], [900, 210, 2], [1020, 60, 2.5], [1100, 300, 2],
+    [1220, 150, 3], [1340, 260, 2], [1400, 80, 2], [240, 360, 2], [80, 300, 2.5],
+    [820, 400, 2.5], [500, 420, 2], [1280, 420, 2],
+  ];
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 1440 480"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      className="h-full w-full text-ink"
+    >
+      {/* constellation links */}
+      <path
+        d="M60 90 L300 60 L540 130 L760 80 L1020 60 L1220 150 L1400 80 M180 200 L430 260 L660 320 L900 210 L1100 300 L1340 260 M80 300 L240 360 L500 420 L820 400 L1280 420"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      {stars.map(([x, y, r], i) => (
+        <circle key={i} cx={x} cy={y} r={r} fill="currentColor" />
+      ))}
+      {/* origin reticle — KTM */}
+      <g stroke="currentColor" strokeWidth="1.5">
+        <circle cx="720" cy="240" r="14" />
+        <path d="M720 218 v10 M720 252 v10 M698 240 h10 M732 240 h10" />
+      </g>
+    </svg>
+  );
+}
+
 export default function ClientsPage() {
+  const clientCount = profile.clients.length;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.06"
+          title="SIGNALS"
+          altitude="7,100M"
+          motif={<ConstellationMotif />}
+        >
+          <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
+            Every signal traces back to the valley.
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              CLIENTS
-            </h1>
-            <span className="label">05 / 07</span>
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
+          {/* Intro row */}
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <Reveal className="max-w-xl">
+              <p className="text-sm leading-relaxed text-dim">
+                Companies and organisations I have delivered software for, spanning EdTech, HealthTech,
+                AgriTech, government, real estate, events, tourism, and more. Some local, some halfway
+                across the world.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1} className="text-right">
+              <Odometer
+                value={`${clientCount}+`}
+                className="font-display text-5xl font-semibold text-accent"
+              />
+              <p className="label numeric mt-2">Companies</p>
+            </Reveal>
           </div>
 
-          <div className="flex flex-wrap items-baseline justify-between gap-4 mb-10">
-            <p className="text-[var(--c-dim)] text-sm max-w-xl leading-relaxed">
-              Companies and organisations I have delivered software for, spanning EdTech, HealthTech,
-              AgriTech, government, real estate, events, tourism, and more. Some local, some halfway
-              across the world.
-            </p>
-            <div className="text-right">
-              <p className="font-heading font-black text-[var(--c-accent)] text-4xl">19+</p>
-              <p className="label mt-1">Companies</p>
-            </div>
+          {/* Signal registry */}
+          <div className="mt-12 mb-6 flex items-baseline justify-between gap-4">
+            <span className="label numeric">SIGNAL REGISTRY</span>
+            <span className="label numeric">{String(clientCount).padStart(2, '0')} NODES</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-[var(--c-b2)]">
-            {profile.clients.map(({ index, name, category, url }) => {
-              const content = (
-                <div className="group p-5 border-b border-r border-[var(--c-b2)] hover:bg-[var(--c-accent)] transition-colors duration-150">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="space-y-1.5">
-                      <p className="font-mono text-[var(--c-muted)] group-hover:text-[var(--c-on-accent)] text-[10px] tracking-wider">{index}</p>
-                      <h2 className="font-heading font-bold text-[var(--c-text)] group-hover:text-[var(--c-on-accent)] text-base leading-snug transition-colors">
-                        {name}
-                      </h2>
-                      <p className="label text-[var(--c-muted)] group-hover:text-[var(--c-on-accent)] transition-colors">
-                        {category}
-                      </p>
-                    </div>
-                    {url && (
-                      <span className="label text-[var(--c-muted)] group-hover:text-[var(--c-on-accent)] transition-colors text-[9px] mt-0.5 whitespace-nowrap">
-                        ↗
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
+          <SignalGrid />
 
-              return url ? (
-                <Link key={name} href={url} target="_blank" rel="noopener noreferrer">
-                  {content}
-                </Link>
-              ) : (
-                <div key={name}>{content}</div>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex-1 h-px bg-[var(--c-b2)]" />
-            <p className="label whitespace-nowrap text-center">
+          {/* NDA note */}
+          <div className="mt-10 flex items-center gap-4">
+            <div className="h-px flex-1 bg-line-2" />
+            <p className="label numeric max-w-md text-center">
               Most projects under NDA — case studies on request
             </p>
-            <div className="flex-1 h-px bg-[var(--c-b2)]" />
+            <div className="h-px flex-1 bg-line-2" />
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/contact" className="btn-primary text-xs">Work with me →</Link>
-            <Link href="/projects" className="label hover:text-[var(--c-accent)] transition-colors self-center">SEE THE PROJECTS →</Link>
+          {/* CTAs */}
+          <div className="mt-12 flex flex-wrap items-center gap-6">
+            <Link href="/contact" className="btn-primary text-xs">
+              Work with me →
+            </Link>
+            <Link
+              href="/projects"
+              className="swipe group label numeric inline-flex items-center gap-2"
+            >
+              SEE THE PROJECTS
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1.5"
+              >
+                →
+              </span>
+            </Link>
           </div>
         </div>
+
+        <ChapterNav current="/clients" />
       </main>
       <Footer />
     </>

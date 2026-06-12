@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { LineMask } from '@/components/fx/LineMask';
+import { Reveal } from '@/components/fx/Reveal';
+import { Odometer } from '@/components/fx/Odometer';
 import { profile } from '@/data/profile';
 
 export const metadata: Metadata = {
@@ -89,105 +94,241 @@ const categories = [
   { label: 'Research & Tooling', count: '10+' },
 ];
 
+/** Fork-graph motif — VOL.03 plate art (BRIEF §5), rendered at 4% by VolumePlate. */
+function ForkMotif() {
+  return (
+    <svg
+      className="h-full w-full"
+      viewBox="0 0 1440 600"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    >
+      {/* trunk lanes */}
+      <path d="M180 600 V0" />
+      <path d="M540 600 V0" />
+      <path d="M900 600 V0" />
+      <path d="M1260 600 V0" />
+      {/* branch / merge curves */}
+      <path d="M180 470 C 180 420, 320 430, 320 380 V 260 C 320 210, 180 220, 180 170" />
+      <path d="M540 520 C 540 470, 680 480, 680 430 V 180 C 680 130, 540 140, 540 90" />
+      <path d="M900 440 C 900 390, 1040 400, 1040 350 V 250 C 1040 200, 900 210, 900 160" />
+      <path d="M1260 500 C 1260 450, 1120 460, 1120 410 V 220 C 1120 170, 1260 180, 1260 130" />
+      {/* commit nodes */}
+      <circle cx="180" cy="470" r="7" />
+      <circle cx="180" cy="170" r="7" />
+      <circle cx="180" cy="60" r="7" />
+      <circle cx="320" cy="320" r="7" />
+      <circle cx="540" cy="520" r="7" />
+      <circle cx="540" cy="90" r="7" />
+      <circle cx="680" cy="300" r="7" />
+      <circle cx="900" cy="540" r="7" />
+      <circle cx="900" cy="440" r="7" />
+      <circle cx="900" cy="160" r="7" />
+      <circle cx="1040" cy="300" r="7" />
+      <circle cx="1120" cy="320" r="7" />
+      <circle cx="1260" cy="500" r="7" />
+      <circle cx="1260" cy="130" r="7" />
+    </svg>
+  );
+}
+
+/* Arrow-slide mono link — arrows ride group hover (CONTRACT §7). */
+function KitLink({ href, children }: { href: string; children: string }) {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="swipe group/link numeric inline-flex items-center gap-2 font-mono text-label font-semibold uppercase tracking-[0.18em] text-ink"
+    >
+      {children}
+      <span
+        aria-hidden="true"
+        className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover/link:translate-x-1.5"
+      >
+        →
+      </span>
+    </Link>
+  );
+}
+
 export default function OpenSourcePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="min-h-screen bg-bg">
+        <VolumePlate volume="VOL.03" title="FIELD KITS" altitude="4,000M" motif={<ForkMotif />}>
+          <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
+            Tools packed in the open.
+          </LineMask>
+          <LineMask as="p" delay={0.28} className="label numeric mt-4">
+            80+ REPOS · WEB / AI / MOBILE / GAMES / RESEARCH
+          </LineMask>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              OPEN SOURCE
-            </h1>
-            <span className="label">80+ repos</span>
-          </div>
+        <div className="mx-auto w-full max-w-7xl px-6 pb-24 pt-14 md:pb-32">
+          {/* ── repository manifest — deterministic-border grid ───────── */}
+          <Reveal>
+            <div className="mb-6 flex items-baseline justify-between border-b border-line-2 pb-4">
+              <h2 className="label">REPOSITORY MANIFEST</h2>
+              <span className="label numeric">06 CATEGORIES</span>
+            </div>
+          </Reveal>
 
-          {/* Stats grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border border-[var(--c-b2)] mb-16">
+          <div className="mb-16 grid grid-cols-2 border-b border-r border-line-2 md:grid-cols-3 lg:grid-cols-6">
             {categories.map((cat, i) => (
-              <div
+              <Reveal
                 key={cat.label}
-                className={`p-4 md:p-5 text-center border-b border-r border-[var(--c-b2)] ${i === categories.length - 1 ? 'border-r-0' : ''}`}
+                delay={Math.min(i * 0.06, 0.3)}
+                className="border-l border-t border-line-2"
               >
-                <p className="font-heading font-black text-[var(--c-accent)] text-xl md:text-2xl">{cat.count}</p>
-                <p className="label mt-2">{cat.label}</p>
-              </div>
+                <div className="h-full p-4 text-center transition duration-200 ease-[var(--ease-micro)] hover:-translate-y-1 hover:bg-acc-1 md:p-5">
+                  <Odometer
+                    value={cat.count}
+                    className="font-display text-xl font-semibold text-accent md:text-2xl"
+                  />
+                  <p className="label mt-2">{cat.label}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* LeetCode */}
-          <div className="mb-16 border border-[var(--c-b2)] p-6 md:p-8">
-            <p className="label mb-3">Competitive Programming</p>
-            <div className="flex flex-wrap items-end gap-6 md:gap-8">
-              <div>
-                <p className="font-heading font-black text-[var(--c-accent)] text-4xl md:text-5xl">580+</p>
-                <p className="label mt-2">Problems solved</p>
-              </div>
-              <div>
-                <p className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl">Top 3%</p>
-                <p className="label mt-2">Global ranking</p>
-              </div>
-              <div className="flex-1 min-w-[200px]">
-                <p className="text-[var(--c-dim)] text-sm leading-relaxed">
-                  LeetCode every morning. Not for interviews. To stay sharp. Graph problems at 7am before emails are a good way to start the day.
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 pt-4 border-t border-[var(--c-b2)]">
-              <Link
-                href={profile.contacts.leetcode}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="label text-[var(--c-muted)] hover:text-[var(--c-accent)] transition-colors"
-              >
-                View LeetCode Profile →
-              </Link>
-            </div>
-          </div>
-
-          {/* Highlighted repos */}
-          <p className="label mb-6">Highlighted Repositories</p>
-          <div className="space-y-0 border-t border-[var(--c-b2)] mb-12">
-            {highlights.map(repo => (
-              <Link
-                key={repo.name}
-                href={repo.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-start gap-4 md:gap-6 py-6 border-b border-[var(--c-b2)] hover:bg-[rgba(74,222,128,0.05)] transition-colors"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-3 mb-2">
-                    <h3 className="font-heading font-bold text-[var(--c-text)] group-hover:text-[var(--c-accent)] transition-colors text-base md:text-lg">
-                      {repo.name}
-                    </h3>
-                    <span className="label">{repo.status}</span>
-                  </div>
-                  <p className="text-[var(--c-dim)] text-sm leading-relaxed mb-3">{repo.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {repo.tech.map(t => (
-                      <span key={t} className="border border-[var(--c-b2)] px-2 py-0.5 text-[var(--c-muted)] font-mono text-[10px] tracking-wider uppercase">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+          {/* ── competitive programming — instrument panel ────────────── */}
+          <Reveal className="mb-16">
+            <div className="border border-line-2 bg-surface p-6 md:p-8">
+              <p className="label numeric mb-4">Competitive Programming</p>
+              <div className="flex flex-wrap items-end gap-6 md:gap-10">
+                <div>
+                  <Odometer
+                    value="580+"
+                    className="font-display text-4xl font-semibold text-accent md:text-5xl"
+                  />
+                  <p className="label mt-2">Problems solved</p>
                 </div>
-                <span className="label text-[var(--c-muted)] group-hover:text-[var(--c-accent)] transition-colors flex-shrink-0">
-                  GitHub →
+                <div>
+                  <Odometer
+                    value="TOP 3%"
+                    className="font-display text-4xl font-semibold text-ink md:text-5xl"
+                  />
+                  <p className="label mt-2">Global ranking</p>
+                </div>
+                <div className="min-w-[200px] flex-1">
+                  <p className="max-w-[52ch] text-sm leading-relaxed text-dim">
+                    LeetCode every morning. Not for interviews. To stay sharp. Graph problems at 7am
+                    before emails are a good way to start the day.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 border-t border-line-2 pt-4">
+                <KitLink href={profile.contacts.leetcode}>View LeetCode Profile</KitLink>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* ── field kits — highlighted repositories ─────────────────── */}
+          <Reveal>
+            <div className="mb-6 flex items-baseline justify-between border-b border-line-2 pb-4">
+              <h2 className="label">Highlighted Repositories</h2>
+              <span className="label numeric">
+                {String(highlights.length).padStart(2, '0')} KITS
+              </span>
+            </div>
+          </Reveal>
+
+          <div className="mb-12 grid grid-cols-1 border-b border-r border-line-2 md:grid-cols-2">
+            {highlights.map((repo, i) => (
+              <Reveal
+                key={repo.name}
+                delay={Math.min(i * 0.06, 0.24)}
+                className="border-l border-t border-line-2"
+              >
+                <Link
+                  href={repo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex h-full flex-col gap-4 p-6 transition duration-200 ease-[var(--ease-micro)] hover:-translate-y-1 hover:bg-acc-1 md:p-8"
+                >
+                  <span className="flex items-baseline justify-between gap-4">
+                    <span className="label numeric">KIT {String(i + 1).padStart(2, '0')}</span>
+                    <span className="label numeric">{repo.status}</span>
+                  </span>
+                  <span className="font-display text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                    <span className="swipe">{repo.name}</span>
+                  </span>
+                  <span className="block text-sm leading-relaxed text-dim">{repo.desc}</span>
+                  <span className="mt-auto block space-y-4">
+                    <span className="flex flex-wrap gap-2">
+                      {repo.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="border border-line-3 px-2 py-0.5 font-mono text-[0.63rem] uppercase tracking-[0.14em] text-muted"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="numeric flex items-center gap-2 border-t border-line-1 pt-4 font-mono text-label font-semibold uppercase tracking-[0.18em] text-ink">
+                      GitHub
+                      <span
+                        aria-hidden="true"
+                        className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5"
+                      >
+                        →
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+
+            {/* overflow kit — the rest of the manifest */}
+            <Reveal delay={0.3} className="border-l border-t border-line-2">
+              <Link
+                href={profile.contacts.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col justify-between gap-4 p-6 transition duration-200 ease-[var(--ease-micro)] hover:-translate-y-1 hover:bg-acc-1 md:p-8"
+              >
+                <span className="flex items-baseline justify-between gap-4">
+                  <span className="label numeric">KIT {String(highlights.length + 1).padStart(2, '0')}</span>
+                  <span className="label numeric">FULL MANIFEST</span>
+                </span>
+                <span className="font-voice block text-epigraph text-dim">
+                  Everything else lives on GitHub.
+                </span>
+                <span className="numeric flex items-center gap-2 border-t border-line-1 pt-4 font-mono text-label font-semibold uppercase tracking-[0.18em] text-ink">
+                  All 80+ Repos
+                  <span
+                    aria-hidden="true"
+                    className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5"
+                  >
+                    →
+                  </span>
                 </span>
               </Link>
-            ))}
+            </Reveal>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <Link href={profile.contacts.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              All Repos on GitHub →
-            </Link>
-            <span className="label">80+ public repositories</span>
-          </div>
+          {/* ── CTA ───────────────────────────────────────────────────── */}
+          <Reveal delay={0.1}>
+            <div className="flex flex-wrap items-center gap-6">
+              <a
+                href={profile.contacts.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                All Repos on GitHub →
+              </a>
+              <span className="label numeric">80+ public repositories</span>
+            </div>
+          </Reveal>
         </div>
+
+        <ChapterNav current="/open-source" />
       </main>
       <Footer />
     </>

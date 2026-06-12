@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { profile } from '@/data/profile';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { Reveal } from '@/components/fx/Reveal';
+import SkillsView from './SkillsView';
 
 export const metadata: Metadata = {
   title: 'Skills — Full-Stack, AI/ML, DevOps & Mobile Development',
@@ -42,64 +44,67 @@ const jsonLd = {
   ],
 };
 
+/* Volume motif — instrument grid (brief §5): calibration grid with
+   crosshair ticks and gauge dials. Rendered at 4% by the plate. */
+function InstrumentGridMotif() {
+  return (
+    <svg
+      className="h-full w-full text-ink"
+      viewBox="0 0 1440 520"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <pattern id="vol04-grid" width="64" height="64" patternUnits="userSpaceOnUse">
+          <path d="M64 0H0V64" stroke="currentColor" strokeWidth="1" />
+          <path d="M32 28v8M28 32h8" stroke="currentColor" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="1440" height="520" fill="url(#vol04-grid)" />
+      <g stroke="currentColor" strokeWidth="1">
+        {/* primary dial */}
+        <circle cx="288" cy="256" r="160" />
+        <circle cx="288" cy="256" r="112" strokeDasharray="2 10" />
+        <circle cx="288" cy="256" r="56" />
+        <path d="M288 80v32M288 400v32M112 256h32M448 256h32" />
+        {/* secondary dial */}
+        <circle cx="1088" cy="160" r="96" />
+        <circle cx="1088" cy="160" r="64" strokeDasharray="2 8" />
+        <path d="M1088 40v24M1088 256v24M968 160h24M1184 160h24" />
+        {/* calibration tick rows */}
+        <path d="M704 448h512" strokeDasharray="1 15" />
+        <path d="M640 64h256" strokeDasharray="1 15" />
+      </g>
+    </svg>
+  );
+}
+
 export default function SkillsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="relative min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.04"
+          title="INSTRUMENTS"
+          altitude="5,300M"
+          motif={<InstrumentGridMotif />}
+        >
+          <p className="label numeric">TECHNICAL SKILLS — FIELD MANIFEST</p>
+          <Reveal delay={0.15}>
+            <p className="mt-4 text-sm leading-relaxed text-dim md:text-base">
+              I work across the whole stack and a few domains most engineers never touch. None of this
+              is from a tutorial. It is from shipping things, breaking them, and fixing them under
+              pressure, usually with the power about to go out.
+            </p>
+          </Reveal>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              SKILLS
-            </h1>
-            <span className="label">02 / 07</span>
-          </div>
+        <SkillsView />
 
-          <p className="text-[var(--c-dim)] text-sm max-w-2xl leading-relaxed mb-12">
-            I work across the whole stack and a few domains most engineers never touch. None of this
-            is from a tutorial. It is from shipping things, breaking them, and fixing them under
-            pressure, usually with the power about to go out.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-[var(--c-b2)]">
-            {profile.skills.map((cat, idx) => (
-              <div
-                key={cat.category}
-                className="p-6 border-b border-[var(--c-b2)] md:odd:border-r last:border-b-0 lg:odd:border-r-0"
-                style={{
-                  borderRight: undefined,
-                  borderBottom: idx === profile.skills.length - 1 ? 'none' : undefined,
-                }}
-              >
-                <p className="label mb-5 text-[var(--c-accent)]">{cat.category}</p>
-                <ul className="space-y-2.5">
-                  {cat.items.map((skill) => (
-                    <li key={skill} className="group flex items-center gap-3">
-                      <span className="w-1 h-px bg-[var(--c-accent)] group-hover:w-4 transition-all duration-200 flex-shrink-0" />
-                      <span className="text-[var(--c-dim)] group-hover:text-[var(--c-text)] text-sm transition-colors duration-200">
-                        {skill}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex-1 h-px bg-[var(--c-b2)]" />
-            <p className="label whitespace-nowrap">5 years · full-stack to low-level</p>
-            <div className="flex-1 h-px bg-[var(--c-b2)]" />
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/projects" className="label hover:text-[var(--c-accent)] transition-colors">SEE THE PROJECTS →</Link>
-            <Link href="/uses" className="label hover:text-[var(--c-accent)] transition-colors">MY SETUP →</Link>
-            <Link href="/experience" className="label hover:text-[var(--c-accent)] transition-colors">EXPERIENCE →</Link>
-          </div>
-        </div>
+        <ChapterNav current="/skills" />
       </main>
       <Footer />
     </>

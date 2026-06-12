@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { profile } from '@/data/profile';
+import VolumePlate from '@/components/fx/VolumePlate';
+import ChapterNav from '@/components/fx/ChapterNav';
+import { Reveal } from '@/components/fx/Reveal';
+import ExperienceView from './ExperienceView';
 
 export const metadata: Metadata = {
   title: 'Experience — Lead Developer, CTO & Freelance Engineer',
@@ -65,89 +67,71 @@ const jsonLd = [
   },
 ];
 
+/* Volume motif — route path (brief §5): a wandering ascent line with
+   waypoint rings and a summit flag. Rendered at 4% by the plate. */
+function RoutePathMotif() {
+  return (
+    <svg
+      className="h-full w-full text-ink"
+      viewBox="0 0 1440 520"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      aria-hidden="true"
+    >
+      <g stroke="currentColor">
+        {/* the route */}
+        <path
+          d="M-40 488 C 120 440, 240 472, 360 408 C 480 344, 560 296, 680 320 C 800 344, 880 232, 1000 176 C 1120 120, 1280 72, 1480 24"
+          strokeWidth="1.5"
+          strokeDasharray="7 9"
+        />
+        {/* fainter parallel contour */}
+        <path
+          d="M-40 520 C 160 488, 300 512, 440 456 C 580 400, 660 352, 780 376 C 900 400, 1020 296, 1140 224 C 1260 152, 1360 120, 1480 88"
+          strokeWidth="1"
+          strokeDasharray="2 10"
+        />
+      </g>
+      <g stroke="currentColor" strokeWidth="1">
+        {/* waypoints along the route */}
+        <circle cx="360" cy="408" r="7" />
+        <circle cx="360" cy="408" r="2" fill="currentColor" />
+        <circle cx="680" cy="320" r="7" />
+        <circle cx="680" cy="320" r="2" fill="currentColor" />
+        <circle cx="1000" cy="176" r="7" />
+        <circle cx="1000" cy="176" r="2" fill="currentColor" />
+        {/* summit peak + flag */}
+        <path d="M1280 120l28-46 28 46z" />
+        <path d="M1308 74V46M1308 46l20 9-20 9" />
+      </g>
+    </svg>
+  );
+}
+
 export default function ExperiencePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="pt-14 bg-[var(--c-bg)] min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
+      <main className="relative min-h-screen bg-bg">
+        <VolumePlate
+          volume="VOL.05"
+          title="THE ROUTE"
+          altitude="6,200M"
+          motif={<RoutePathMotif />}
+        >
+          <p className="label numeric">WORK EXPERIENCE — EXPEDITION LOG</p>
+          <Reveal delay={0.15}>
+            <p className="mt-4 text-sm leading-relaxed text-dim md:text-base">
+              Five years of overlapping roles, because the market here rewards being useful in more
+              than one way. Lead, CTO, technical head, freelancer, often all in the same week.
+            </p>
+          </Reveal>
+        </VolumePlate>
 
-          <div className="flex items-baseline justify-between mb-10 md:mb-12 pb-5 border-b border-[var(--c-b2)]">
-            <h1 className="font-heading font-black text-[var(--c-text)] text-4xl md:text-5xl tracking-tight">
-              EXPERIENCE
-            </h1>
-            <span className="label">03 / 07</span>
-          </div>
+        <ExperienceView />
 
-          <p className="text-[var(--c-dim)] text-sm max-w-2xl leading-relaxed mb-12">
-            Five years of overlapping roles, because the market here rewards being useful in more
-            than one way. Lead, CTO, technical head, freelancer, often all in the same week.
-          </p>
-
-          <div className="space-y-0">
-            {profile.timeline.map(({ index, role, org, period, items }, i) => (
-              <div
-                key={index}
-                className={`group border-b border-[var(--c-b2)] ${i === 0 ? 'border-t' : ''}`}
-              >
-                <div className="py-7 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-x-8 gap-y-3 items-start">
-
-                  <span className="font-mono text-[var(--c-muted)] text-sm pt-0.5 w-8 flex-shrink-0">
-                    {index}
-                  </span>
-
-                  <div>
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h2 className="font-heading font-bold text-[var(--c-text)] text-xl group-hover:text-[var(--c-accent)] transition-colors">
-                        {role}
-                      </h2>
-                      <span className="text-[var(--c-muted)] font-mono text-xs tracking-wider uppercase">
-                        @ {org}
-                      </span>
-                    </div>
-
-                    <ul className="mt-4 space-y-2">
-                      {items.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-[var(--c-dim)] text-sm">
-                          <span className="mt-1.5 w-1 h-1 bg-[var(--c-accent)] flex-shrink-0" />
-                          <span className="group-hover:text-[var(--c-text)] transition-colors leading-relaxed">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <span className="label md:text-right pt-1 whitespace-nowrap">
-                    {period}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16">
-            <div className="flex items-baseline justify-between mb-8 pb-5 border-b border-[var(--c-b2)]">
-              <h2 className="font-heading font-black text-[var(--c-text)] text-2xl md:text-3xl tracking-tight">
-                EDUCATION
-              </h2>
-            </div>
-            <div className="border border-[var(--c-b2)] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <p className="text-[var(--c-text)] font-semibold text-base">{profile.education.degree}</p>
-                <p className="text-[var(--c-dim)] text-sm">{profile.education.institution}</p>
-              </div>
-              <span className="label whitespace-nowrap">{profile.education.period}</span>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/clients" className="label hover:text-[var(--c-accent)] transition-colors">WHO I WORKED WITH →</Link>
-            <Link href="/achievements" className="label hover:text-[var(--c-accent)] transition-colors">ACHIEVEMENTS →</Link>
-            <Link href="/assets/pdfs/SarojResume.pdf" target="_blank" className="label hover:text-[var(--c-accent)] transition-colors">RESUME →</Link>
-          </div>
-        </div>
+        <ChapterNav current="/experience" />
       </main>
       <Footer />
     </>
