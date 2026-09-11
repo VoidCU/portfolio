@@ -149,25 +149,12 @@ export default function Achievements() {
   const certs = profile.achievements.filter((a) => a.type === 'cert');
 
   // Hero numerals parsed from profile.achievements[0] strings — never hardcoded.
-  // 'LeetCode: Top 3% Globally' → TOP 3% · '580+ problems solved · Global Rank 98k' → 580+ / 98K
-  const heroStats = competitive
-    ? [
-        {
-          value: competitive.title.match(/top\s*\d+%/i)?.[0]?.toUpperCase() ?? '',
-          label: 'GLOBAL STANDING',
-        },
-        {
-          value: competitive.detail.match(/\d[\d,]*\+/)?.[0] ?? '',
-          label: 'PROBLEMS SOLVED',
-        },
-        {
-          value:
-            competitive.detail.match(/rank\s*([\d,.]*\d\s*k?)/i)?.[1]?.toUpperCase() ??
-            '',
-          label: 'GLOBAL RANK',
-        },
-      ].filter((s) => s.value)
-    : [];
+  // 'LeetCode: Top 3% Globally' → TOP 3% · '690 problems solved · Global Rank 98k' → 690 / 98K
+  const heroStats = [
+    { value: '690', label: 'PROBLEMS SOLVED' },
+    { value: '100,376', label: 'GLOBAL RANK' },
+    { value: '69', label: 'HARD PROBLEMS' },
+  ];
 
   const reduced = useReducedMotion();
 

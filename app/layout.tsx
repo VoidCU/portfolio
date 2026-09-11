@@ -2,6 +2,8 @@ import "./globals.css";
 import "./cinema.css";
 import "./story.css";
 import "./film.css";
+import "./universe.css";
+import Atmosphere from "@/components/cinema/Atmosphere";
 import type { Metadata, Viewport } from "next";
 import { ReactNode } from "react";
 import { clash, general, fraunces, jetbrains } from "./fonts";
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s · Saroj Prasad Mainali",
   },
   description:
-    "Full-stack engineer and technical lead from Kathmandu, Nepal. 5+ years architecting SaaS platforms, AI systems, mobile apps, and production software. 100+ shipped products, 19+ client companies.",
+    "Full-stack engineer and technical lead from Kathmandu, Nepal. 5+ years architecting SaaS platforms, AI systems, mobile apps, and production software. 200+ projects, 10+ client companies.",
   keywords: [
     "full-stack developer Nepal",
     "software engineer Kathmandu",
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
     siteName: "Saroj Prasad Mainali",
     title: "Saroj Prasad Mainali — Full-Stack Engineer & AI Builder",
     description:
-      "Full-stack engineer from Kathmandu. 5+ years · 100+ shipped products · 19+ companies. Building SaaS, AI systems, and mobile apps that actually ship.",
+      "Full-stack engineer from Kathmandu. 5+ years · 200+ projects · 10+ companies. Building SaaS, AI systems, and mobile apps that actually ship.",
     images: [
       {
         url: "/assets/art/saroj-editorial.webp",
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Saroj Prasad Mainali — Full-Stack Engineer & AI Builder",
     description:
-      "Full-stack engineer from Kathmandu. Building SaaS, AI systems, and mobile apps that ship. 5+ years · 100+ products.",
+      "Full-stack engineer from Kathmandu. Building SaaS, AI systems, and mobile apps that ship. 5+ years · 200+ projects.",
     images: ["/assets/art/saroj-editorial.webp"],
     creator: "@VoidCU",
   },
@@ -194,7 +196,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-bg text-ink font-sans antialiased">
         <MotionRoot>
           <SmoothScroll>{children}</SmoothScroll>
-          <Grain />
+        <Grain />
+        <Atmosphere />
         </MotionRoot>
       </body>
     </html>

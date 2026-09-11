@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useRef, type ReactNode } from "react";
-import Image from "next/image";
+import Image from "@/components/cinema/ThemeImage";
 import Link from "next/link";
 import {
   motion,

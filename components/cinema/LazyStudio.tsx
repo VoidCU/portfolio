@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 
-const Studio = dynamic(() => import("./OrbitalScene"), { ssr: false });
+const Studio = dynamic(() => import("./UniverseScene"), { ssr: false });
 
 /** Keep the opening scene light; load WebGL as the studio approaches the viewport. */
 export default function LazyStudio({ paused = false }: { paused?: boolean }) {
@@ -27,7 +27,7 @@ export default function LazyStudio({ paused = false }: { paused?: boolean }) {
         <Studio paused={paused} />
       ) : (
         <div className="studio-loading">
-          <span>SAROJ’S STUDIO</span>
+          <span>THE CONNECTED UNIVERSE</span>
           <span>Interfaces · Intelligence · Infrastructure</span>
         </div>
       )}

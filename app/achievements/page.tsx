@@ -9,22 +9,23 @@ import { Odometer } from '@/components/fx/Odometer';
 import { Reveal } from '@/components/fx/Reveal';
 import { profile } from '@/data/profile';
 import SummitStats from './SummitStats';
+import { leetcode, leetcodeStats } from '@/data/leetcode';
 
 export const metadata: Metadata = {
-  title: 'Achievements — LeetCode Top 3% & Certifications',
+  title: 'Achievements — LeetCode & Certifications',
   description:
-    'Saroj Prasad Mainali: LeetCode Top 3% globally with 580+ problems solved. Certifications in Machine Learning, Advanced Learning Algorithms, and Game Theory from Stanford, DeepLearning.AI.',
+    'Saroj Prasad Mainali: LeetCode problem solving with 690 problems solved. Certifications in Machine Learning, Advanced Learning Algorithms, and Game Theory from Stanford, DeepLearning.AI.',
   keywords: [
-    'LeetCode top 3 percent Nepal', 'competitive programming Nepal', 'Saroj Prasad Mainali LeetCode',
+    'LeetCode problem solving Nepal', 'competitive programming Nepal', 'Saroj Prasad Mainali LeetCode',
     'machine learning certification Nepal', 'DeepLearning.AI certification Nepal',
     'Stanford game theory certification', 'software engineer achievements Nepal',
-    '580 leetcode problems', 'VoidCU LeetCode', 'Nepal developer certifications',
+    '690 leetcode problems', 'VoidCU LeetCode', 'Nepal developer certifications',
     'algorithm problem solving Nepal', 'coding achievements Nepal',
   ],
   authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
   openGraph: {
     title: 'Achievements — Saroj Prasad Mainali (VoidCU)',
-    description: 'LeetCode Top 3% globally with 580+ problems. Certifications from Stanford, DeepLearning.AI, and Coursera.',
+    description: 'LeetCode problem solving with 690 problems. Certifications from Stanford, DeepLearning.AI, and Coursera.',
     type: 'website',
     url: 'https://voidcu.com/achievements',
     siteName: 'Saroj Prasad Mainali',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Achievements — Saroj Prasad Mainali (VoidCU)',
-    description: 'LeetCode Top 3% · 580+ problems · Machine Learning cert · Advanced Learning Algorithms cert.',
+    description: 'LeetCode · 690 problems · Machine Learning cert · Advanced Learning Algorithms cert.',
     creator: '@VoidCU',
     images: ['/assets/art/saroj-editorial.webp'],
   },
@@ -114,24 +115,8 @@ export default function AchievementsPage() {
   const entryCount = String(profile.achievements.length).padStart(2, '0');
 
   // Hero numerals parsed from profile.achievements — never hardcoded.
-  // 'LeetCode: Top 3% Globally' → TOP 3% · '580+ problems solved · Global Rank 98k' → 580+ / 98K
-  const heroStats = competitive
-    ? [
-        {
-          value: competitive.title.match(/top\s*\d+%/i)?.[0]?.toUpperCase() ?? '',
-          label: 'GLOBAL STANDING',
-        },
-        {
-          value: competitive.detail.match(/\d[\d,]*\+/)?.[0] ?? '',
-          label: 'PROBLEMS SOLVED',
-        },
-        {
-          value:
-            competitive.detail.match(/rank\s*([\d,.]*\d\s*k?)/i)?.[1]?.toUpperCase() ?? '',
-          label: 'GLOBAL RANK',
-        },
-      ].filter((s) => s.value)
-    : [];
+  // 'LeetCode: Top 3% Globally' → TOP 3% · '690 problems solved · Global Rank 98k' → 690 / 98K
+  const heroStats = leetcodeStats;
 
   return (
     <>
@@ -157,6 +142,7 @@ export default function AchievementsPage() {
         <div className="mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
           {/* Hero numerals — odometer rolls in ghost-stroke → solid flood */}
           {heroStats.length > 0 && <SummitStats stats={heroStats} />}
+          <p className="mt-5 text-sm text-dim">{leetcode.easy} easy · {leetcode.medium} medium · {leetcode.hard} hard. Verified {leetcode.verified}.</p>
 
           {/* Log entries */}
           <div className="mt-16 mb-8 flex items-baseline justify-between gap-4 md:mt-20">

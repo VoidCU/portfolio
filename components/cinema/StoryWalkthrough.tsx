@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/cinema/ThemeImage";
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
@@ -13,15 +13,15 @@ import { useFilmStill } from "./FilmMotion";
 const chapters = [
   {
     name: "The spark",
-    image: "saroj-roots",
-    eyebrow: "01 / KATHMANDU, NEPAL",
-    title: "Kathmandu is where my story starts.",
-    text: "I’m Saroj Prasad Mainali. A computer engineering graduate from Thapathali Campus, a builder, and someone who keeps asking how things work. Nepal is home. Curiosity is what keeps me moving.",
-    note: "Rooted here. Thinking beyond the horizon.",
+    image: "story-origin",
+    eyebrow: "01 / DISCOVER THE PROBLEM",
+    title: "Every useful thing starts with a question.",
+    text: "What would make this easier for someone? That question becomes a sketch, then a prototype. From civic information to finding an auction, the work starts with a real problem, close to home.",
+    note: "A question becomes a direction.",
   },
   {
     name: "The craft",
-    image: "saroj-afterhours",
+    image: "story-workshop",
     eyebrow: "02 / THE 2 A.M. CHAPTER",
     title: "Sometimes, the job starts at 2 a.m.",
     text: "A production server went down. My home internet followed. I sat on the floor with a laptop and a phone hotspot. Two hours later, it was back. That’s part of my story too: staying with a problem until it works.",
@@ -29,11 +29,11 @@ const chapters = [
   },
   {
     name: "The impact",
-    image: "saroj-maker",
-    eyebrow: "03 / THE MANY HATS I WEAR",
-    title: "One person. More than one way to build.",
+    image: "story-horizon",
+    eyebrow: "03 / PUT IT INTO THE WORLD",
+    title: "Built here. Connected everywhere.",
     text: "I lead engineering, design interfaces, train models, and connect the systems behind them. From AI photography workflows and water modelling to Genzlink, Auctionmandu and Amarnepal, I like turning complicated problems into useful things.",
-    note: "Different disciplines. The same pair of hands.",
+    note: "200+ projects. 10+ companies. Still building.",
   },
 ];
 

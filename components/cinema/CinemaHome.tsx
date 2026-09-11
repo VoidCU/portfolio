@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/cinema/ThemeImage";
+import { SignalMark } from "./Atmosphere";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -106,8 +107,10 @@ export default function CinemaHome() {
               </Link>
             </div>
           </motion.div>
-          <div className="hero-art-label" aria-hidden="true">
-            <span className="crosshair">+</span>
+          <div className="hero-art-label">
+            <SignalMark station={0} className="crosshair">
+              +
+            </SignalMark>
             <span>
               WRITTEN IN CODE.
               <br />
@@ -143,11 +146,7 @@ export default function CinemaHome() {
               <span>
                 {stat.label === "Years"
                   ? "YEARS OF BUILDING"
-                  : stat.label === "Products"
-                    ? "PRODUCTS SHIPPED"
-                    : stat.label === "Repos"
-                      ? "PUBLIC REPOSITORIES"
-                      : "PROBLEMS SOLVED"}
+                  : stat.label.toUpperCase()}
               </span>
             </div>
           ))}
@@ -192,7 +191,7 @@ export default function CinemaHome() {
                   <small>ENGINEER · BUILDER · EXPLORER</small>
                 </span>
                 <span className="portrait-badge">
-                  MADE IN
+                  <SignalMark station={1}>MADE IN</SignalMark>
                   <br />
                   <strong>NEPAL ↗</strong>
                 </span>
@@ -202,7 +201,9 @@ export default function CinemaHome() {
         </section>
         <BuilderStatement />
         <section id="work" className="cinema-section work-section">
-          <Chapter number="02">SELECTED WORK</Chapter>
+          <Chapter number="02">
+            SELECTED WORK <SignalMark station={2}>·</SignalMark>
+          </Chapter>
           <Reveal>
             <div className="section-heading">
               <h2>
@@ -225,7 +226,9 @@ export default function CinemaHome() {
           </Link>
         </section>
         <section id="expertise" className="cinema-section expertise-section">
-          <Chapter number="03">THE TOOLKIT</Chapter>
+          <Chapter number="03">
+            THE TOOLKIT <SignalMark station={3}>·</SignalMark>
+          </Chapter>
           <div className="expertise-layout personal-toolkit">
             <div className="expertise-intro">
               <Reveal>
@@ -241,14 +244,12 @@ export default function CinemaHome() {
               </Reveal>
               <div
                 className="orbital-art"
-                aria-label="Interactive three-dimensional engineering workstation"
+                aria-label="Scroll through an orbital map of my engineering skills"
               >
                 <OrbitalScene paused={!!still} />
-                <span className="orbital-caption">
-                  THE ENGINEERING WORKSHOP
-                </span>
+                <span className="orbital-caption">THE CONNECTED UNIVERSE</span>
                 <span className="orbital-instruction">
-                  SELECT A DISCIPLINE TO EXPLORE
+                  SCROLL TO MOVE BETWEEN LAYERS
                 </span>
               </div>
             </div>
@@ -314,7 +315,7 @@ export default function CinemaHome() {
             <span>
               BUILDING ALONGSIDE
               <br />
-              <strong>19+ COMPANIES</strong>
+              <strong>10+ COMPANIES</strong>
             </span>
             <div>
               {profile.clients.slice(0, 5).map((client) => (
@@ -327,8 +328,8 @@ export default function CinemaHome() {
           </div>
           <Link href="/achievements" className="achievement-strip">
             <span>KEEPING THE CURIOSITY ALIVE</span>
-            <strong>LeetCode: Top 3% globally</strong>
-            <span>580+ problems. Always one more to solve. ↗</span>
+            <strong>LeetCode: 690 problems solved</strong>
+            <span>690 problems. Always one more to solve. ↗</span>
           </Link>
         </section>
         <section className="cinema-section journal-section">
@@ -374,7 +375,8 @@ export default function CinemaHome() {
           </div>
           <div className="contact-content">
             <span className="hero-eyebrow">
-              <span className="status-dot" /> THE NEXT CHAPTER
+              <span className="status-dot" /> THE NEXT CHAPTER{" "}
+              <SignalMark station={4}>·</SignalMark>
             </span>
             <Reveal>
               <h2>

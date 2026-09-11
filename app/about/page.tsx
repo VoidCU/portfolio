@@ -13,7 +13,7 @@ import Portrait from './Portrait';
 export const metadata: Metadata = {
   title: 'About Saroj Prasad Mainali — Full-Stack Engineer from Kathmandu',
   description:
-    'Saroj Prasad Mainali (VoidCU) is a full-stack engineer from Kathmandu, Nepal with 5+ years building SaaS, AI systems, mobile apps, and automation for 19+ companies worldwide.',
+    'Saroj Prasad Mainali (VoidCU) is a full-stack engineer from Kathmandu, Nepal with 5+ years building SaaS, AI systems, mobile apps, and automation for 10+ companies worldwide.',
   keywords: [
     'Saroj Prasad Mainali', 'VoidCU', 'full-stack engineer Nepal', 'software engineer Kathmandu',
     'Nepal developer about', 'computer engineer tribhuvan university', 'Neuron Nest lead developer',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Saroj Prasad Mainali — Full-Stack Engineer & AI Builder',
     description:
-      'Full-stack engineer from Kathmandu. 5+ years, 100+ shipped products, 19+ companies. Building SaaS, AI, and mobile apps that actually work.',
+      'Full-stack engineer from Kathmandu. 5+ years, 200+ projects, 10+ companies. Building SaaS, AI, and mobile apps that actually work.',
     type: 'profile',
     url: 'https://voidcu.com/about',
     siteName: 'Saroj Prasad Mainali',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'About Saroj Prasad Mainali — VoidCU',
-    description: 'Full-stack engineer from Kathmandu. 5+ years · 100+ shipped products. Learn about who I am and what I build.',
+    description: 'Full-stack engineer from Kathmandu. 5+ years · 200+ projects. Learn about who I am and what I build.',
     creator: '@VoidCU',
     images: ['/assets/art/saroj-editorial.webp'],
   },
@@ -87,7 +87,7 @@ const facts = [
   { label: 'Based in', value: 'Kathmandu, Nepal' },
   { label: 'Alias', value: 'VoidCU' },
   { label: 'Role', value: 'Full-Stack Engineer & AI Builder' },
-  { label: 'Experience', value: '5+ years, 100+ shipped products' },
+  { label: 'Experience', value: '5+ years, 200+ projects' },
   { label: 'Status', value: 'Open to work & collaborations' },
 ];
 

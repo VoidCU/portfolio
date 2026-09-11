@@ -394,7 +394,7 @@ export default function Projects() {
               rel="noopener noreferrer"
               className="swipe group/cta numeric font-mono text-label uppercase tracking-[0.18em] text-ink"
             >
-              ALL 80+ REPOS ON GITHUB{' '}
+              ALL 150+ REPOSITORIES ON GITHUB{' '}
               <span className="inline-block transition-transform duration-200 group-hover/cta:translate-x-1.5">
                 →
               </span>

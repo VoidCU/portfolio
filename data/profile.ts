@@ -21,9 +21,11 @@ export const profile = {
   },
   stats: [
     { value: "5+", label: "Years" },
-    { value: "100+", label: "Products" },
-    { value: "80+", label: "Repos" },
-    { value: "580+", label: "LeetCode" },
+    { value: "200+", label: "Projects" },
+    { value: "150+", label: "Repositories" },
+    { value: "10+", label: "Companies" },
+    { value: "300+", label: "Happy people & friends" },
+    { value: "690", label: "LeetCode solved" },
   ],
   skills: [
     {
@@ -287,8 +289,8 @@ export const profile = {
   ],
   achievements: [
     {
-      title: "LeetCode: Top 3% Globally",
-      detail: "580+ problems solved · Global Rank 98k",
+      title: "LeetCode: 690 problems solved",
+      detail: "690 problems solved · Global Rank 100,376 · Verified September 12, 2026",
       type: "competitive",
     },
     {

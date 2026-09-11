@@ -37,7 +37,7 @@ export default function SkillsView() {
             aria-pressed={paused}
             onClick={() => setPaused(!paused)}
           >
-            {paused ? "Resume workshop motion" : "Pause workshop motion"}{" "}
+            {paused ? "Resume orbital motion" : "Pause orbital motion"}{" "}
             {paused ? "▶" : "Ⅱ"}
           </button>
         </div>

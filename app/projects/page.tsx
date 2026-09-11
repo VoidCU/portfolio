@@ -10,7 +10,7 @@ import ProjectsView from './ProjectsView';
 export const metadata: Metadata = {
   title: 'Projects — SaaS, AI Research & Civic Tech from Nepal',
   description:
-    'Saroj Prasad Mainali\'s projects: Devanagari OCR at 99.98% accuracy, Amarnepal civic data platform, Genzlink mobile discovery app, Auctionmandu bank auction platform, Project Lakhey donor system, and Perceparator audio separation. 100+ shipped products.',
+    'Saroj Prasad Mainali\'s projects: Devanagari OCR at 99.98% accuracy, Amarnepal civic data platform, Genzlink mobile discovery app, Auctionmandu bank auction platform, Project Lakhey donor system, and Perceparator audio separation. 200+ projects.',
   keywords: [
     'Saroj Prasad Mainali projects', 'Nepal software projects', 'Devanagari OCR Nepal',
     'Amarnepal civic tech', 'Genzlink mobile app', 'Project Lakhey NGO', 'Perceparator audio separation',

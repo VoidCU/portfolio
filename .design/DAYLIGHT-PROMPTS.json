@@ -1,0 +1,125 @@
+{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "name": "saroj-opening",
+      "prompt": "Use case: lighting-weather. Edit target: supplied saroj-opening portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. Preserve the person's exact identity, face, expression, hair, well-groomed natural beard, clothing and pose unchanged. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/saroj-opening-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-52e19b60-2713-439e-b3ad-df155a773e20.png"
+    },
+    {
+      "name": "saroj-editorial",
+      "prompt": "Use case: lighting-weather. Edit target: supplied saroj-editorial portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. Preserve the person's exact identity, face, expression, hair, well-groomed natural beard, clothing and pose unchanged. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/saroj-editorial-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-97537582-e0a3-4f9e-bc81-c0e2d9346f9c.png"
+    },
+    {
+      "name": "story-origin",
+      "prompt": "Use case: lighting-weather. Edit target: supplied story-origin portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/story-origin-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-6b78d2c6-847b-4dd2-aef1-c6398db872a7.png"
+    },
+    {
+      "name": "story-workshop",
+      "prompt": "Use case: lighting-weather. Edit target: supplied story-workshop portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/story-workshop-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-bfe76298-4ad0-4fc1-869c-e7882cdc8657.png"
+    },
+    {
+      "name": "story-horizon",
+      "prompt": "Use case: lighting-weather. Edit target: supplied story-horizon portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/story-horizon-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-01dfdf98-30b2-4eaf-8061-c2ec3349194a.png"
+    },
+    {
+      "name": "orbital-himalaya",
+      "prompt": "Use case: lighting-weather. Edit target: supplied orbital-himalaya portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/orbital-himalaya-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-923e4554-e71f-4789-a5c7-93958f07cd23.png"
+    },
+    {
+      "name": "journal-context",
+      "prompt": "Use case: lighting-weather. Edit target: supplied journal-context portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/journal-context-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-9fc7a33c-1684-43c8-ac4c-a6ae5ee8fc58.png"
+    },
+    {
+      "name": "journal-machine",
+      "prompt": "Use case: lighting-weather. Edit target: supplied journal-machine portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/journal-machine-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-bfe74038-af37-43fc-8608-83286b3d80b0.png"
+    },
+    {
+      "name": "journal-time",
+      "prompt": "Use case: lighting-weather. Edit target: supplied journal-time portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/journal-time-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-39929a21-1333-4cd1-a556-f5ded511552b.png"
+    },
+    {
+      "name": "contact-invitation",
+      "prompt": "Use case: lighting-weather. Edit target: supplied contact-invitation portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/contact-invitation-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-7f89f515-c221-4b56-aae1-634e6d704699.png"
+    },
+    {
+      "name": "audio-material",
+      "prompt": "Use case: lighting-weather. Edit target: supplied audio-material portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/audio-material-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-d7b53f71-17cf-4f56-bce8-8aaf4c01f2fe.png"
+    },
+    {
+      "name": "cover-origin",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-origin portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-origin-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-8baf7706-9872-4588-bb7e-c939a5a15f92.png"
+    },
+    {
+      "name": "cover-projects",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-projects portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-projects-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-75c2b802-d86c-4a03-9958-699df4d1286a.png"
+    },
+    {
+      "name": "cover-opensource",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-opensource portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-opensource-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-2185334d-f538-4a5c-af44-fb2f76476dda.png"
+    },
+    {
+      "name": "cover-systems",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-systems portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-systems-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-653c6718-0ab0-4c9a-af12-982b29359b4a.png"
+    },
+    {
+      "name": "cover-journey",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-journey portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-journey-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-efb82e76-ddaf-40b5-ba35-d58a5b06a341.png"
+    },
+    {
+      "name": "cover-collaboration",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-collaboration portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-collaboration-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-82debc30-a35d-44d3-a8ef-d1a865ae8d84.png"
+    },
+    {
+      "name": "cover-notes",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-notes portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-notes-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-3a1f2e7a-fc89-488a-bc1a-d71a3228e1db.png"
+    },
+    {
+      "name": "cover-now",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-now portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-now-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-081dcb18-5e3a-4615-8a41-b98d6bdeec0a.png"
+    },
+    {
+      "name": "cover-contact",
+      "prompt": "Use case: lighting-weather. Edit target: supplied cover-contact portfolio artwork. Create its matching DAYLIGHT edition. Keep the exact composition, camera, geometry, objects and framing. Replace night/dusk illumination with beautiful bright soft late-morning natural daylight, pale blue sky where present, gently sunlit mountains and natural warm materials. Lift interior shadows with daylight bounce, lamps off. Cinematic refined photographic detail, not washed out. Preserve any orbital arcs as subtle silver phenomena in daylight. No people; do not add any person. No text or watermark. Same aspect ratio as input.",
+      "output": "public/assets/art/cover-contact-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-17c2bee6-8ad5-49eb-bfa2-e4026412afb5.png"
+    }
+  ]
+}

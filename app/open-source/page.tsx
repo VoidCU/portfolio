@@ -10,19 +10,19 @@ import { Odometer } from '@/components/fx/Odometer';
 import { profile } from '@/data/profile';
 
 export const metadata: Metadata = {
-  title: 'Open Source — 80+ Repos, Devanagari OCR & LeetCode Top 3%',
+  title: 'Open Source — 150+ Repositories, Devanagari OCR & LeetCode',
   description:
-    'Saroj Prasad Mainali\'s open-source work: 80+ public GitHub repositories spanning web, AI, mobile, games, and research. Devanagari OCR at 99.98%, Perceparator audio separation. LeetCode Top 3% globally.',
+    'Saroj Prasad Mainali\'s open-source work: 150+ repositories across web, AI and product work; selected public projects spanning web, AI, mobile, games, and research. Devanagari OCR at 99.98%, Perceparator audio separation. LeetCode problem solving.',
   keywords: [
     'open source Nepal developer', 'GitHub VoidCU', '80 repositories Nepal',
     'Devanagari OCR open source', 'Perceparator PyTorch', 'Amarnepal open source',
-    'LeetCode top 3 percent Nepal', '580 problems solved', 'Nepal open source developer',
+    'LeetCode problem solving Nepal', '690 problems solved', 'Nepal open source developer',
     'Saroj Prasad Mainali GitHub', 'TensorFlow Nepal open source', 'VoidCU GitHub',
   ],
   authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
   openGraph: {
     title: 'Open Source — Saroj Prasad Mainali (VoidCU)',
-    description: '80+ public repos. Devanagari OCR at 99.98%, Perceparator audio separation, Amarnepal civic platform. LeetCode Top 3% globally.',
+    description: '150+ repositories. Devanagari OCR at 99.98%, Perceparator audio separation, Amarnepal civic platform. LeetCode problem solving.',
     type: 'website',
     url: 'https://voidcu.com/open-source',
     siteName: 'Saroj Prasad Mainali',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Open Source — Saroj Prasad Mainali (VoidCU)',
-    description: '80+ repos · Devanagari OCR 99.98% · Perceparator · LeetCode Top 3%. The public side of the work.',
+    description: '150+ repositories · Devanagari OCR 99.98% · Perceparator · LeetCode. The public side of the work.',
     creator: '@VoidCU',
     images: ['/assets/art/saroj-editorial.webp'],
   },
@@ -158,7 +158,7 @@ export default function OpenSourcePage() {
             Tools packed in the open.
           </LineMask>
           <LineMask as="p" delay={0.28} className="label numeric mt-4">
-            80+ REPOS · WEB / AI / MOBILE / GAMES / RESEARCH
+            150+ REPOSITORIES · WEB / AI / MOBILE / GAMES / RESEARCH
           </LineMask>
         </VolumePlate>
 
@@ -196,14 +196,14 @@ export default function OpenSourcePage() {
               <div className="flex flex-wrap items-end gap-6 md:gap-10">
                 <div>
                   <Odometer
-                    value="580+"
+                    value="690"
                     className="font-display text-4xl font-semibold text-accent md:text-5xl"
                   />
                   <p className="label mt-2">Problems solved</p>
                 </div>
                 <div>
                   <Odometer
-                    value="TOP 3%"
+                    value="100,376"
                     className="font-display text-4xl font-semibold text-ink md:text-5xl"
                   />
                   <p className="label mt-2">Global ranking</p>
@@ -293,7 +293,7 @@ export default function OpenSourcePage() {
                   Everything else lives on GitHub.
                 </span>
                 <span className="numeric flex items-center gap-2 border-t border-line-1 pt-4 font-mono text-label font-semibold uppercase tracking-[0.18em] text-ink">
-                  All 80+ Repos
+                  All 150+ Repositories
                   <span
                     aria-hidden="true"
                     className="inline-block transition-transform duration-200 ease-[var(--ease-micro)] group-hover:translate-x-1.5"
@@ -316,7 +316,7 @@ export default function OpenSourcePage() {
               >
                 All Repos on GitHub →
               </a>
-              <span className="label numeric">80+ public repositories</span>
+              <span className="label numeric">150+ repositories</span>
             </div>
           </Reveal>
         </div>

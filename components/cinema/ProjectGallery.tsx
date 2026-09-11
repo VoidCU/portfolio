@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image from "@/components/cinema/ThemeImage";
 import { useState, type PointerEvent } from "react";
 import { useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";

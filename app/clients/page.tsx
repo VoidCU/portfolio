@@ -11,9 +11,9 @@ import { profile } from '@/data/profile';
 import SignalGrid from './SignalGrid';
 
 export const metadata: Metadata = {
-  title: 'Clients — 19+ Companies Across EdTech, HealthTech & More',
+  title: 'Clients — 10+ Companies Across EdTech, HealthTech & More',
   description:
-    'Saroj Prasad Mainali has delivered software for 19+ companies across EdTech, HealthTech, AgriTech, government, finance, real estate, events, and tourism in Nepal and internationally.',
+    'Saroj Prasad Mainali has delivered software for 10+ companies across EdTech, HealthTech, AgriTech, government, finance, real estate, events, and tourism in Nepal and internationally.',
   keywords: [
     'Saroj Prasad Mainali clients', 'Nepal software clients', 'EdTech Nepal developer',
     'HealthTech Nepal', 'AgriTech Nepal', 'Nepal government software', 'finance software Nepal',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
   openGraph: {
     title: 'Clients — Saroj Prasad Mainali (VoidCU)',
-    description: '19+ companies across EdTech, HealthTech, AgriTech, government, real estate, events, and tourism. Nepal and international.',
+    description: '10+ companies across EdTech, HealthTech, AgriTech, government, real estate, events, and tourism. Nepal and international.',
     type: 'website',
     url: 'https://voidcu.com/clients',
     siteName: 'Saroj Prasad Mainali',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Clients — Saroj Prasad Mainali (VoidCU)',
-    description: '19+ companies served across many industries from Kathmandu and internationally.',
+    description: '10+ companies served across many industries from Kathmandu and internationally.',
     creator: '@VoidCU',
     images: ['/assets/art/saroj-editorial.webp'],
   },

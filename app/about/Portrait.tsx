@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/cinema/ThemeImage";
 export default function Portrait({ degree }: { degree: string }) {
   return (
     <figure className="editorial-portrait">

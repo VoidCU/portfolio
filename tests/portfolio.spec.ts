@@ -60,29 +60,14 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
     "https://www.genzlinkapp.com/",
   );
   await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Intelligence", exact: true }).click();
-  await expect(
-    page.getByText("From data to useful intelligence."),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Explore the layers" }).click();
-  await expect(
-    page.getByRole("button", { name: "Reassemble workstation" }),
-  ).toHaveAttribute("aria-pressed", "true");
-  await page
-    .getByRole("button", { name: "Infrastructure", exact: true })
-    .click();
-  await expect(page.getByText("Built to run beyond the demo.")).toBeVisible();
-  await page.getByRole("button", { name: "Photography", exact: true }).click();
-  await expect(
-    page.getByText("The creative side of the system."),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "My setup", exact: true }).click();
-  await expect(page.getByText(/Ryzen 7 5700X/)).toBeVisible();
-  await page.getByRole("button", { name: "Rotate studio left" }).click();
-  await page.getByRole("button", { name: "Reset view", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Overview", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await page.locator('.universe-tabs button').nth(2).click();
+  await expect(page.locator('.universe-readout strong')).toHaveText('AI & Data');
+  await expect(page.getByText('Patterns become possibilities.')).toBeVisible();
+  await page.locator('.universe-tabs button').nth(3).click();
+  await expect(page.locator('.universe-readout strong')).toHaveText('DevOps & Cloud');
+  await page.locator('.universe-tabs button').nth(5).click();
+  await expect(page.locator('.universe-readout strong')).toHaveText('Design & Tools');
+  await expect(page.locator('.universe-tabs button').nth(5)).toHaveAttribute('aria-pressed','true');
 });
 
 test("menu traps focus and restores it when closed", async ({ page }) => {
@@ -160,6 +145,9 @@ test("reduced motion keeps content readable and pause remains functional", async
   await page.goto("/");
   await expect(page.locator("main")).toHaveClass(/motion-paused/);
   await expect(page.locator(".hero-content")).toHaveCSS("opacity", "1");
+  await expect(page.locator(".cinema-hero h1 > span").first()).toHaveCSS("opacity", "1");
+  await expect(page.locator(".cinema-hero h1 > span").last()).toHaveCSS("opacity", "1");
+  await expect(page.locator(".hero-intro")).toHaveCSS("opacity", "1");
   await page.getByRole("button", { name: /PAUSE MOTION/ }).click();
   await expect(
     page.getByRole("button", { name: /RESUME MOTION/ }),
@@ -206,7 +194,7 @@ test("all existing pages retain content without horizontal overflow", async ({
   expect(new Set(covers).size).toBe(covers.length);
 });
 
-test("studio has a usable image fallback when WebGL is unavailable", async ({
+test("orbital skills remain usable when WebGL is unavailable", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -228,17 +216,9 @@ test("studio has a usable image fallback when WebGL is unavailable", async ({
   });
   await page.goto("/skills");
   await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
-  const fallback = page.locator(".workshop-canvas img");
+  const fallback = page.locator(".universe-fallback");
   await expect(fallback).toBeVisible();
-  await expect
-    .poll(() =>
-      fallback.evaluate(
-        (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
-      ),
-    )
-    .toBe(true);
-  await page.getByRole("button", { name: "Photography", exact: true }).click();
-  await expect(
-    page.getByText("The creative side of the system."),
-  ).toBeVisible();
+  await page.locator('.universe-tabs button').nth(5).click();
+  await expect(page.locator('.universe-readout strong')).toHaveText('Design & Tools');
+  await expect(page.getByText('Bring the whole world together.')).toBeVisible();
 });
