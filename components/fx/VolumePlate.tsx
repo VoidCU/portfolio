@@ -1,4 +1,18 @@
 import type { ReactNode } from "react";
+import { ImageLens } from "@/components/cinema/FilmMotion";
+const coverArt: Record<string, string> = {
+  ORIGIN: "cover-origin",
+  EXPEDITIONS: "cover-projects",
+  "FIELD KITS": "cover-opensource",
+  INSTRUMENTS: "cover-systems",
+  "THE ROUTE": "cover-journey",
+  SIGNALS: "cover-collaboration",
+  "SUMMIT LOG": "orbital-himalaya",
+  "FIELD NOTES": "cover-notes",
+  "PRESENT POSITION": "cover-now",
+  "GEAR MANIFEST": "story-workshop",
+  TRANSMISSION: "cover-contact",
+};
 const titles: Record<string, string> = {
   ORIGIN: "The person behind the pixels.",
   EXPEDITIONS: "Ideas made real.",
@@ -26,12 +40,10 @@ export default function VolumePlate({
 }) {
   return (
     <header className="cinema-volume">
-      <div
+      <ImageLens
         className="volume-landscape"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `url(/assets/art/${["INSTRUMENTS", "GEAR MANIFEST", "FIELD KITS"].includes(title) ? "story-workshop" : ["SIGNALS", "SUMMIT LOG", "TRANSMISSION", "EXPEDITIONS"].includes(title) ? "story-horizon" : "story-origin"}.webp)`,
-        }}
+        src={`/assets/art/${coverArt[title] ?? "cover-notes"}.webp`}
+        priority
       />
       {motif && (
         <div className="volume-motif" aria-hidden="true">

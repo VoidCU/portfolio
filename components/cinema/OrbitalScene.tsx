@@ -3,14 +3,16 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 const views = [
   {
     name: "Overview",
     title: "A whole system. Every layer considered.",
     text: "Explore the interface, computing core and infrastructure. Each part connects to the next.",
-    camera: [5.5, 4.5, 6.9],
-    target: [0, 0.6, 0],
+    camera: [6.4, 4.8, 8.2],
+    target: [0, 0.3, 0],
   },
   {
     name: "Interface",
@@ -33,6 +35,20 @@ const views = [
     camera: [5.5, 3, 5.3],
     target: [1.8, 1, -0.6],
   },
+  {
+    name: "Photography",
+    title: "The creative side of the system.",
+    text: "At KS Photography Station, I connect studio systems, NAS storage and AI photo-culling workflows.",
+    camera: [-4.5, 2.8, 4.5],
+    target: [-2.1, 0.4, 0.6],
+  },
+  {
+    name: "My setup",
+    title: "Built by hand. Used every day.",
+    text: "My custom PC: Ryzen 7 5700X, RTX 3060 and 32GB RAM. A mechanical keyboard, Ubuntu and a lot of iteration.",
+    camera: [5.2, 2.6, 4.8],
+    target: [2.7, 0.9, -0.8],
+  },
 ];
 
 /** Detailed, explorable workstation; rendering sleeps offscreen and when paused. */
@@ -41,12 +57,16 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
   const [view, setView] = useState(0);
   const [exploded, setExploded] = useState(false);
   const [failed, setFailed] = useState(false);
+  const manual = useRef(false);
+  const orbit = useRef<(direction: number) => void>(() => {});
+  const [reset, setReset] = useState(0);
   const settings = useRef({ paused, view, exploded });
   const refresh = useRef<() => void>(() => {});
   useEffect(() => {
     settings.current = { paused, view, exploded };
+    manual.current = false;
     refresh.current();
-  }, [paused, view, exploded]);
+  }, [paused, view, exploded, reset]);
   useEffect(() => {
     const element = host.current;
     if (!element) return;
@@ -69,9 +89,42 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     element.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
+    const environment = new RoomEnvironment();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const environmentTarget = pmrem.fromScene(environment, 0.04);
+    scene.environment = environmentTarget.texture;
+    scene.environmentIntensity = 0.55;
+    environment.dispose();
     const camera = new THREE.PerspectiveCamera(39, 1, 0.1, 60);
     camera.position.fromArray(views[0].camera);
     const focus = new THREE.Vector3(0, 0.6, 0);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.enableDamping = false;
+    controls.minPolarAngle = 0.3;
+    controls.maxPolarAngle = Math.PI / 2.05;
+    controls.minAzimuthAngle = -Math.PI / 2;
+    controls.maxAzimuthAngle = Math.PI / 2;
+    controls.rotateSpeed = 0.45;
+    controls.enabled = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
+    renderer.domElement.style.touchAction = "pan-y";
+    controls.addEventListener("start", () => {
+      manual.current = true;
+    });
+    controls.addEventListener("change", () => {
+      if (manual.current) renderer.render(scene, camera);
+    });
+    orbit.current = (direction) => {
+      manual.current = true;
+      const offset = camera.position.clone().sub(controls.target);
+      offset.applyAxisAngle(new THREE.Vector3(0, 1, 0), direction * 0.2);
+      camera.position.copy(controls.target).add(offset);
+      controls.update();
+      renderer.render(scene, camera);
+    };
     const root = new THREE.Group();
     scene.add(root);
     const materials: THREE.Material[] = [];
@@ -246,6 +299,109 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
         mesh.rotation.x = (blade * Math.PI) / 3;
       }
     }
+    // Personal studio details: camera, glass-sided PC, lamp, notebook and phone.
+    const photo = new THREE.Group();
+    photo.position.set(-2.35, 0.32, -0.03);
+    photo.rotation.y = -0.25;
+    root.add(photo);
+    box(photo, [0.7, 0.44, 0.29], [0, 0.1, 0], graphite, true);
+    box(photo, [0.21, 0.55, 0.34], [0.27, 0.11, 0.02], dark, true);
+    box(photo, [0.3, 0.12, 0.22], [-0.05, 0.36, 0], graphite, true);
+    const lens = cylinder(photo, 0.205, 0.39, [0, 0.1, 0.3], dark);
+    lens.rotation.x = Math.PI / 2;
+    for (let i = 0; i < 5; i++) {
+      const ring = cylinder(
+        photo,
+        0.213,
+        0.015,
+        [0, 0.1, 0.16 + i * 0.06],
+        i === 3 ? copper : graphite,
+      );
+      ring.rotation.x = Math.PI / 2;
+    }
+    const lensGlass = new THREE.MeshPhysicalMaterial({
+      color: 0x163954,
+      metalness: 0.6,
+      roughness: 0.08,
+      clearcoat: 1,
+    });
+    materials.push(lensGlass);
+    cylinder(photo, 0.178, 0.015, [0, 0.1, 0.505], lensGlass).rotation.x =
+      Math.PI / 2;
+    cylinder(photo, 0.055, 0.035, [0.2, 0.405, 0], silver);
+    const pc = new THREE.Group();
+    pc.position.set(2.95, 0, -0.6);
+    root.add(pc);
+    box(root, [1.2, 0.18, 1.8], [2.97, -0.17, -0.5], graphite, true);
+    box(pc, [0.86, 0.08, 1.32], [0, 0.12, 0], silver, true);
+    box(pc, [0.86, 0.08, 1.32], [0, 1.98, 0], graphite, true);
+    box(pc, [0.08, 1.84, 1.3], [-0.39, 1.05, 0], graphite);
+    box(pc, [0.83, 1.84, 0.08], [0, 1.05, -0.62], graphite);
+    box(pc, [0.7, 1.5, 0.055], [0, 1.08, -0.5], pcb);
+    box(pc, [0.52, 0.16, 1.1], [0, 0.73, 0.02], silver, true);
+    for (let i = 0; i < 10; i++)
+      box(pc, [0.53, 0.022, 0.028], [0, 0.7 + i * 0.012, 0.56], dark);
+    const glass = new THREE.MeshPhysicalMaterial({
+      color: 0xbad8eb,
+      transparent: true,
+      opacity: 0.18,
+      metalness: 0.05,
+      roughness: 0.12,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    materials.push(glass);
+    const sidePanel = box(pc, [0.015, 1.82, 1.26], [0.43, 1.05, 0], glass);
+    for (let i = 0; i < 3; i++) {
+      const fan = cylinder(pc, 0.25, 0.06, [0, 0.48 + i * 0.57, 0.65], dark);
+      fan.rotation.x = Math.PI / 2;
+      const hub = cylinder(pc, 0.065, 0.07, [0, 0.48 + i * 0.57, 0.69], copper);
+      hub.rotation.x = Math.PI / 2;
+      for (let b = 0; b < 7; b++) {
+        const blade = box(
+          pc,
+          [0.045, 0.4, 0.02],
+          [0, 0.48 + i * 0.57, 0.697],
+          silver,
+        );
+        blade.rotation.z = (b * Math.PI) / 7;
+      }
+    }
+    for (let i = 0; i < 2; i++) {
+      const path = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-0.2 + i * 0.22, 1.05, -0.3),
+        new THREE.Vector3(-0.2 + i * 0.22, 1.65, 0.1),
+        new THREE.Vector3(0.05 + i * 0.13, 1.75, -0.25),
+      ]);
+      const geo = new THREE.TubeGeometry(path, 24, 0.035, 8, false);
+      geometries.push(geo);
+      pc.add(new THREE.Mesh(geo, copper));
+    }
+    box(root, [0.65, 0.04, 0.92], [-0.1, 0.08, -0.45], white, true);
+    for (let i = 0; i < 7; i++)
+      box(root, [0.48, 0.005, 0.008], [-0.1, 0.105, -0.75 + i * 0.085], silver);
+    const pen = cylinder(root, 0.018, 0.65, [0.27, 0.13, -0.45], copper);
+    pen.rotation.x = Math.PI / 2;
+    box(root, [0.32, 0.045, 0.62], [-1.15, 0.09, 1.25], dark, true);
+    box(root, [0.27, 0.005, 0.52], [-1.15, 0.115, 1.25], lensGlass, true);
+    cylinder(root, 0.24, 0.05, [-2.3, 0.08, -1.4], graphite);
+    box(root, [0.045, 1.1, 0.045], [-2.3, 0.65, -1.4], copper);
+    box(root, [0.66, 0.05, 0.045], [-1.99, 1.19, -1.4], copper);
+    const lamp = cylinder(root, 0.2, 0.12, [-1.69, 1.16, -1.4], graphite);
+    lamp.rotation.z = 0.3;
+    cylinder(root, 0.17, 0.01, [-1.69, 1.09, -1.4], glow);
+    // A grounded studio platform and slatted architectural backdrop.
+    box(root, [7.5, 0.12, 4.8], [0.4, -0.52, -0.15], dark, true);
+    for (let i = 0; i < 21; i++)
+      box(
+        root,
+        [0.23, 0.014, 4.65],
+        [-3.1 + i * 0.34, -0.45, -0.15],
+        i % 3 === 0 ? graphite : dark,
+      );
+    for (let i = 0; i < 17; i++)
+      box(root, [0.035, 2.9, 0.045], [-2.8 + i * 0.4, 0.97, -2.08], graphite);
+    box(root, [6.7, 0.035, 0.045], [0.4, 2.42, -2.08], copper);
     // Patch cables visually connect the workstation, board and rack.
     for (let i = 0; i < 3; i++) {
       const path = new THREE.CatmullRomCurve3([
@@ -284,18 +440,32 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
     const pointer = new THREE.Vector2();
     const draw = () => {
       frame = 0;
-      if (disposed) return;
+      if (disposed || renderer.getContext().isContextLost()) return;
       const state = settings.current;
       const chosen = views[state.view];
       const cameraTarget = new THREE.Vector3().fromArray(chosen.camera);
       if (!state.paused) {
         cameraTarget.x += pointer.x * 0.45;
         cameraTarget.y += pointer.y * 0.2;
+        if (state.view === 0 && !manual.current) {
+          const rect = element.getBoundingClientRect();
+          const progress = THREE.MathUtils.clamp(
+            (innerHeight - rect.top) / (innerHeight + rect.height),
+            0,
+            1,
+          );
+          cameraTarget.x += (progress - 0.5) * 1.8;
+          cameraTarget.z -= progress * 0.8;
+        }
       }
       const step = state.paused ? 1 : 0.075;
-      camera.position.lerp(cameraTarget, step);
-      focus.lerp(new THREE.Vector3().fromArray(chosen.target), step);
-      camera.lookAt(focus);
+      if (!manual.current) {
+        camera.position.lerp(cameraTarget, step);
+        focus.lerp(new THREE.Vector3().fromArray(chosen.target), step);
+        controls.target.copy(focus);
+        camera.lookAt(focus);
+        controls.update();
+      }
       const spread = state.exploded ? 1 : 0;
       ui.position.x = THREE.MathUtils.lerp(ui.position.x, -0.35 * spread, step);
       server.position.x = THREE.MathUtils.lerp(
@@ -309,6 +479,11 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
         step,
       );
       ai.position.y = THREE.MathUtils.lerp(ai.position.y, 0.2 * spread, step);
+      sidePanel.position.x = THREE.MathUtils.lerp(
+        sidePanel.position.x,
+        0.43 + spread * 0.65,
+        step,
+      );
       renderer.render(scene, camera);
       if (visible && !document.hidden && !state.paused)
         frame = requestAnimationFrame(draw);
@@ -323,6 +498,7 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
       const { width, height } = element.getBoundingClientRect();
       renderer.setSize(width, height);
       camera.aspect = width / Math.max(height, 1);
+      camera.zoom = Math.min(1, camera.aspect / 1.3);
       camera.updateProjectionMatrix();
       wake();
     };
@@ -368,6 +544,10 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
       texture.dispose();
+      controls.dispose();
+      environmentTarget.dispose();
+      pmrem.dispose();
+      orbit.current = () => {};
       renderer.dispose();
       renderer.domElement.remove();
     };
@@ -378,12 +558,16 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
         className="workshop-canvas"
         ref={host}
         role="img"
-        aria-label="Detailed 3D engineering workstation with a working product screen, keyboard, computing core and server rack"
+        aria-label="Interactive 3D studio with a camera, custom PC, real product screen, computing core and server rack"
       >
+        <div className="workshop-scene-label" aria-hidden="true">
+          <span>SAROJ’S STUDIO</span>
+          <span>06 PERSPECTIVES / ONE BUILDER</span>
+        </div>
         {failed && (
           <Image
-            src="/assets/art/story-workshop.webp"
-            alt="Engineering workshop overlooking the Himalayas"
+            src="/assets/art/studio-fallback.webp"
+            alt="Saroj’s modeled studio with a custom PC, camera, keyboard and server rack"
             fill
             sizes="(max-width: 760px) 90vw, 50vw"
           />
@@ -415,6 +599,29 @@ export default function OrbitalScene({ paused = false }: { paused?: boolean }) {
         {exploded ? "Reassemble workstation" : "Explore the layers"}
         <span aria-hidden="true">{exploded ? "−" : "+"}</span>
       </button>
+      <div className="workshop-orbit-tools" aria-label="Camera controls">
+        <button
+          aria-label="Rotate studio left"
+          onClick={() => orbit.current(-1)}
+        >
+          ←
+        </button>
+        <button
+          onClick={() => {
+            setView(0);
+            setReset((r) => r + 1);
+          }}
+        >
+          Reset view
+        </button>
+        <button
+          aria-label="Rotate studio right"
+          onClick={() => orbit.current(1)}
+        >
+          →
+        </button>
+        <span>Drag to orbit on desktop</span>
+      </div>
     </div>
   );
 }

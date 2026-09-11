@@ -7,7 +7,7 @@ test("homepage art, navigation and project destinations are available", async ({
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Beyond theordinary.",
+    "Saroj.Always building.",
   );
   await expect(page.locator(".hero-landscape img")).toBeVisible();
   await expect
@@ -46,7 +46,7 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
   await page.getByRole("link", { name: "Next: The craft" }).click();
   await expect(page).toHaveURL(/#story-1$/);
   await expect(
-    page.getByRole("heading", { name: "Then comes the work you don’t see." }),
+    page.getByRole("heading", { name: "Sometimes, the job starts at 2 a.m." }),
   ).toBeVisible();
   await page.getByRole("link", { name: "Next: The impact" }).click();
   await expect(page).toHaveURL(/#story-2$/);
@@ -59,6 +59,7 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
     "href",
     "https://www.genzlinkapp.com/",
   );
+  await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
   await page.getByRole("button", { name: "Intelligence", exact: true }).click();
   await expect(
     page.getByText("From data to useful intelligence."),
@@ -71,6 +72,17 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
     .getByRole("button", { name: "Infrastructure", exact: true })
     .click();
   await expect(page.getByText("Built to run beyond the demo.")).toBeVisible();
+  await page.getByRole("button", { name: "Photography", exact: true }).click();
+  await expect(
+    page.getByText("The creative side of the system."),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "My setup", exact: true }).click();
+  await expect(page.getByText(/Ryzen 7 5700X/)).toBeVisible();
+  await page.getByRole("button", { name: "Rotate studio left" }).click();
+  await page.getByRole("button", { name: "Reset view", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Overview", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
 });
 
 test("menu traps focus and restores it when closed", async ({ page }) => {
@@ -157,6 +169,7 @@ test("reduced motion keeps content readable and pause remains functional", async
 test("all existing pages retain content without horizontal overflow", async ({
   page,
 }) => {
+  const covers: string[] = [];
   for (const route of [
     "/about",
     "/skills",
@@ -172,6 +185,17 @@ test("all existing pages retain content without horizontal overflow", async ({
     expect(response?.status(), route).toBe(200);
     await expect(page.locator("h1"), route).toBeVisible();
     await expect(page.locator("#main-content"), route).toBeVisible();
+    const cover = page.locator(".volume-landscape img");
+    await expect
+      .poll(
+        () =>
+          cover.evaluate(
+            (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+          ),
+        { message: `${route} cover loads` },
+      )
+      .toBe(true);
+    covers.push((await cover.getAttribute("src")) || "");
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -179,4 +203,42 @@ test("all existing pages retain content without horizontal overflow", async ({
       route,
     ).toBe(true);
   }
+  expect(new Set(covers).size).toBe(covers.length);
+});
+
+test("studio has a usable image fallback when WebGL is unavailable", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (
+      type: string,
+      ...args: unknown[]
+    ) {
+      if (
+        type === "webgl" ||
+        type === "webgl2" ||
+        type === "experimental-webgl"
+      )
+        return null;
+      return original.apply(this, [type, ...args] as Parameters<
+        typeof original
+      >);
+    } as typeof original;
+  });
+  await page.goto("/skills");
+  await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
+  const fallback = page.locator(".workshop-canvas img");
+  await expect(fallback).toBeVisible();
+  await expect
+    .poll(() =>
+      fallback.evaluate(
+        (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+      ),
+    )
+    .toBe(true);
+  await page.getByRole("button", { name: "Photography", exact: true }).click();
+  await expect(
+    page.getByText("The creative side of the system."),
+  ).toBeVisible();
 });

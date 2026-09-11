@@ -2,37 +2,74 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+import { useFilmStill } from "./FilmMotion";
 
 const chapters = [
   {
     name: "The spark",
-    image: "story-origin",
+    image: "saroj-roots",
     eyebrow: "01 / KATHMANDU, NEPAL",
-    title: "Every journey starts with a question.",
-    text: "What could we build that makes a difference? For me, that question connects the foothills of Nepal, computer engineering at Thapathali Campus, and a life spent making things.",
-    note: "Curiosity is the starting point.",
+    title: "Kathmandu is where my story starts.",
+    text: "I’m Saroj Prasad Mainali. A computer engineering graduate from Thapathali Campus, a builder, and someone who keeps asking how things work. Nepal is home. Curiosity is what keeps me moving.",
+    note: "Rooted here. Thinking beyond the horizon.",
   },
   {
     name: "The craft",
-    image: "story-workshop",
-    eyebrow: "02 / INSIDE THE WORKSHOP",
-    title: "Then comes the work you don’t see.",
-    text: "The first sketch. The stubborn bug. The model that finally learns. I move between interfaces, APIs, AI and infrastructure to turn a promising idea into something people can actually use.",
-    note: "Design. Build. Question. Refine.",
+    image: "saroj-afterhours",
+    eyebrow: "02 / THE 2 A.M. CHAPTER",
+    title: "Sometimes, the job starts at 2 a.m.",
+    text: "A production server went down. My home internet followed. I sat on the floor with a laptop and a phone hotspot. Two hours later, it was back. That’s part of my story too: staying with a problem until it works.",
+    note: "The work nobody sees still matters.",
   },
   {
     name: "The impact",
-    image: "story-horizon",
-    eyebrow: "03 / OUT INTO THE WORLD",
-    title: "An idea only matters when it reaches someone.",
-    text: "A nearby opportunity on Genzlink. An auction discovered on Auctionmandu. A clearer view of Nepal’s public budgets. Different products, connected by the same purpose: make useful things, and keep making them better.",
-    note: "This is where the story becomes real.",
+    image: "saroj-maker",
+    eyebrow: "03 / THE MANY HATS I WEAR",
+    title: "One person. More than one way to build.",
+    text: "I lead engineering, design interfaces, train models, and connect the systems behind them. From AI photography workflows and water modelling to Genzlink, Auctionmandu and Amarnepal, I like turning complicated problems into useful things.",
+    note: "Different disciplines. The same pair of hands.",
   },
 ];
+
+function StoryCamera({
+  image,
+  index,
+  progress,
+}: {
+  image: string;
+  index: number;
+  progress: MotionValue<number>;
+}) {
+  const still = useFilmStill();
+  const scale = useTransform(
+    progress,
+    [Math.max(0, (index - 0.5) / 3), (index + 1) / 3],
+    [1.02, 1.18],
+  );
+  const x = useTransform(progress, [0, 1], ["1.5%", "-1.5%"]);
+  return (
+    <motion.div
+      className="story-camera"
+      style={still ? { scale: 1, x: 0 } : { scale, x }}
+    >
+      <Image src={`/assets/art/${image}.webp`} alt="" fill sizes="100vw" />
+    </motion.div>
+  );
+}
 
 export default function StoryWalkthrough() {
   const host = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: host,
+    offset: ["start start", "end end"],
+  });
   useEffect(() => {
     const steps = host.current?.querySelectorAll<HTMLElement>(".story-step");
     const observer = new IntersectionObserver(
@@ -59,20 +96,24 @@ export default function StoryWalkthrough() {
             key={chapter.image}
             className={`story-scene ${i === active ? "is-active" : ""}`}
           >
-            <Image
-              src={`/assets/art/${chapter.image}.webp`}
-              alt=""
-              fill
-              sizes="100vw"
+            <StoryCamera
+              image={chapter.image}
+              index={i}
+              progress={scrollYProgress}
             />
           </div>
         ))}
         <div className="story-shade" />
         <div className="story-stage-caption">
-          <span>A STORY IN THREE CHAPTERS</span>
+          <span>SAROJ PRASAD MAINALI / A BUILDER’S STORY</span>
           <span>NEPAL → EVERYWHERE</span>
         </div>
       </div>
+      <motion.div
+        className="story-progress"
+        style={{ scaleX: scrollYProgress }}
+        aria-hidden="true"
+      />
       <nav className="story-navigation" aria-label="Story chapters">
         {chapters.map((chapter, i) => (
           <a
@@ -99,7 +140,7 @@ export default function StoryWalkthrough() {
                 src={`/assets/art/${chapter.image}.webp`}
                 alt=""
                 fill
-                sizes="100vw"
+                sizes="(max-width: 760px) 1100px, 100vw"
               />
             </div>
             <div className="story-copy">

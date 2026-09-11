@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
-import { useReducedMotionSafe } from './hooks';
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import { useFilmStill } from "@/components/cinema/FilmMotion";
 
 const EASE_RISE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -18,14 +18,14 @@ export function Reveal({
   children,
   delay = 0,
   y = 24,
-  className = '',
+  className = "",
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
 }) {
-  const reduced = useReducedMotionSafe();
+  const reduced = useFilmStill();
 
   return (
     <motion.div
@@ -33,7 +33,7 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-12%' }}
+      viewport={{ once: true, margin: "-12%" }}
       transition={
         reduced
           ? { duration: 0.3, delay, y: { duration: 0 } }

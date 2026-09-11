@@ -1,0 +1,129 @@
+[
+  {
+    "name": "saroj-opening",
+    "prompt": "Use case: identity-preserve. Input image is the identity reference of Saroj, the owner of a software engineering portfolio. Create a new photoreal cinematic scene starring EXACTLY this man. Preserve his facial identity, age, curly hair, facial proportions, skin tone, natural short chin beard and moustache. Clean naturally groomed cheeks, no spotty beard, no beautification, no different face. Outfit charcoal overshirt and black tee. High-end independent film cinematography, grounded contemporary Nepal rather than science-fiction fantasy. Midnight navy, silver-blue and restrained amber practical light, real skin and fabric texture, subtle film grain. Wide 1792x1024 landscape, designed as website background: man in the RIGHT third, LEFT 50% dark atmospheric negative space for text. No lettering, logos, watermarks, legible screen text, fake credentials or extra fingers. Scene: opening portrait of a builder. Saroj stands at the large window of his understated Kathmandu home studio at blue hour, waist-up visible, turned three-quarter toward camera, calm thoughtful expression and face clearly recognizable. City lights and distant hills outside; edge of a desk and thin monitor in the lower right foreground. A warm desk lamp rims his face, soft cool skylight. Medium wide editorial photograph. This should feel like HIS film, human and intimate, not a stock businessman.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-b251bc2f-0a12-461c-abd7-a3bbb5b7b195.png",
+    "output": "public/assets/art/saroj-opening.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "saroj-roots",
+    "prompt": "Use case: identity-preserve. Input image is the identity reference of Saroj, the owner of a software engineering portfolio. Create a new photoreal cinematic scene starring EXACTLY this man. Preserve his facial identity, age, curly hair, facial proportions, skin tone, natural short chin beard and moustache. Clean naturally groomed cheeks, no spotty beard, no beautification, no different face. Outfit charcoal overshirt and black tee. High-end independent film cinematography, grounded contemporary Nepal rather than science-fiction fantasy. Midnight navy, silver-blue and restrained amber practical light, real skin and fabric texture, subtle film grain. Wide 1792x1024 landscape, designed as website background: man in the RIGHT third, LEFT 50% dark atmospheric negative space for text. No lettering, logos, watermarks, legible screen text, fake credentials or extra fingers. Scene: a quiet Kathmandu brick rooftop at dawn. Saroj leaning casually against a low brick parapet on the right, three-quarter facing camera, notebook held loosely at his side. Layered terracotta rooftops, distant temple roofs and misty hills. Real contemporary Nepal with atmospheric scale and tiny city details. Warm light begins to catch his hair. Documentary-style cinematic environmental portrait, not a tourism poster.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-f06d2201-b9dd-4902-ae46-bf5f4bcf62a4.png",
+    "output": "public/assets/art/saroj-roots.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "saroj-afterhours",
+    "prompt": "Use case: identity-preserve. Input image is the identity reference of Saroj, the owner of a software engineering portfolio. Create a new photoreal cinematic scene starring EXACTLY this man. Preserve his facial identity, age, curly hair, facial proportions, skin tone, natural short chin beard and moustache. Clean naturally groomed cheeks, no spotty beard, no beautification, no different face. Outfit charcoal overshirt and black tee. High-end independent film cinematography, grounded contemporary Nepal rather than science-fiction fantasy. Midnight navy, silver-blue and restrained amber practical light, real skin and fabric texture, subtle film grain. Wide 1792x1024 landscape, designed as website background: man in the RIGHT third, LEFT 50% dark atmospheric negative space for text. No lettering, logos, watermarks, legible screen text, fake credentials or extra fingers. Scene inspired by his own written story about fixing a production server at 2 a.m. A quiet small home room at night. Saroj sits on the floor beside a low table, laptop on his knees, phone nearby as a hotspot. He is concentrating on the screen, face three-quarter visible and softly lit by it, recognizable curly hair. Warm single practical desk lamp on the right. Cables, modest realistic room, city darkness through window. Intimate honest cinematic scene about persistence. No holograms or extravagant lab.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-82a5ff1f-3da2-4995-9e45-f9ceb4b7de71.png",
+    "output": "public/assets/art/saroj-afterhours.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "saroj-maker",
+    "prompt": "Use case: identity-preserve. Input image is the identity reference of Saroj, the owner of a software engineering portfolio. Create a new photoreal cinematic scene starring EXACTLY this man. Preserve his facial identity, age, curly hair, facial proportions, skin tone, natural short chin beard and moustache. Clean naturally groomed cheeks, no spotty beard, no beautification, no different face. Outfit charcoal overshirt and black tee. High-end independent film cinematography, grounded contemporary Nepal rather than science-fiction fantasy. Midnight navy, silver-blue and restrained amber practical light, real skin and fabric texture, subtle film grain. Wide 1792x1024 landscape, designed as website background: man in the RIGHT third, LEFT 50% dark atmospheric negative space for text. No lettering, logos, watermarks, legible screen text, fake credentials or extra fingers. Scene: Saroj seated on the right of a thoughtful design and engineering studio desk, his face in three-quarter view toward us, one hand naturally on a laptop and the other resting beside a physical sketchbook. Monitor behind him shows abstract blue river terrain visualization without text; desk includes a modest mirrorless camera and a phone, connecting software, AI photography and hydrology. Dark uncluttered workspace, shallow depth of field, soft natural window light and amber task lamp, believable tools and real human warmth. Film still about a multidisciplinary engineer at work.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-17d00610-5884-4a09-a21b-56de2595c689.png",
+    "output": "public/assets/art/saroj-maker.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "journal-context",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Theme: wearing many hats and switching between projects. Top-down close view of a lived-in dark wooden desk: open unmarked engineering notebook with hand-drawn boxes and connecting lines, compact mechanical keyboard partly in frame, camera lens, laptop corner, one ceramic coffee cup, loosely coiled cable. Three pools of light divide these different tools into connected little worlds. Balanced editorial composition, shallow reflections, physically plausible, no person. For a journal thumbnail.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-66a2f466-6b57-4736-b645-8d0166ae148e.png",
+    "output": "public/assets/art/journal-context.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "journal-machine",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Theme: human craft in the age of AI. Macro cinematic still of a copper processor with fine etched traces on a charcoal circuit board, in focus next to the edge of an ordinary pencil and the paper corner of a human sketch. A warm raking light and soft blue secondary light. Elegant material contrast between handmade thinking and computation. Not a glowing brain, not a robot. For a journal thumbnail.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-bac84a8f-e5e6-49aa-af83-39ddbbea515d.png",
+    "output": "public/assets/art/journal-machine.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "journal-time",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Theme: past, present and mortality. A single beautiful imperfect glass hourglass on a dark stone windowsill, fine amber sand caught in motion, reflected three times softly in layered window glass, foggy Kathmandu hills behind at first light. Quiet contemplative cinema, close photograph, physically realistic refraction. For an introspective journal thumbnail.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-b0fdc74d-dc56-4d51-b64d-899fae280714.png",
+    "output": "public/assets/art/journal-time.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "contact-invitation",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Theme: the next chapter begins with a conversation. Two simple chairs at a small warm wood studio table, open blank notebook, two ceramic cups, huge panoramic window onto a distant quiet blue Kathmandu valley after sunset. Chairs and warm lamp occupy the right and bottom edges. Center and left are dark uncluttered for large website copy, a welcoming intimate studio not a corporate boardroom. Wide atmospheric perspective.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-3ef2ea85-e635-4e33-9fcb-22921affd1ea.png",
+    "output": "public/assets/art/contact-invitation.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "audio-material",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Theme: audio source separation research. Photographic macro still of two separate thin copper vibrating ribbons suspended over a precise acoustic laboratory tabletop, a studio microphone slightly out of focus behind, each ribbon following a physically tangible wave shape, blue and amber edge light separating the two sources. Elegant physical acoustic sculpture, no digital waveform UI and no lettering. This is conceptual research artwork.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-9246260d-c15b-420f-ac54-f67bd2c9b347.png",
+    "output": "public/assets/art/audio-material.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-origin",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Page cover about the person. Close cinematic photograph of weathered Kathmandu red brick, an open simple doorway on the far right framing a quiet blue courtyard with warm morning light, small plant and worn stone steps. Deep shadow fills the left half for a white heading. Human-scale Nepal architectural detail, no people.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-ed83bf18-5e38-4b23-935b-b2103ae615fa.png",
+    "output": "public/assets/art/cover-origin.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-projects",
+    "prompt": "Use case: stylized-concept. Create one exquisite photoreal editorial film still for Saroj Mainali's personal engineering portfolio. 1792x1024 landscape. Cohesive deep midnight navy, graphite, blue-gray and subtle warm copper light. Physical materials, soft photographic depth, realistic textures, sophisticated independent-film art direction, restrained and human. No text, logos, watermarks, emoji, clipart, symbols floating in air, or fake interface lettering. Page cover for shipped digital products. Three exquisite unbranded physical devices on staggered dark stone display shelves on the right: a smartphone, thin tablet and laptop, screens softly reflecting warm window light and showing only indistinct dark reflections. A small roll of architectural paper lies below. Physical product-design studio photography, spacious dark left half for white heading, no made-up interface.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-f8325b42-b998-4134-bb02-b3aa3ff8205d.png",
+    "output": "public/assets/art/cover-projects.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-opensource",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. A handcrafted modular machine with a carefully opened graphite enclosure on a workshop table, neatly separated brass fasteners and precision mechanical connectors exposing its understandable inner assembly. Beautiful macro side angle, metaphor for sharing how things work. Warm workbench lamp and distant navy studio wall.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-46e27bf9-6ff4-474b-9a7e-6e9776b00faa.png",
+    "output": "public/assets/art/cover-opensource.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-systems",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. Macro architectural photograph of a real engineering workstation seen edge-on: fine copper heatsink fins, frosted glass cooling tubes, brushed black aluminium rack rails, soft tiny blue status LEDs, complex ordered layered physical detail. A sophisticated tactile study of technical craft, no entire computer icon.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-9db0cb8a-3b7f-4308-906b-e16a28d5d75d.png",
+    "output": "public/assets/art/cover-systems.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-journey",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. A real mountain footpath winds up worn stone steps between low brick walls and terraced hills of Nepal, three small amber practical lamps recede along the path, layered blue hills in distance at dusk. Human scale, forward movement, rain-darkened stone texture. No people, no glowing neon trails.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-bad4a098-e4d7-4f36-9728-6a953f4aea44.png",
+    "output": "public/assets/art/cover-journey.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-collaboration",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. Quiet creative studio after a collaboration session: large warm wooden meeting table on right with several different notebooks, pencils, closed laptops and ceramic cups, simple empty chairs, hazy city at blue hour through floor-to-ceiling window. Intimate thoughtful design studio, no corporate handshake cliches, no people.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-cc47656b-6c44-4ab2-992f-989f58744dec.png",
+    "output": "public/assets/art/cover-collaboration.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-now",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. Present moment in Kathmandu: rain on a studio window at night, sharply focused droplets in right foreground, soft amber city bokeh and blue buildings beyond, a single blurred warm interior lamp reflection. Filmic quiet observation of everyday life, strong layered depth and real glass optics.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-16445511-54a7-4e27-8bcd-efc284f2e9c8.png",
+    "output": "public/assets/art/cover-now.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-contact",
+    "prompt": "Use case: stylized-concept. One photoreal cinematic website page-cover artwork, landscape 1792x1024. Saroj Mainali's personal engineering portfolio, elegant midnight navy and graphite palette, silver-blue atmosphere with selective warm copper illumination. Physical realism, subtle grain, calm sophisticated cinematic framing. Subject and visual interest on RIGHT half, LEFT half very dark spacious negative space for white page title. No text, watermarks, logos, clipart, emojis, obvious stock-photo staging, fantasy planets or floating interfaces. A thin beam of warm light from a partly open graphite studio door on the right spills across a polished dark floor into the viewer's space. A glimpse of a comfortable chair and small desk beyond, blue twilight window within. A welcoming physical threshold, quiet minimalist architecture, invitation to start a conversation.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-b9455cbc-0baf-4868-b298-8080265eb949.png",
+    "output": "public/assets/art/cover-contact.webp",
+    "tool": "built-in image_gen"
+  },
+  {
+    "name": "cover-notes",
+    "prompt": "Use case: stylized-concept. Generate an EMPTY still life, NO PERSON and NO HUMAN BODY PARTS. Wide photoreal macro photograph 1792x1024. Open paper notebook and fountain pen on the far RIGHT of a dark wooden desk. Loose translucent tracing paper partly overlaps the notebook. Unreadable tiny hand-drawn diagrams only. Left 55 percent is dark blue shadow and simple empty tabletop for a white website title. Warm copper desk-lamp lighting from right, shallow depth of field, subtle photographic grain, beautiful tangible paper fibers and ink. Background is an ordinary very dark studio wall, no windows, no planets, no astronomical props. This artwork is ONLY objects. No man, no woman, no hands, no face, no figure, no reflections of people, no logos, no watermark, no readable writing.",
+    "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-7a403883-c69c-4674-840f-e216d4d0d645.png",
+    "output": "public/assets/art/cover-notes.webp",
+    "tool": "built-in image_gen",
+    "discarded": "Initial variant included an unrelated person and was rejected during visual review."
+  }
+]

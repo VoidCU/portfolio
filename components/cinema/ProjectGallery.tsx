@@ -4,6 +4,7 @@ import { useState, type PointerEvent } from "react";
 import { useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { Reveal } from "@/components/fx/Reveal";
+import { ProductCamera } from "./FilmMotion";
 
 const categories = ["All work", "Platforms", "AI & Research"];
 export function ProjectGallery({
@@ -83,7 +84,9 @@ export function ProjectGallery({
                     / SELECTED WORK
                   </span>
                 </div>
-                <ProjectArtwork index={project.index} />
+                <ProductCamera>
+                  <ProjectArtwork index={project.index} />
+                </ProductCamera>
                 <span className="project-open">↗</span>
               </a>
               <div className="project-info">
@@ -184,7 +187,7 @@ function ProjectArtwork({ index }: { index: string }) {
       label: "COMMUNITY & IMPACT / EDITORIAL ART",
     },
     "05": {
-      image: "story-workshop",
+      image: "audio-material",
       label: "AUDIO INTELLIGENCE / EDITORIAL ART",
     },
   };

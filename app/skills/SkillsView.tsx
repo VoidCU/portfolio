@@ -1,13 +1,10 @@
 "use client";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useReducedMotionSafe } from "@/components/fx/hooks";
 import { useState } from "react";
 import { profile } from "@/data/profile";
 import { Reveal } from "@/components/fx/Reveal";
-const OrbitalScene = dynamic(() => import("@/components/cinema/OrbitalScene"), {
-  ssr: false,
-});
+import OrbitalScene from "@/components/cinema/LazyStudio";
 export default function SkillsView() {
   const reduced = useReducedMotionSafe();
   const [paused, setPaused] = useState(false);

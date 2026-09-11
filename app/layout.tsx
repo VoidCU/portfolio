@@ -1,6 +1,7 @@
 import "./globals.css";
 import "./cinema.css";
 import "./story.css";
+import "./film.css";
 import type { Metadata, Viewport } from "next";
 import { ReactNode } from "react";
 import { clash, general, fraunces, jetbrains } from "./fonts";
