@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/open-source',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Open Source Work' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Open Source Work' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Open Source — Saroj Prasad Mainali (VoidCU)',
     description: '80+ repos · Devanagari OCR 99.98% · Perceparator · LeetCode Top 3%. The public side of the work.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/open-source' },
 };
@@ -68,13 +68,6 @@ const highlights = [
     tech: ['Next.js', 'TypeScript', 'Framer Motion'],
     href: 'https://github.com/VoidCU/amarnepal',
     status: 'Live',
-  },
-  {
-    name: 'Void Social',
-    desc: 'Multi-tenant social media management platform with AES-256-GCM encryption and full RBAC.',
-    tech: ['Next.js', 'Prisma', 'PostgreSQL'],
-    href: 'https://github.com/VoidCU/void-social',
-    status: 'In Dev',
   },
   {
     name: 'Project Lakhey',
@@ -159,7 +152,7 @@ export default function OpenSourcePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate volume="VOL.03" title="FIELD KITS" altitude="4,000M" motif={<ForkMotif />}>
           <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
             Tools packed in the open.

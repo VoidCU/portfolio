@@ -18,24 +18,24 @@ export const metadata: Metadata = {
   keywords: [
     'Saroj Prasad Mainali now', `VoidCU current work ${SURVEY_YEAR}`, 'Neuron Nest lead developer',
     'KS Photography AI pipeline', 'LLM fine-tuning Nepal', 'Kubernetes Istio learning',
-    'Void Social development', 'Nepal developer now page', 'what saroj is doing',
+    'Genzlink and Auctionmandu', 'Nepal developer now page', 'what saroj is doing',
     'developer now page Kathmandu', 'now page Nepal',
   ],
   authors: [{ name: 'Saroj Prasad Mainali', url: 'https://voidcu.com' }],
   openGraph: {
     title: 'Now — Saroj Prasad Mainali (VoidCU)',
-    description: `What I am working on right now: Neuron Nest LMS, AI photo pipeline, LLM fine-tuning, Void Social. ${SURVEYED} from Kathmandu.`,
+    description: `What I am working on right now: Neuron Nest LMS, AI photo pipeline, LLM fine-tuning, Genzlink and Auctionmandu. ${SURVEYED} from Kathmandu.`,
     type: 'website',
     url: 'https://voidcu.com/now',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali — Now Page' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali — Now Page' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Now — Saroj Prasad Mainali (VoidCU)',
     description: `Leading engineering at Neuron Nest, building AI photo pipelines, learning LLM fine-tuning. Kathmandu, ${SURVEYED}.`,
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/now' },
 };
@@ -68,7 +68,7 @@ const fieldLog = [
   {
     label: 'PERSONAL PROJECTS',
     entries: [
-      'Void Social is in active development. Multi-tenant social media management platform. Hoping to soft-launch by August.',
+      'Genzlink connects people with nearby listings; Auctionmandu brings Nepal’s bank auctions into a searchable web and mobile experience.',
       'This portfolio. It has been rebuilt more times than I want to admit.',
     ],
   },
@@ -140,7 +140,7 @@ export default function NowPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.09"
           title="PRESENT POSITION"

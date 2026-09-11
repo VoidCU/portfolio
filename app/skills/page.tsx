@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/skills',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Technical Skills' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Technical Skills' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Skills — Saroj Prasad Mainali (VoidCU)',
     description: 'Full-stack to low-level. Frontend, backend, AI/ML, DevOps, and more. 5 years of real production work.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/skills' },
 };
@@ -85,7 +85,7 @@ export default function SkillsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-bg">
+      <main id="main-content" className="relative min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.04"
           title="INSTRUMENTS"

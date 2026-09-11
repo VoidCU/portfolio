@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/achievements',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Achievements' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Achievements' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Achievements — Saroj Prasad Mainali (VoidCU)',
     description: 'LeetCode Top 3% · 580+ problems · Machine Learning cert · Advanced Learning Algorithms cert.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/achievements' },
 };
@@ -137,7 +137,7 @@ export default function AchievementsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.07"
           title="SUMMIT LOG"

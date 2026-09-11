@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     type: 'profile',
     url: 'https://voidcu.com/about',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali — Full-Stack Engineer from Kathmandu, Nepal' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali — Full-Stack Engineer from Kathmandu, Nepal' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About Saroj Prasad Mainali — VoidCU',
     description: 'Full-stack engineer from Kathmandu. 5+ years · 100+ shipped products. Learn about who I am and what I build.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/about' },
 };
@@ -55,7 +55,7 @@ const jsonLd = [
     name: 'Saroj Prasad Mainali',
     alternateName: ['VoidCU', 'Saroj Mainali'],
     url: 'https://voidcu.com',
-    image: 'https://voidcu.com/assets/me.jpeg',
+    image: 'https://voidcu.com/assets/art/saroj-editorial.webp',
     jobTitle: 'Full-Stack Engineer & Technical Lead',
     description: 'Full-stack engineer from Kathmandu, Nepal specialising in SaaS architecture, AI/ML systems, and mobile development.',
     address: { '@type': 'PostalAddress', addressLocality: 'Kathmandu', addressCountry: 'NP' },
@@ -140,7 +140,7 @@ export default function AboutPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.01"
           title="ORIGIN"

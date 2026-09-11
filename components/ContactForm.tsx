@@ -1,17 +1,22 @@
-'use client';
+"use client";
 
-import { useId, useState } from 'react';
-import { AnimatePresence, motion, useAnimate, useReducedMotion } from 'framer-motion';
-import { profile } from '@/data/profile';
-import { Scramble } from './fx/Scramble';
+import { useId, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useAnimate,
+  useReducedMotion,
+} from "framer-motion";
+import { profile } from "@/data/profile";
+import { Scramble } from "./fx/Scramble";
 
 const EASE_RISE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-type FieldName = 'name' | 'email' | 'subject' | 'msg';
+type FieldName = "name" | "email" | "subject" | "msg";
 type FormState = Record<FieldName, string>;
-type Status = 'idle' | 'sending' | 'success' | 'error';
+type Status = "idle" | "sending" | "success" | "error";
 
-const EMPTY: FormState = { name: '', email: '', subject: '', msg: '' };
+const EMPTY: FormState = { name: "", email: "", subject: "", msg: "" };
 
 const FIELDS: {
   name: FieldName;
@@ -20,10 +25,10 @@ const FIELDS: {
   autoComplete?: string;
   multiline?: boolean;
 }[] = [
-  { name: 'name', label: 'Name', autoComplete: 'name' },
-  { name: 'email', label: 'Email', type: 'email', autoComplete: 'email' },
-  { name: 'subject', label: 'Subject' },
-  { name: 'msg', label: 'Message', multiline: true },
+  { name: "name", label: "Name", autoComplete: "name" },
+  { name: "email", label: "Email", type: "email", autoComplete: "email" },
+  { name: "subject", label: "Subject" },
+  { name: "msg", label: "Message", multiline: true },
 ];
 
 /**
@@ -42,58 +47,64 @@ export default function ContactForm({
   const [form, setForm] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [focused, setFocused] = useState<FieldName | null>(null);
-  const [status, setStatus] = useState<Status>('idle');
-  const [errMsg, setErrMsg] = useState('');
+  const [status, setStatus] = useState<Status>("idle");
+  const [errMsg, setErrMsg] = useState("");
 
   const validate = (): boolean => {
     const errs: Partial<FormState> = {};
-    if (form.name.trim().length < 2) errs.name = 'At least 2 characters';
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) errs.email = 'Valid email required';
-    if (form.subject.trim().length < 2) errs.subject = 'Required';
-    if (form.msg.trim().length < 10) errs.msg = 'At least 10 characters';
+    if (form.name.trim().length < 2) errs.name = "At least 2 characters";
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) errs.email = "Valid email required";
+    if (form.subject.trim().length < 2) errs.subject = "Required";
+    if (form.msg.trim().length < 10) errs.msg = "At least 10 characters";
     setErrors(errs);
     const bad = Object.keys(errs) as FieldName[];
     if (bad.length > 0 && !reduced) {
       // 4px x-shake, 3 keyframes — skipped under reduced motion (BRIEF §4.10)
       for (const field of bad) {
-        animateShake(`[data-field="${field}"]`, { x: [-4, 4, 0] }, { duration: 0.3 });
+        animateShake(
+          `[data-field="${field}"]`,
+          { x: [-4, 4, 0] },
+          { duration: 0.3 },
+        );
       }
     }
     return bad.length === 0;
   };
 
-  const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const update = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
     setErrors((er) => ({ ...er, [e.target.name]: undefined }));
   };
 
   const send = async () => {
     if (!validate()) return;
-    setStatus('sending');
-    setErrMsg('');
+    setStatus("sending");
+    setErrMsg("");
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       const json = await res.json();
       if (!res.ok) {
-        setErrMsg(json.error ?? 'Something went wrong.');
-        setStatus('error');
+        setErrMsg(json.error ?? "Something went wrong.");
+        setStatus("error");
         return;
       }
-      setStatus('success');
+      setStatus("success");
       setForm(EMPTY);
     } catch {
       setErrMsg(`Something went wrong. Email me directly at ${fallbackEmail}`);
-      setStatus('error');
+      setStatus("error");
     } finally {
-      setTimeout(() => setStatus('idle'), 6000);
+      setTimeout(() => setStatus("idle"), 6000);
     }
   };
 
-  const sending = status === 'sending';
+  const sending = status === "sending";
 
   return (
     <form
@@ -104,14 +115,14 @@ export default function ContactForm({
         e.preventDefault();
         void send();
       }}
-      className="relative border border-line-2 bg-surface p-6 sm:p-8 lg:p-10"
+      className="cinema-form relative border border-line-2 bg-surface p-6 sm:p-8 lg:p-10"
     >
-      <p className="label numeric mb-8">TX/07 — RELAY FORM · 27.7172°N 85.3240°E</p>
+      <p className="label numeric mb-8">YOUR NEXT CHAPTER STARTS HERE</p>
 
       <div className="space-y-7">
         {FIELDS.map((f) => {
           const error = errors[f.name];
-          const active = focused === f.name || form[f.name] !== '';
+          const active = focused === f.name || form[f.name] !== "";
           const fieldId = `${uid}-${f.name}`;
           const errId = `${fieldId}-err`;
           const controlProps = {
@@ -121,10 +132,10 @@ export default function ContactForm({
             onChange: update,
             onFocus: () => setFocused(f.name),
             onBlur: () => setFocused(null),
-            'aria-invalid': error ? true : undefined,
-            'aria-describedby': error ? errId : undefined,
+            "aria-invalid": error ? true : undefined,
+            "aria-describedby": error ? errId : undefined,
             className:
-              'block w-full bg-transparent pt-6 pb-2.5 font-mono text-sm text-ink caret-accent focus:outline-none',
+              "block w-full bg-transparent pt-6 pb-2.5 font-mono text-sm text-ink caret-accent focus:outline-none",
           };
           return (
             <div key={f.name} data-field={f.name} className="relative">
@@ -137,7 +148,7 @@ export default function ContactForm({
               ) : (
                 <input
                   {...controlProps}
-                  type={f.type ?? 'text'}
+                  type={f.type ?? "text"}
                   autoComplete={f.autoComplete}
                 />
               )}
@@ -147,8 +158,10 @@ export default function ContactForm({
                 htmlFor={fieldId}
                 className="label pointer-events-none absolute left-0 top-6 origin-left select-none"
                 style={{
-                  transform: active ? 'translateY(-1.35rem) scale(0.82)' : 'none',
-                  transition: 'transform 0.2s var(--ease-micro)',
+                  transform: active
+                    ? "translateY(-1.35rem) scale(0.82)"
+                    : "none",
+                  transition: "transform 0.2s var(--ease-micro)",
                 }}
               >
                 {f.label}
@@ -158,20 +171,24 @@ export default function ContactForm({
               <span
                 aria-hidden="true"
                 className={`absolute inset-x-0 bottom-0 h-px transition-colors duration-200 ${
-                  error ? 'bg-danger' : 'bg-line-3'
+                  error ? "bg-danger" : "bg-line-3"
                 }`}
               />
               <span
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-px origin-left bg-accent"
                 style={{
-                  transform: focused === f.name ? 'scaleX(1)' : 'scaleX(0)',
-                  transition: 'transform 0.3s var(--ease-micro)',
+                  transform: focused === f.name ? "scaleX(1)" : "scaleX(0)",
+                  transition: "transform 0.3s var(--ease-micro)",
                 }}
               />
 
               {error && (
-                <p id={errId} role="alert" className="mt-1.5 font-mono text-xs text-danger">
+                <p
+                  id={errId}
+                  role="alert"
+                  className="mt-1.5 font-mono text-xs text-danger"
+                >
                   {error}
                 </p>
               )}
@@ -189,33 +206,36 @@ export default function ContactForm({
         <span className="relative block h-[1.1em] overflow-hidden">
           <AnimatePresence initial={false} mode="popLayout">
             <motion.span
-              key={sending ? 'sending' : 'idle'}
+              key={sending ? "sending" : "idle"}
               className="block"
-              initial={reduced ? { opacity: 0 } : { y: '120%' }}
-              animate={reduced ? { opacity: 1 } : { y: '0%' }}
-              exit={reduced ? { opacity: 0 } : { y: '-120%' }}
+              initial={reduced ? { opacity: 0 } : { y: "120%" }}
+              animate={reduced ? { opacity: 1 } : { y: "0%" }}
+              exit={reduced ? { opacity: 0 } : { y: "-120%" }}
               transition={{ duration: 0.3, ease: EASE_RISE }}
             >
-              {sending ? 'TRANSMITTING…' : 'SEND MESSAGE'}
+              {sending ? "SENDING…" : "SEND MESSAGE"}
             </motion.span>
           </AnimatePresence>
         </span>
         {sending &&
           (reduced ? (
-            <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-on-accent/60" />
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-px bg-on-accent/60"
+            />
           ) : (
             <motion.span
               aria-hidden="true"
               className="absolute bottom-0 left-0 h-px w-1/3 bg-on-accent"
-              animate={{ x: ['-100%', '400%'] }}
-              transition={{ duration: 1.1, repeat: Infinity, ease: 'linear' }}
+              animate={{ x: ["-100%", "400%"] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
             />
           ))}
       </button>
 
       {/* Status panels — AnimatePresence swaps, no setTimeout pops */}
       <AnimatePresence mode="wait" initial={false}>
-        {status === 'success' && (
+        {status === "success" && (
           <motion.div
             key="success"
             role="status"
@@ -225,7 +245,12 @@ export default function ContactForm({
             transition={{ duration: 0.35, ease: EASE_RISE }}
             className="mt-5 flex items-start gap-3 border border-line-2 bg-bg p-4"
           >
-            <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className="mt-0.5 h-5 w-5 shrink-0 text-accent"
+              fill="none"
+              aria-hidden="true"
+            >
               <motion.path
                 d="M4 12.5 10 18.5 20 6.5"
                 stroke="currentColor"
@@ -237,7 +262,7 @@ export default function ContactForm({
             </svg>
             <div className="min-w-0">
               <Scramble
-                text="TRANSMISSION RECEIVED — 27.7172°N"
+                text="MESSAGE RECEIVED"
                 play="mount"
                 className="numeric font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent"
               />
@@ -247,7 +272,7 @@ export default function ContactForm({
             </div>
           </motion.div>
         )}
-        {status === 'error' && (
+        {status === "error" && (
           <motion.div
             key="error"
             role="alert"

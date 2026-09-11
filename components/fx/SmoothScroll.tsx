@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ReactLenis, type LenisRef } from 'lenis/react';
-import { useReducedMotion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import type { ReactNode } from 'react';
+import { ReactLenis, type LenisRef } from "lenis/react";
+import { useReducedMotionSafe } from "./hooks";
+import { useEffect, useRef } from "react";
+import type { ReactNode } from "react";
 
 /**
  * Lenis smooth scroll (contract §3.1).
@@ -13,7 +13,7 @@ import type { ReactNode } from 'react';
  * - No-op passthrough under reduced motion (native scrolling).
  */
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useReducedMotionSafe();
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
@@ -22,11 +22,11 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     const stop = () => lenisRef.current?.lenis?.stop();
     const start = () => lenisRef.current?.lenis?.start();
 
-    window.addEventListener('voidcu:lenis-stop', stop);
-    window.addEventListener('voidcu:lenis-start', start);
+    window.addEventListener("voidcu:lenis-stop", stop);
+    window.addEventListener("voidcu:lenis-start", start);
     return () => {
-      window.removeEventListener('voidcu:lenis-stop', stop);
-      window.removeEventListener('voidcu:lenis-start', start);
+      window.removeEventListener("voidcu:lenis-stop", stop);
+      window.removeEventListener("voidcu:lenis-start", start);
     };
   }, [reducedMotion]);
 

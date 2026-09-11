@@ -10,15 +10,16 @@ function buildHash(): string {
 }
 
 const nextConfig: NextConfig = {
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   env: {
     NEXT_PUBLIC_BUILD_HASH: buildHash(),
   },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-        pathname: '/VoidCU/**',
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/VoidCU/**",
       },
     ],
   },

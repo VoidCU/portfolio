@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/uses',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Developer Setup' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Developer Setup' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Uses — Saroj Prasad Mainali (VoidCU)',
     description: 'VS Code + WSL 2, Next.js + FastAPI, Docker, Figma. My real daily setup as a full-stack engineer in Nepal.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/uses' },
 };
@@ -156,7 +156,7 @@ export default function UsesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.10"
           title="GEAR MANIFEST"

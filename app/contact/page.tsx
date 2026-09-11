@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/contact',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Contact Saroj Prasad Mainali' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Contact Saroj Prasad Mainali' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Saroj Prasad Mainali (VoidCU)',
     description: 'Open to freelance, full-time roles, and collaborations. Available now. Response within 1-2 days.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/contact' },
 };
@@ -108,7 +108,7 @@ export default function ContactPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate volume="VOL.11" title="TRANSMISSION" altitude="8,600M" motif={broadcastMotif}>
           <LineMask delay={0.15}>
             <p className="font-voice text-epigraph text-dim">

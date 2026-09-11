@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import NotFoundView from './NotFoundView';
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import NotFoundView from "./NotFoundView";
 
 /**
  * OFF THE TRAIL — 404 (BRIEF §5). Full site chrome retained; the page
@@ -11,7 +11,7 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <main className="bg-bg text-ink">
+      <main id="main-content" className="bg-bg text-ink">
         <NotFoundView />
       </main>
       <Footer />

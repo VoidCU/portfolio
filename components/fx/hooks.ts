@@ -1,7 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { useEffect, useState } from "react";
 
 /**
  * Hydration-safe reduced-motion flag: false on the server AND on the first
@@ -11,10 +10,15 @@ import { useReducedMotion } from 'framer-motion';
  * useReducedMotion directly.
  */
 export function useReducedMotionSafe(): boolean {
-  const reduced = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return mounted && !!reduced;
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return reduced;
 }
 
 /**
@@ -26,11 +30,11 @@ export function useFinePointer(): boolean {
   const [fine, setFine] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
     const update = () => setFine(mq.matches);
     update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   return fine;
@@ -42,13 +46,13 @@ export function useFinePointer(): boolean {
  * `suppressHydrationWarning` on the consuming element). Contract §3.16.
  */
 export function useKtmTime(): string {
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    const formatter = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Asia/Kathmandu',
-      hour: '2-digit',
-      minute: '2-digit',
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kathmandu",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: false,
     });
     // setState bails out when the formatted string is unchanged,

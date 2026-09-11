@@ -10,10 +10,10 @@ import ProjectsView from './ProjectsView';
 export const metadata: Metadata = {
   title: 'Projects — SaaS, AI Research & Civic Tech from Nepal',
   description:
-    'Saroj Prasad Mainali\'s projects: Devanagari OCR at 99.98% accuracy, Amarnepal civic data platform, Void Social multi-tenant inbox, Project Lakhey donor system, and Perceparator audio separation. 100+ shipped products.',
+    'Saroj Prasad Mainali\'s projects: Devanagari OCR at 99.98% accuracy, Amarnepal civic data platform, Genzlink mobile discovery app, Auctionmandu bank auction platform, Project Lakhey donor system, and Perceparator audio separation. 100+ shipped products.',
   keywords: [
     'Saroj Prasad Mainali projects', 'Nepal software projects', 'Devanagari OCR Nepal',
-    'Amarnepal civic tech', 'Void Social SaaS', 'Project Lakhey NGO', 'Perceparator audio separation',
+    'Amarnepal civic tech', 'Genzlink mobile app', 'Project Lakhey NGO', 'Perceparator audio separation',
     'Nepal AI projects', 'multi-tenant SaaS Nepal', 'Next.js projects Nepal',
     'open source Nepal developer', 'VoidCU projects', 'SaaS architect Nepal',
   ],
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/projects',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Projects' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Projects' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Projects — Saroj Prasad Mainali (VoidCU)',
-    description: 'Devanagari OCR, Amarnepal, Void Social, Project Lakhey, and more. Real products from a Nepal-based engineer.',
+    description: 'Devanagari OCR, Auctionmandu, Genzlink, Amarnepal, Project Lakhey, and more. Real products from a Nepal-based engineer.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/projects' },
 };
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate volume="VOL.02" title="EXPEDITIONS" altitude="3,500M" motif={<TopoMotif />}>
           <LineMask as="p" delay={0.2} className="font-voice text-epigraph text-dim">
             The public slice, documented.

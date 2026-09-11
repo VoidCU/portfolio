@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/clients',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Clients' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Clients' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Clients — Saroj Prasad Mainali (VoidCU)',
     description: '19+ companies served across many industries from Kathmandu and internationally.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/clients' },
 };
@@ -89,7 +89,7 @@ export default function ClientsPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.06"
           title="SIGNALS"

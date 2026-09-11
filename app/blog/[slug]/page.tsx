@@ -41,14 +41,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       authors: ['Saroj Prasad Mainali'],
       tags: [post.category, 'software engineering', 'Nepal'],
       url: `https://voidcu.com/blog/${post.slug}`,
-      images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: post.title }],
+      images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: post.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
       creator: '@VoidCU',
-      images: ['/assets/me.jpeg'],
+      images: ['/assets/art/saroj-editorial.webp'],
     },
     alternates: { canonical: `https://voidcu.com/blog/${post.slug}` },
   };
@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: Props) {
     url: `https://voidcu.com/blog/${post.slug}`,
     articleSection: post.category,
     inLanguage: 'en-US',
-    image: { '@type': 'ImageObject', url: 'https://voidcu.com/assets/me.jpeg' },
+    image: { '@type': 'ImageObject', url: 'https://voidcu.com/assets/art/saroj-editorial.webp' },
   };
 
   const index = orderedPosts.findIndex((p) => p.slug === slug);
@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <Navbar />
       <ReadingAltimeter />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         {/* ── Entry plate — VOL.08 field-note header ─────────────────── */}
         <header className="relative overflow-hidden border-b border-line-2 pb-10 pt-28 md:pb-14 md:pt-36">
           <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]">

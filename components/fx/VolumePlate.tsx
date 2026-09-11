@@ -1,42 +1,50 @@
-import { ReactNode } from 'react';
-import { CharMask, LineMask } from './LineMask';
-
-type Props = {
-  volume: string;     // 'VOL.04'
-  title: string;      // 'INSTRUMENTS'
-  altitude: string;   // '5,300M'
-  /** Page-specific decorative SVG, rendered absolute at 4% opacity behind the header */
-  motif?: ReactNode;
-  /** Optional intro line(s) under the title (epigraph, lede) */
-  children?: ReactNode;
+import type { ReactNode } from "react";
+const titles: Record<string, string> = {
+  ORIGIN: "The person behind the pixels.",
+  EXPEDITIONS: "Ideas made real.",
+  "FIELD KITS": "Built in the open.",
+  INSTRUMENTS: "Many disciplines. One builder.",
+  "THE ROUTE": "Always moving forward.",
+  SIGNALS: "Good work. Great people.",
+  "SUMMIT LOG": "Milestones along the way.",
+  "FIELD NOTES": "Beyond the code.",
+  "PRESENT POSITION": "Here. Now. Next.",
+  "GEAR MANIFEST": "Tools of the trade.",
+  TRANSMISSION: "Let’s make it happen.",
 };
-
-/** Shared subpage header — the "Field Volume" plate (CONTRACT §5). */
-export default function VolumePlate({ volume, title, altitude, motif, children }: Props) {
-  const numeral = volume.replace('VOL.', '');
+export default function VolumePlate({
+  volume,
+  title,
+  motif,
+  children,
+}: {
+  volume: string;
+  title: string;
+  altitude: string;
+  motif?: ReactNode;
+  children?: ReactNode;
+}) {
   return (
-    <header className="relative overflow-hidden border-b border-line-2 pt-28 pb-10 md:pt-36 md:pb-14">
+    <header className="cinema-volume">
+      <div
+        className="volume-landscape"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `url(/assets/art/${["INSTRUMENTS", "GEAR MANIFEST", "FIELD KITS"].includes(title) ? "story-workshop" : ["SIGNALS", "SUMMIT LOG", "TRANSMISSION", "EXPEDITIONS"].includes(title) ? "story-horizon" : "story-origin"}.webp)`,
+        }}
+      />
       {motif && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]">
+        <div className="volume-motif" aria-hidden="true">
           {motif}
         </div>
       )}
-      <span
-        aria-hidden
-        className="ghost-outline font-display pointer-events-none absolute -top-6 right-0 select-none text-[clamp(8rem,22vw,20rem)] leading-none"
-      >
-        {numeral}
-      </span>
-      <div className="relative mx-auto w-full max-w-7xl px-6">
-        <div className="mb-5 flex items-center justify-between">
-          <LineMask as="p" className="label numeric">{`${volume} — FIELD VOLUME`}</LineMask>
-          <LineMask as="p" delay={0.08} className="label numeric">{`▲ ${altitude}`}</LineMask>
-        </div>
-        <h1 className="font-display text-ink tracking-tight" style={{ fontSize: 'var(--text-chapter, clamp(3rem, 9vw, 9rem))', lineHeight: 0.95 }}>
-          <CharMask text={title} />
-        </h1>
-        {children && <div className="mt-6 max-w-2xl">{children}</div>}
+      <div className="volume-kicker">
+        <span>{volume.replace("VOL.", "CHAPTER ")}</span>
+        <span> / </span>
+        <span>SAROJ PRASAD MAINALI</span>
       </div>
+      <h1>{titles[title] ?? title}</h1>
+      {children && <div className="volume-intro">{children}</div>}
     </header>
   );
 }

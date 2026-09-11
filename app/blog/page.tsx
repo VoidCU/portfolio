@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/blog',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali Blog' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali Blog' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Blog — Saroj Prasad Mainali (VoidCU)',
     description: 'Writing on engineering, AI, and building in Nepal. 23 posts on real-world experience.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/blog' },
 };
@@ -86,7 +86,7 @@ export default function BlogPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="min-h-screen bg-bg">
+      <main id="main-content" className="min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.08"
           title="FIELD NOTES"

@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://voidcu.com/experience',
     siteName: 'Saroj Prasad Mainali',
-    images: [{ url: '/assets/me.jpeg', width: 1200, height: 630, alt: 'Saroj Prasad Mainali — Work Experience' }],
+    images: [{ url: '/assets/art/saroj-editorial.webp', width: 1063, height: 1480, alt: 'Saroj Prasad Mainali — Work Experience' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Experience — Saroj Prasad Mainali (VoidCU)',
     description: 'Lead Developer at Neuron Nest, CTO at Elytra Solutions, Technical Head at KS Photography. 5 years of overlapping roles.',
     creator: '@VoidCU',
-    images: ['/assets/me.jpeg'],
+    images: ['/assets/art/saroj-editorial.webp'],
   },
   alternates: { canonical: 'https://voidcu.com/experience' },
 };
@@ -113,7 +113,7 @@ export default function ExperiencePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-bg">
+      <main id="main-content" className="relative min-h-screen bg-bg">
         <VolumePlate
           volume="VOL.05"
           title="THE ROUTE"

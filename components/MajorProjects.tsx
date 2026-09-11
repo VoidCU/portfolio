@@ -222,7 +222,7 @@ function ExpeditionCard({
             </Reveal>
             <Reveal delay={0.25}>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line-2 pt-5">
-                <FieldLink href={project.github}>GitHub</FieldLink>
+                {project.github && <FieldLink href={project.github}>GitHub</FieldLink>}
                 {project.url && <FieldLink href={project.url}>Live</FieldLink>}
               </div>
             </Reveal>
