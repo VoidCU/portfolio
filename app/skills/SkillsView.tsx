@@ -4,7 +4,7 @@ import { useReducedMotionSafe } from "@/components/fx/hooks";
 import { useState } from "react";
 import { profile } from "@/data/profile";
 import { Reveal } from "@/components/fx/Reveal";
-import OrbitalScene from "@/components/cinema/LazyStudio";
+import SignalDesk from "@/components/cinema/SignalDesk";
 export default function SkillsView() {
   const reduced = useReducedMotionSafe();
   const [paused, setPaused] = useState(false);
@@ -29,15 +29,15 @@ export default function SkillsView() {
           </Link>
         </div>
         <div>
-          <div className="orbital-art">
-            <OrbitalScene paused={paused || !!reduced} />
+          <div className="desk-on-skills">
+            <SignalDesk paused={paused || !!reduced} />
           </div>
           <button
             className="cinema-text-link"
             aria-pressed={paused}
             onClick={() => setPaused(!paused)}
           >
-            {paused ? "Resume orbital motion" : "Pause orbital motion"}{" "}
+            {paused ? "Resume diagram motion" : "Pause diagram motion"}{" "}
             {paused ? "▶" : "Ⅱ"}
           </button>
         </div>

@@ -3,7 +3,8 @@ import "./cinema.css";
 import "./story.css";
 import "./film.css";
 import "./universe.css";
-import Atmosphere from "@/components/cinema/Atmosphere";
+import SignalPortal from "@/components/cinema/SignalPortal";
+import "./fieldwork.css";
 import type { Metadata, Viewport } from "next";
 import { ReactNode } from "react";
 import { clash, general, fraunces, jetbrains } from "./fonts";
@@ -197,7 +198,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <MotionRoot>
           <SmoothScroll>{children}</SmoothScroll>
         <Grain />
-        <Atmosphere />
+        <SignalPortal />
         </MotionRoot>
       </body>
     </html>

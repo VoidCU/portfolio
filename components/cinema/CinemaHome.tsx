@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "@/components/cinema/ThemeImage";
-import { SignalMark } from "./Atmosphere";
+import { SignalMark } from "./SignalPortal";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -10,10 +10,10 @@ import { profile } from "@/data/profile";
 import { blogPosts } from "@/data/blog";
 import ContactForm from "@/components/ContactForm";
 import { Reveal } from "@/components/fx/Reveal";
-import StoryWalkthrough from "./StoryWalkthrough";
+import StoryFlow from "./StoryFlow";
 import { ProjectGallery } from "./ProjectGallery";
 import { FilmMotionProvider, ImageLens, BuilderStatement } from "./FilmMotion";
-import OrbitalScene from "./LazyStudio";
+import SignalDesk from "./SignalDesk";
 
 function Chapter({
   number,
@@ -151,7 +151,7 @@ export default function CinemaHome() {
             </div>
           ))}
         </div>
-        <StoryWalkthrough />
+        <StoryFlow />
         <section id="origin" className="cinema-section origin-section">
           <Chapter number="01">THE ORIGIN</Chapter>
           <div className="origin-grid">
@@ -229,52 +229,24 @@ export default function CinemaHome() {
           <Chapter number="03">
             THE TOOLKIT <SignalMark station={3}>·</SignalMark>
           </Chapter>
-          <div className="expertise-layout personal-toolkit">
-            <div className="expertise-intro">
-              <Reveal>
-                <h2>
-                  Inside my
-                  <br />
-                  <em>working world.</em>
-                </h2>
-                <p className="section-lede">
-                  Software, AI, photography, infrastructure. Explore how the
-                  pieces fit together.
-                </p>
-              </Reveal>
-              <div
-                className="orbital-art"
-                aria-label="Scroll through an orbital map of my engineering skills"
-              >
-                <OrbitalScene paused={!!still} />
-                <span className="orbital-caption">THE CONNECTED UNIVERSE</span>
-                <span className="orbital-instruction">
-                  SCROLL TO MOVE BETWEEN LAYERS
-                </span>
-              </div>
-            </div>
-            <div className="expertise-list">
-              {profile.skills.map((skill, i) => (
-                <Reveal key={skill.category} delay={i * 0.04}>
-                  <details className="skill-detail" open={i < 2}>
-                    <summary>
-                      <small>0{i + 1}</small>
-                      <h3>{skill.category}</h3>
-                      <span>+</span>
-                    </summary>
-                    <div className="skill-tags">
-                      {skill.items.map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </div>
-                  </details>
-                </Reveal>
-              ))}
-              <Link href="/skills" className="cinema-text-link">
-                The complete skill set <span>↗</span>
-              </Link>
-            </div>
+          <div className="desk-introduction">
+            <Reveal>
+              <h2>
+                Different disciplines.
+                <br />
+                <em>One connected mind.</em>
+              </h2>
+            </Reveal>
+            <p>
+              From the first pixel to the last deployment.
+              <br />
+              Follow a thread. See what makes it work.
+            </p>
           </div>
+          <SignalDesk paused={!!still} />
+          <Link href="/skills" className="cinema-text-link desk-complete-link">
+            The complete skill set <span>↗</span>
+          </Link>
         </section>
         <section id="journey" className="cinema-section journey-section">
           <Chapter number="04">THE JOURNEY</Chapter>

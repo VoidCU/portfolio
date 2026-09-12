@@ -1,18 +1,10 @@
 import { test, expect } from "@playwright/test";
 
-test("day artwork, night illumination and their preferences survive reload", async ({
+test("day artwork persists and removed lighting stays absent", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Turn ambient lights off" }).click();
-  await expect(page.locator("html")).toHaveAttribute(
-    "data-illumination",
-    "off",
-  );
-  await page.reload();
-  await expect(
-    page.getByRole("button", { name: "Turn ambient lights on" }),
-  ).toBeVisible();
+  await expect(page.locator('.ambient-switch')).toHaveCount(0);
   await page.evaluate(() => {
     (
       window as Window & { __voidcuToggleTheme: () => void }
@@ -74,29 +66,29 @@ test("the concealed transmission is connected, solvable and remembers progress",
   await expect(page.locator(".signal-progress .held")).toHaveCount(1);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Inspect marker 02" }).click();
-  for (const i of [1, 3, 7, 9])
+  for (const i of [1, 3, 7, 13, 18, 24])
     await page.getByRole("button", { name: `Cell ${i}`, exact: true }).click();
   await expect(page.locator(".signal-progress .held")).toHaveCount(2);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Inspect marker 03" }).click();
-  for (const label of ["DISCOVER", "PROTOTYPE", "BUILD", "SHIP"])
+  for (const label of ["Relay C", "Relay B", "Relay D", "Relay F"])
     await page.getByRole("button", { name: new RegExp(label) }).click();
   await expect(page.locator(".signal-progress .held")).toHaveCount(3);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Inspect marker 04" }).click();
   for (const [orbit, count] of [
-    [1, 11],
-    [2, 8],
-    [3, 5],
+    [1, 2],
+    [2, 3],
+    [3, 1],
   ])
     for (let i = 0; i < count; i++)
       await page
-        .getByRole("button", { name: new RegExp(`Advance orbit ${orbit},`) })
+        .getByRole("button", { name: new RegExp(`Advance dial ${orbit},`) })
         .click();
   await expect(page.locator(".signal-progress .held")).toHaveCount(4);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Inspect marker 05" }).click();
-  await page.getByLabel("Signature").fill("VoidCU");
+  await page.getByLabel("Decoded instruction").fill("RETURN");
   await page.getByRole("button", { name: "Return the signal" }).click();
   await expect(page.locator(".signal-progress .held")).toHaveCount(5);
   await page.keyboard.press("Escape");
@@ -108,17 +100,13 @@ test("the concealed transmission is connected, solvable and remembers progress",
   await expect(page.locator(".signal-progress .held")).toHaveCount(5);
 });
 
-test("scrolling changes the active skill layer without manual selection", async ({
-  page,
-}) => {
-  await page.goto("/");
-  await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
-  await page.locator(".universe-step").nth(3).scrollIntoViewIfNeeded();
-  await expect(page.locator(".universe-tabs button").nth(3)).toHaveAttribute(
-    "aria-pressed",
-    "true",
-  );
-  await expect(page.locator(".universe-readout strong")).toHaveText(
-    "DevOps & Cloud",
-  );
+test('scroll changes the desk until a visitor takes control',async({page})=>{
+ await page.goto('/');
+ await page.locator('.signal-desk').evaluate(el=>window.scrollTo({top:el.getBoundingClientRect().top+scrollY-innerHeight*.8,behavior:'instant'}));
+ await expect(page.getByRole('tab',{name:/Interface/})).toHaveAttribute('aria-selected','true');
+ await page.locator('.desk-footer').scrollIntoViewIfNeeded();
+ await expect(page.getByRole('tab',{name:/Interface/})).toHaveAttribute('aria-selected','false');
+ await page.getByRole('tab',{name:/Intelligence/}).click();
+ await page.locator('.desk-footer').scrollIntoViewIfNeeded();
+ await expect(page.getByRole('tab',{name:/Intelligence/})).toHaveAttribute('aria-selected','true');
 });

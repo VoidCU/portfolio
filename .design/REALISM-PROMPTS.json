@@ -1,0 +1,75 @@
+{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "name": "story-origin",
+      "period": "night",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A believable Himalayan valley in Nepal photographed from a trekking ridge, layered foothills, distant snow peaks, a small weathered stone field station at the right. Plausible geography and scale. No giant astronomical objects or luminous orbital arcs. Believable early evening blue hour, still enough natural ambient light to see detail, subtle practical warm lights where appropriate, restrained colour. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-origin.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-6a15ee79-aecb-4c70-b7f9-d9b930ce080e.png"
+    },
+    {
+      "name": "story-origin",
+      "period": "day",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A believable Himalayan valley in Nepal photographed from a trekking ridge, layered foothills, distant snow peaks, a small weathered stone field station at the right. Plausible geography and scale. No giant astronomical objects or luminous orbital arcs. Bright but soft natural daylight, neutral exposure, soft shadows, pale blue or lightly clouded sky. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-origin-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-05b0b355-a004-4617-b4e3-cfeedcacb870.png"
+    },
+    {
+      "name": "story-workshop",
+      "period": "night",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. An actual compact developer's workspace in a Kathmandu apartment: practical wooden desk, one widescreen monitor, keyboard, modest PC tower, notebook, comfortable chair, a window with distant city rooftops and foothills. Ordinary achievable architecture, slightly lived-in, no palace, giant arches, luxury marble, brass sci-fi machines or impossible mountain window. Believable early evening blue hour, still enough natural ambient light to see detail, subtle practical warm lights where appropriate, restrained colour. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-workshop.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-3af25bea-ad41-4f28-8669-c5fe777ffb14.png"
+    },
+    {
+      "name": "story-workshop",
+      "period": "day",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. An actual compact developer's workspace in a Kathmandu apartment: practical wooden desk, one widescreen monitor, keyboard, modest PC tower, notebook, comfortable chair, a window with distant city rooftops and foothills. Ordinary achievable architecture, slightly lived-in, no palace, giant arches, luxury marble, brass sci-fi machines or impossible mountain window. Bright but soft natural daylight, neutral exposure, soft shadows, pale blue or lightly clouded sky. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-workshop-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-fb9f949e-75e5-4d79-9b80-178ebf7e8301.png"
+    },
+    {
+      "name": "story-horizon",
+      "period": "night",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A believable panoramic Kathmandu valley landscape from a hill, dense low-rise Nepalese urban fabric with scattered terraced fields on the slopes, layers of distant mountains. No exaggerated connecting light trails, artificial arcs, fantasy geography or immense peaks immediately behind the city. Believable early evening blue hour, still enough natural ambient light to see detail, subtle practical warm lights where appropriate, restrained colour. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-horizon.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-dc884da2-8c62-49e5-ae7d-579c04eb6be2.png"
+    },
+    {
+      "name": "story-horizon",
+      "period": "day",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A believable panoramic Kathmandu valley landscape from a hill, dense low-rise Nepalese urban fabric with scattered terraced fields on the slopes, layers of distant mountains. No exaggerated connecting light trails, artificial arcs, fantasy geography or immense peaks immediately behind the city. Bright but soft natural daylight, neutral exposure, soft shadows, pale blue or lightly clouded sky. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/story-horizon-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-1c6c7bf3-6edb-4149-8a77-d4823def4fb5.png"
+    },
+    {
+      "name": "orbital-himalaya",
+      "period": "night",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A documentary photograph of a remote Himalayan mountain valley and river with naturally layered ridges and distant snowy peaks. Remove the enormous space ring completely. Natural terrestrial sky, no lens flare or cosmic phenomena. Believable early evening blue hour, still enough natural ambient light to see detail, subtle practical warm lights where appropriate, restrained colour. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/orbital-himalaya.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-8f5c1be1-905d-4b3c-b329-e068342c53b9.png"
+    },
+    {
+      "name": "orbital-himalaya",
+      "period": "day",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. A documentary photograph of a remote Himalayan mountain valley and river with naturally layered ridges and distant snowy peaks. Remove the enormous space ring completely. Natural terrestrial sky, no lens flare or cosmic phenomena. Bright but soft natural daylight, neutral exposure, soft shadows, pale blue or lightly clouded sky. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/orbital-himalaya-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-280560aa-28e7-47a9-947e-dbe608ae1551.png"
+    },
+    {
+      "name": "cover-systems",
+      "period": "night",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. An actual developer's desktop PC with a conventional case, visible graphics card, tidy cables and realistic air cooling, beside a notebook and keyboard in a modest real apartment workspace. Technically believable parts, useful everyday setup, no industrial science-fiction piping, oversized copper machinery or fantasy lab. Believable early evening blue hour, still enough natural ambient light to see detail, subtle practical warm lights where appropriate, restrained colour. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/cover-systems.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-e0414b67-fbf0-4316-a294-044c6b0a2923.png"
+    },
+    {
+      "name": "cover-systems",
+      "period": "day",
+      "prompt": "Use case: style-transfer. Edit target: supplied portfolio artwork. Replace its fantasy rendering with a convincing editorial PHOTOGRAPH of the same general subject and framing. An actual developer's desktop PC with a conventional case, visible graphics card, tidy cables and realistic air cooling, beside a notebook and keyboard in a modest real apartment workspace. Technically believable parts, useful everyday setup, no industrial science-fiction piping, oversized copper machinery or fantasy lab. Bright but soft natural daylight, neutral exposure, soft shadows, pale blue or lightly clouded sky. Wide landscape aspect ratio. Natural imperfect textures, physically plausible illumination and perspective, moderate contrast, subtle photographic grain, no CGI appearance, no oversharpening, no HDR, no excessive fog. Keep useful uncluttered space at left. No people, no text or watermarks.",
+      "output": "public/assets/art/cover-systems-day.webp",
+      "source": "C:\\Users\\kingn\\.codex\\generated_images\\01a09001-db00-76a2-ad65-28a88d397f3a\\exec-b5734da4-3421-425c-b818-202afb714788.png"
+    }
+  ]
+}

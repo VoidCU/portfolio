@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { links, flipGrid, startingGrid, routeCost } from "./signalLogic";
 
-const KEY = "voidcu-transmission-v1";
+const KEY = "voidcu-transmission-v2";
 const places = [
   "the opening coordinate",
   "the origin portrait",
   "the selected work",
-  "the orbital instrument",
+  "the signal desk",
   "the final transmission",
 ];
-const initialBoard = [false, true, false, true, true, true, false, true, false];
+const initialBoard = startingGrid;
 
 export default function SignalRoom({
   station,
@@ -23,8 +24,8 @@ export default function SignalRoom({
     [ready, setReady] = useState(false),
     [frequency, setFrequency] = useState(40),
     [board, setBoard] = useState(initialBoard),
-    [route, setRoute] = useState<number[]>([]),
-    [rings, setRings] = useState([1, 4, 7]),
+    [route, setRoute] = useState<string[]>(["A"]),
+    [rings, setRings] = useState([8, 5, 5]),
     [word, setWord] = useState(""),
     [message, setMessage] = useState("");
   useEffect(() => {
@@ -60,34 +61,27 @@ export default function SignalRoom({
     );
   }
   function toggleCell(index: number) {
-    const copy = [...board];
-    [
-      index,
-      index - 3,
-      index + 3,
-      index % 3 > 0 ? index - 1 : -1,
-      index % 3 < 2 ? index + 1 : -1,
-    ]
-      .filter((i) => i >= 0 && i < 9)
-      .forEach((i) => (copy[i] = !copy[i]));
+    const copy = flipGrid(board, index);
     setBoard(copy);
     if (copy.every(Boolean)) complete();
   }
-  function choose(index: number) {
-    const next = [...route, index];
+  function choose(node: string) {
+    const next = [...route, node];
     setRoute(next);
-    if (next.length === 4) {
-      if (next.join(",") === "2,0,3,1") complete();
+    if (node === "F") {
+      if (routeCost(next) <= 9) complete();
       else {
         setMessage(
-          "The signal loops back. Follow the order of a product coming to life.",
+          "The signal arrived, but exhausted its energy. Find a route costing no more than nine.",
         );
-        setRoute([]);
+        setRoute(["A"]);
       }
     }
   }
   function rotate(index: number) {
-    const next = rings.map((r, i) => (i === index ? (r + 1) % 12 : r));
+    const next = rings.map(
+      (r, i) => (r + (i === index ? 1 : i === (index + 1) % 3 ? 2 : 0)) % 12,
+    );
     setRings(next);
     if (next.every((r) => r === 0)) complete();
   }
@@ -126,7 +120,7 @@ export default function SignalRoom({
                   "Bring the grid online.",
                   "Give the signal a route.",
                   "A moment of alignment.",
-                  "Who sent the signal?",
+                  "Read what remains.",
                 ][station]}
         </h2>
         {locked ? (
@@ -186,9 +180,9 @@ export default function SignalRoom({
               <>
                 <p>
                   Every switch changes itself and its immediate neighbours.
-                  Leave all nine lights on.
+                  Leave all twenty-five cells filled. Edges do not wrap.
                 </p>
-                <div className="signal-grid">
+                <div className="signal-grid complex-grid">
                   {board.map((on, i) => (
                     <button
                       key={i}
@@ -214,24 +208,40 @@ export default function SignalRoom({
             {station === 2 && (
               <>
                 <p>
-                  A product starts with a question. Then a shape, then a working
-                  system, then people. Connect the four relays in that order.
+                  Carry the packet from A to F. Each connection has an energy
+                  cost. You have nine units. Connections run only in the
+                  direction shown.
                 </p>
                 <div className="relay-grid">
-                  {["PROTOTYPE", "SHIP", "DISCOVER", "BUILD"].map((name, i) => (
+                  {Object.keys(links).map((name) => (
                     <button
                       key={name}
-                      disabled={route.includes(i)}
-                      onClick={() => choose(i)}
+                      aria-label={`Relay ${name}`}
+                      disabled={
+                        route.includes(name) ||
+                        !(name in links[route[route.length - 1]])
+                      }
+                      onClick={() => choose(name)}
                     >
                       <small>
-                        {route.includes(i) ? route.indexOf(i) + 1 : "·"}
+                        {route.includes(name) ? route.indexOf(name) + 1 : "·"}
                       </small>
                       {name}
+                      <span className="relay-costs">
+                        {Object.entries(links[name])
+                          .map(([n, c]) => `${n}: ${c}`)
+                          .join(" / ") || "DESTINATION"}
+                      </span>
                     </button>
                   ))}
                 </div>
-                <button className="signal-reset" onClick={() => setRoute([])}>
+                <p className="route-status">
+                  {route.join(" → ")} / {routeCost(route)} of 9 units
+                </p>
+                <button
+                  className="signal-reset"
+                  onClick={() => setRoute(["A"])}
+                >
                   Clear route
                 </button>
               </>
@@ -239,8 +249,9 @@ export default function SignalRoom({
             {station === 3 && (
               <>
                 <p>
-                  Three independent orbits. Bring each satellite to north. Each
-                  control advances one hour.
+                  Three coupled dials. Bring every pointer to north. A turn
+                  advances its own dial by one hour and the next dial by two.
+                  The last feeds the first.
                 </p>
                 <div className="alignment-map" aria-hidden="true">
                   {rings.map((r, i) => (
@@ -261,33 +272,41 @@ export default function SignalRoom({
                     <button
                       key={i}
                       onClick={() => rotate(i)}
-                      aria-label={`Advance orbit ${i + 1}, position ${r === 0 ? 12 : r} o'clock`}
+                      aria-label={`Advance dial ${i + 1}, position ${r === 0 ? 12 : r} o'clock`}
                     >
                       0{i + 1} · {r === 0 ? 12 : r}:00
                     </button>
                   ))}
                 </div>
+                <button
+                  className="signal-reset"
+                  onClick={() => setRings([8, 5, 5])}
+                >
+                  Reset dials
+                </button>
               </>
             )}
             {station === 4 && (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (word.trim().toUpperCase() === "VOIDCU") {
+                  if (word.trim().toUpperCase() === "RETURN") {
                     complete();
                   } else {
                     setMessage(
-                      "The signature has six letters. Look at the name on the orbital instrument.",
+                      "Subtract the sender's six-letter alias from the encrypted letters. A = 0. Wrap below A back to Z.",
                     );
                   }
                 }}
               >
                 <p>
-                  A signature travelled through every layer. Six letters. The
-                  alias behind this world.
+                  The sender left an instruction, encrypted with the alias on
+                  the signal desk. Subtract the key letter by letter, using A =
+                  0 through Z = 25.
                 </p>
+                <div className="cipher-strip">MSBXTH</div>
                 <label>
-                  Signature
+                  Decoded instruction
                   <input
                     autoComplete="off"
                     spellCheck={false}

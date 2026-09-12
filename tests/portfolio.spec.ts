@@ -43,12 +43,12 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
   await page.goto("/");
   await page.getByRole("link", { name: /Follow the story/ }).click();
   await expect(page).toHaveURL(/#story$/);
-  await page.getByRole("link", { name: "Next: The craft" }).click();
+  await page.getByRole("link", { name: "Next: The work" }).click();
   await expect(page).toHaveURL(/#story-1$/);
   await expect(
-    page.getByRole("heading", { name: "Sometimes, the job starts at 2 a.m." }),
+    page.getByRole("heading", { name: "Get the pieces talking to each other." }),
   ).toBeVisible();
-  await page.getByRole("link", { name: "Next: The impact" }).click();
+  await page.getByRole("link", { name: "Next: The next version" }).click();
   await expect(page).toHaveURL(/#story-2$/);
   await page.getByRole("link", { name: /Discover the projects/ }).click();
   await expect(
@@ -59,15 +59,13 @@ test("story chapters and toolkit can be explored with reduced motion", async ({
     "href",
     "https://www.genzlinkapp.com/",
   );
-  await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
-  await page.locator('.universe-tabs button').nth(2).click();
-  await expect(page.locator('.universe-readout strong')).toHaveText('AI & Data');
-  await expect(page.getByText('Patterns become possibilities.')).toBeVisible();
-  await page.locator('.universe-tabs button').nth(3).click();
-  await expect(page.locator('.universe-readout strong')).toHaveText('DevOps & Cloud');
-  await page.locator('.universe-tabs button').nth(5).click();
-  await expect(page.locator('.universe-readout strong')).toHaveText('Design & Tools');
-  await expect(page.locator('.universe-tabs button').nth(5)).toHaveAttribute('aria-pressed','true');
+  await page.locator('.signal-desk').scrollIntoViewIfNeeded();
+  await page.getByRole('tab',{name:/Intelligence/}).click();
+  await expect(page.locator('.desk-description h3')).toHaveText('Find the useful pattern.');
+  await page.getByRole('button',{name:/PyTorch/}).click();
+  await expect(page.locator('.desk-active-tool')).toContainText('PyTorch');
+  await page.getByRole('tab',{name:/Infrastructure/}).click();
+  await expect(page.locator('.desk-description h3')).toHaveText('Keep the whole thing running.');
 });
 
 test("menu traps focus and restores it when closed", async ({ page }) => {
@@ -194,31 +192,14 @@ test("all existing pages retain content without horizontal overflow", async ({
   expect(new Set(covers).size).toBe(covers.length);
 });
 
-test("orbital skills remain usable when WebGL is unavailable", async ({
-  page,
-}) => {
-  await page.addInitScript(() => {
-    const original = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function (
-      type: string,
-      ...args: unknown[]
-    ) {
-      if (
-        type === "webgl" ||
-        type === "webgl2" ||
-        type === "experimental-webgl"
-      )
-        return null;
-      return original.apply(this, [type, ...args] as Parameters<
-        typeof original
-      >);
-    } as typeof original;
-  });
-  await page.goto("/skills");
-  await page.locator(".lazy-studio").scrollIntoViewIfNeeded();
-  const fallback = page.locator(".universe-fallback");
-  await expect(fallback).toBeVisible();
-  await page.locator('.universe-tabs button').nth(5).click();
-  await expect(page.locator('.universe-readout strong')).toHaveText('Design & Tools');
-  await expect(page.getByText('Bring the whole world together.')).toBeVisible();
+test('the signal desk supports keyboard navigation without a 3D canvas', async ({page})=>{
+  await page.goto('/skills');
+  await page.getByRole('tab',{name:/Interface/}).click();
+  await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('tab',{name:/Systems/})).toBeFocused();
+  await expect(page.getByRole('tab',{name:/Systems/})).toHaveAttribute('aria-selected','true');
+  await page.keyboard.press('End');
+  await expect(page.getByRole('tab',{name:/Craft/})).toBeFocused();
+  await expect(page.locator('.desk-description h3')).toHaveText('Notice the details.');
+  await expect(page.locator('canvas,.ambient-switch')).toHaveCount(0);
 });
