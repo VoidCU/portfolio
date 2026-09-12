@@ -122,6 +122,29 @@ export function ProjectGallery({
 }
 
 function ProjectArtwork({ index }: { index: string }) {
+  if (index === "01")
+    return (
+      <div className="amarnepal-showcase">
+        <div className="amarnepal-browser">
+          <div className="browser-chrome" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <span>amarnepal.com</span>
+          </div>
+          <Image
+            src="/assets/projects/amarnepal-web.webp"
+            alt="Amarnepal website showing Nepal's federal budget overview and comparison tools"
+            width={1440}
+            height={760}
+            sizes="(max-width: 760px) 85vw, 43vw"
+          />
+        </div>
+        <span className="product-image-caption">
+          AMARNEPAL / LIVE WEBSITE CAPTURE
+        </span>
+      </div>
+    );
   if (index === "06")
     return (
       <div className="auction-showcase">
@@ -181,7 +204,6 @@ function ProjectArtwork({ index }: { index: string }) {
       </div>
     );
   const scenes: Record<string, { image: string; label: string }> = {
-    "01": { image: "story-origin", label: "NEPAL IN FOCUS / EDITORIAL ART" },
     "03": {
       image: "story-horizon",
       label: "COMMUNITY & IMPACT / EDITORIAL ART",

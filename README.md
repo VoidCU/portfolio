@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Saroj. Always building.
 
-## Getting Started
+Saroj Prasad Mainali's portfolio: a story of software, research, and work from Kathmandu, Nepal.
 
-First, run the development server:
+[Visit the portfolio](https://voidcu.com) | [Ready-to-copy GitHub profile](./github-profile/README.md) | [Profile setup](./github-profile/SETUP.md)
 
-```bash
+![Portfolio hero artwork](./public/assets/art/saroj-opening.webp)
+
+## The website
+
+Built with Next.js 15, React 19, TypeScript, Tailwind CSS, and Framer Motion. The site includes an editorial homepage, day/night artwork, a browsable skills interface, project galleries, experience, writing, and a contact form. Motion can be paused and respects reduced-motion preferences.
+
+Featured work includes **Auctionmandu**, **Genzlink**, **Amarnepal**, **Project Lakhey**, **Devanagari OCR**, and **Perceparator**. The homepage and Projects page also cover student management, ticketing management, contract signing, library management, and billing systems.
+
+## Run locally
+
+Use a Node.js version compatible with Next.js 15 and npm.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. On Windows PowerShell, use `npm.cmd` if local script execution policy blocks `npm.ps1`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run lint
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For browser checks, start a development server on port 3100, then run Playwright in another terminal:
 
-## Learn More
+```sh
+npm run dev -- --port 3100
+```
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run test:e2e
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Playwright uses Chromium for desktop and mobile views. Install its browser with `npx playwright install chromium` if needed. `PLAYWRIGHT_BASE_URL` can point the suite at a different local server. Contact tests intercept requests and do not send email.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Edit the content
 
-## Deploy on Vercel
+| Location                  | Purpose                                                                        |
+| :------------------------ | :----------------------------------------------------------------------------- |
+| `data/profile.ts`         | Biography, systems experience, skills, timeline, projects, clients, and totals |
+| `data/leetcode.ts`        | Dated LeetCode snapshot                                                        |
+| `data/blog.ts`            | Journal content                                                                |
+| `components/cinema/`      | Homepage, project gallery, story, and skills components                        |
+| `public/assets/art/`      | Original portfolio artwork and day variants                                    |
+| `public/assets/projects/` | Product screenshots, including the actual Amarnepal website                    |
+| `app/`                    | Routes, layouts, styles, metadata, and API handlers                            |
+| `tests/`                  | Desktop and mobile browser checks                                              |
+| `github-profile/`         | Portable profile README, images, and publishing instructions                   |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_DIST_DIR` can separate build output from a running development server. Keep environment credentials outside version control.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## GitHub profile
+
+The [profile package](./github-profile/README.md) reuses this site's content and images with GitHub-compatible Markdown and HTML. It belongs in **VoidCU/VoidCU**. The separate **VoidCU/VoidCU.github.io** repository hosts a static website; this repository is **VoidCU/portfolio**. See the [setup instructions](./github-profile/SETUP.md) before copying files.

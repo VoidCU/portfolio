@@ -1,4 +1,5 @@
 import { ProjectGallery } from "@/components/cinema/ProjectGallery";
+import SystemsLedger from "@/components/cinema/SystemsLedger";
 export default function ProjectsView({
   domains,
 }: {
@@ -7,6 +8,7 @@ export default function ProjectsView({
   return (
     <div className="inner-content">
       <ProjectGallery filters />
+      <SystemsLedger />
       <h2 className="inner-section-title">Built across boundaries.</h2>
       <div className="inner-domains">
         {domains.map((domain) => (

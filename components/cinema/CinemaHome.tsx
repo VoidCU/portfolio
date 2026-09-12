@@ -14,6 +14,7 @@ import StoryFlow from "./StoryFlow";
 import { ProjectGallery } from "./ProjectGallery";
 import { FilmMotionProvider, ImageLens, BuilderStatement } from "./FilmMotion";
 import SignalDesk from "./SignalDesk";
+import SystemsLedger from "./SystemsLedger";
 
 function Chapter({
   number,
@@ -224,6 +225,7 @@ export default function CinemaHome() {
             </span>
             <b>↗</b>
           </Link>
+          <SystemsLedger />
         </section>
         <section id="expertise" className="cinema-section expertise-section">
           <Chapter number="03">

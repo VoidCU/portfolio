@@ -6,6 +6,43 @@ export const profile = {
     "Computer Engineering graduate from Thapathali Campus, Tribhuvan University. Over five years I have architected and shipped full-stack SaaS platforms, mobile apps, AI pipelines, automation bots, and hydrological models: from green-field to production.",
     "Currently leading engineering at Neuron Nest and Elytra Solutions. I thrive on hard problems: dynamic RBAC systems, transformer models, real-time multi-channel inboxes, and climate simulation workflows.",
   ],
+  systems: [
+    {
+      code: "SMS",
+      name: "Student Management System",
+      domain: "Education",
+      summary:
+        "Software for student administration and the everyday work of educational institutions.",
+    },
+    {
+      code: "TMS",
+      name: "Ticketing Management System",
+      domain: "Operations",
+      summary:
+        "Ticketing software that brings an operational workflow into one system.",
+    },
+    {
+      code: "SIGN",
+      name: "Contract Signing System",
+      domain: "Documents",
+      summary:
+        "Digital contract signing as part of a business document workflow.",
+    },
+    {
+      code: "LIB",
+      name: "Library Management System",
+      domain: "Education",
+      summary:
+        "Management software for libraries and their day-to-day administration.",
+    },
+    {
+      code: "BILL",
+      name: "Billing System",
+      domain: "Business",
+      summary:
+        "Billing software built around the financial side of everyday operations.",
+    },
+  ],
   contacts: {
     location: "Kathmandu, Nepal",
     email: "sarojprasadmainali@gmail.com",
@@ -150,8 +187,8 @@ export const profile = {
     {
       index: "01",
       name: "Amarnepal",
-      tagline: "Nepal Federal Budget Analysis Platform",
-      desc: "Civic data platform analyzing Nepal's federal budgets (FY 2080–2083/84) with animated trend charts, editorial analysis, and Devanagari typography. All figures cross-checked against government sources.",
+      tagline: "Nepal, understood through data.",
+      desc: "A civic data platform exploring Nepal's federal budgets, hydropower, history, tourism, and economy. Interactive comparisons, maps, and editorial explainers make public information easier to explore.",
       tech: [
         "Next.js 15",
         "React 19",
@@ -290,7 +327,8 @@ export const profile = {
   achievements: [
     {
       title: "LeetCode: 690 problems solved",
-      detail: "690 problems solved · Global Rank 100,376 · Verified September 12, 2026",
+      detail:
+        "690 problems solved · Global Rank 100,376 · Verified September 12, 2026",
       type: "competitive",
     },
     {

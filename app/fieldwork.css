@@ -1,6 +1,162 @@
 /* Fieldwork: photographic records and a graphic instrument for the actual stack. */
-.field-story{scroll-margin-top:90px}
-@media(max-height:800px) and (min-width:761px){.field-chapters .field-chapter{position:relative;top:auto}}
+.systems-ledger {
+  margin-top: 100px;
+  color: var(--c-text);
+}
+.systems-intro {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 42px;
+}
+.systems-eyebrow {
+  display: block;
+  margin-bottom: 25px;
+  color: var(--c-accent);
+  font: 9px/1.6 var(--font-mono);
+  letter-spacing: 1.4px;
+}
+.systems-intro h2 {
+  font: 500 clamp(34px, 3.8vw, 58px)/1.1 var(--font-clash);
+  letter-spacing: -0.035em;
+}
+.systems-intro h2 em {
+  font-family: var(--font-fraunces);
+  font-weight: 400;
+}
+.systems-intro > p {
+  max-width: 370px;
+  margin: 0;
+  color: var(--c-dim);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.systems-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--line-4);
+}
+.systems-list li {
+  display: grid;
+  grid-template-columns: 55px 1.2fr 1fr;
+  align-items: center;
+  column-gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-3);
+}
+.system-number {
+  align-self: start;
+  padding-top: 3px;
+  font: 11px var(--font-mono);
+  color: var(--c-accent);
+}
+.system-name > span {
+  display: block;
+  margin-bottom: 10px;
+  font: 8px var(--font-mono);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.system-name b {
+  margin: 0 8px;
+  font-weight: 400;
+  color: var(--c-accent);
+}
+.system-name h3 {
+  font: 500 clamp(19px, 1.9vw, 27px)/1.25 var(--font-clash);
+  letter-spacing: -0.025em;
+}
+.systems-list li > p {
+  max-width: 350px;
+  margin: 0;
+  color: var(--c-dim);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.systems-footnote {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  color: var(--c-muted);
+  font: 8px/1.6 var(--font-mono);
+  letter-spacing: 1px;
+}
+.amarnepal-showcase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 65px 24px 58px;
+  background: radial-gradient(ellipse at 60% 50%, #655b47, #292b27);
+}
+.amarnepal-browser {
+  width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #ffffff30;
+  border-radius: 7px;
+  box-shadow: 0 20px 45px #0006;
+}
+.amarnepal-browser > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+  background: #f6f3e9;
+}
+.amarnepal-browser .browser-chrome {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .systems-ledger {
+    margin-top: 65px;
+  }
+  .systems-intro {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 28px;
+  }
+  .systems-eyebrow {
+    font-size: 8px;
+    margin-bottom: 18px;
+  }
+  .systems-list li {
+    grid-template-columns: 27px 1fr;
+    gap: 12px 15px;
+    padding: 23px 0;
+  }
+  .systems-list li > p {
+    grid-column: 2;
+    font-size: 12px;
+  }
+  .systems-footnote {
+    display: block;
+    font-size: 7px;
+  }
+  .systems-footnote > span {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .amarnepal-showcase {
+    padding-inline: 15px;
+  }
+}
+.field-story {
+  scroll-margin-top: 90px;
+}
+@media (max-height: 800px) and (min-width: 761px) {
+  .field-chapters .field-chapter {
+    position: relative;
+    top: auto;
+  }
+}
 .field-story {
   padding: 105px var(--gutter) 0;
   background: var(--c-bg);
