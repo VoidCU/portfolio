@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -49,6 +49,22 @@ export default function ContactForm({
   const [focused, setFocused] = useState<FieldName | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errMsg, setErrMsg] = useState("");
+  // Anti-bot: signed timestamp token + hidden honeypot field
+  const token = useRef("");
+  const honeypot = useRef<HTMLInputElement>(null);
+
+  const refreshToken = useCallback(async () => {
+    try {
+      const res = await fetch("/api/contact", { cache: "no-store" });
+      token.current = ((await res.json()) as { token?: string }).token ?? "";
+    } catch {
+      token.current = "";
+    }
+  }, []);
+
+  useEffect(() => {
+    void refreshToken();
+  }, [refreshToken]);
 
   const validate = (): boolean => {
     const errs: Partial<FormState> = {};
@@ -86,7 +102,11 @@ export default function ContactForm({
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          token: token.current,
+          website: honeypot.current?.value ?? "",
+        }),
       });
       const json = await res.json();
       if (!res.ok) {
@@ -96,6 +116,7 @@ export default function ContactForm({
       }
       setStatus("success");
       setForm(EMPTY);
+      void refreshToken();
     } catch {
       setErrMsg(`Something went wrong. Email me directly at ${fallbackEmail}`);
       setStatus("error");
@@ -118,6 +139,17 @@ export default function ContactForm({
       className="cinema-form relative border border-line-2 bg-surface p-6 sm:p-8 lg:p-10"
     >
       <p className="label numeric mb-8">YOUR NEXT CHAPTER STARTS HERE</p>
+
+      {/* Honeypot — invisible to people, filled by bots */}
+      <div
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}
+      >
+        <label>
+          Website
+          <input ref={honeypot} type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
 
       <div className="space-y-7">
         {FIELDS.map((f) => {
